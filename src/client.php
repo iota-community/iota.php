@@ -21,6 +21,13 @@ abstract class client {
    * @var mixed|null
    */
   protected $_pass;
+  /**
+   * @var string[]
+   */
+  protected $_headers = [
+    'accept: application/json',
+    'content-type: application/json',
+  ];
 
   /**
    * client constructor.
@@ -53,10 +60,6 @@ abstract class client {
     $this->_handle = new \iota\helper\curl($_url);
     //
     $this->_handle->setOption(CURLOPT_CONNECTTIMEOUT, $this->_timeOut);
-    $this->_handle->setOption(CURLOPT_HTTPHEADER, [
-      'accept: application/json',
-      'content-type: application/json',
-    ]);
     if($method == "delete") {
       $this->_handle->setOption(CURLOPT_CUSTOMREQUEST, $method);
     }
@@ -64,6 +67,14 @@ abstract class client {
     if($_requestData) {
       $this->_handle->setOption(CURLOPT_POSTFIELDS, $_requestData);
     }
+    if($this->_user && $this->_pass) {
+      if(!\strstr($_url, "https://")) {
+        throw new \Exception("Basic authentication requires the endpoint to be https");
+      }
+      $this->_handle->setOption(CURLOPT_USERPWD, $this->_user . ":" . $this->_pass);
+      //$this->_headers[] = "Authorization: Basic " . \iota\converter::strtobase64($this->_user . ":" . $this->_pass);
+    }
+    $this->_handle->setOption(CURLOPT_HTTPHEADER, $this->_headers);
 
     return $this->_handle->exec();
   }
@@ -178,4 +189,9 @@ abstract class client {
    * @return schemas\response\Milestone
    */
   abstract public function milestoneUtxoChanges(string $index): \iota\schemas\response\Milestone;
+
+  /**
+   * @return schemas\response\Peers
+   */
+  abstract public function peers(): \iota\schemas\response\Peers;
 }
