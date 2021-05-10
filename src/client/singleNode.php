@@ -28,6 +28,18 @@ class singleNode extends \iota\client {
   }
 
   /**
+   * Find a message by its identifer. This endpoint returns the given message.
+   *
+   * @param string $messageId
+   *
+   * @return \iota\schemas\Message
+   * @throws \Exception
+   */
+  public function message(string $messageId): \iota\schemas\Message {
+    return (new \iota\api\messages($this))->get($messageId);
+  }
+
+  /**
    * Submit a message. The node takes care of missing* fields and tries to build the message. On success, the message will be stored in the Tangle. This endpoint will return the identifier of the built message. *The node will try to auto-fill the following fields in case they are missing: networkId, parentMessageIds, nonce. If payload is missing, the message will be built without a payload.
    *
    * @param $index
@@ -52,14 +64,50 @@ class singleNode extends \iota\client {
   }
 
   /**
-   * Find a message by its identifer. This endpoint returns the given message.
+   * Find a message by its identifer. This endpoint returns the given message raw data.
    *
    * @param string $messageId
    *
-   * @return \iota\schemas\Message
+   * @return string
    * @throws \Exception
    */
-  public function message(string $messageId): \iota\schemas\Message {
-    return (new \iota\api\messages($this))->get($messageId);
+  public function messageRaw(string $messageId) {
+    return (new \iota\api\messages($this))->getRaw($messageId);
   }
+
+  /**
+   * Returns the children of a message
+   *
+   * @param string $messageId
+   *
+   * @return \iota\schemas\response\MessageChildren
+   * @throws \Exception
+   */
+  public function messageChildren(string $messageId): \iota\schemas\response\MessageChildren {
+    return (new \iota\api\messages($this))->getChildren($messageId);
+  }
+
+  /**
+   * Look up a milestone by a given milestone index.
+   *
+   * @param string $index
+   *
+   * @return \iota\schemas\response\Milestone
+   */
+  public function milestone(string $index): \iota\schemas\response\Milestone {
+    return (new \iota\api\milestones($this))->get($index);
+  }
+
+  /**
+   * Get all UTXO changes of a given milestone
+   *
+   * @param string $index
+   *
+   * @return \iota\schemas\response\UTXOChanges
+   */
+  public function milestoneUtxoChanges(string $index): \iota\schemas\response\Milestone {
+    return (new \iota\api\milestones($this))->utxoChanges($index);
+  }
+
+
 }
