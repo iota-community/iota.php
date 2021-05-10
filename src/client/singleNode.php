@@ -109,5 +109,10 @@ class singleNode extends \iota\client {
     return (new \iota\api\milestones($this))->utxoChanges($index);
   }
 
-
+  /**
+   * @return \iota\schemas\response\Peers
+   */
+  public function peers(): \iota\schemas\response\Peers {
+    return (new \iota\api\peers($this))->list();
+  }
 }
