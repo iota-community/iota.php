@@ -4,7 +4,7 @@
  *
  * @package iota
  */
-class client {
+abstract class client {
   /**
    * @var mixed|string
    */
@@ -35,6 +35,9 @@ class client {
     $this->_pass        = $_options['pass'] ?? null;
   }
 
+  /**
+   * @var helper\curl
+   */
   private \iota\helper\curl $_handle;
 
   /**
@@ -79,6 +82,14 @@ class client {
                 ->__toArray();
   }
 
+  /**
+   * @param string           $method
+   * @param string           $route
+   * @param helper\json|null $_requestData
+   *
+   * @return helper\json
+   * @throws \Exception
+   */
   public function fetchJSON(string $method, string $route, \iota\helper\json|null $_requestData = null) {
     $this->fetch($method, $route, $_requestData);
     $_content = $this->_handle->getContent();
@@ -103,4 +114,68 @@ class client {
 
     return $this->_handle->getStatus();
   }
+
+  /**
+   * @return bool
+   */
+  abstract public function health(): bool;
+
+  /**
+   * @return schemas\response\Info
+   */
+  abstract public function info(): \iota\schemas\response\Info;
+
+  /**
+   * @return schemas\response\Tips
+   */
+  abstract public function tips(): \iota\schemas\response\Tips;
+
+  /**
+   * @param string $messageId
+   *
+   * @return schemas\Message
+   */
+  abstract public function message(string $messageId): \iota\schemas\Message;
+
+  /**
+   * @param schemas\request\SubmitMessage $message
+   *
+   * @return schemas\response\SubmitMessage
+   */
+  abstract public function messageSubmit(\iota\schemas\request\SubmitMessage $message): \iota\schemas\response\SubmitMessage;
+
+  /**
+   * @param string $index
+   *
+   * @return schemas\response\MessagesFind
+   */
+  abstract public function messagesFind(string $index): \iota\schemas\response\MessagesFind;
+
+  /**
+   * @param string $messageId
+   *
+   * @return mixed
+   */
+  abstract public function messageRaw(string $messageId);
+
+  /**
+   * @param string $messageId
+   *
+   * @return schemas\response\MessageChildren
+   */
+  abstract public function messageChildren(string $messageId): \iota\schemas\response\MessageChildren;
+
+  /**
+   * @param string $index
+   *
+   * @return schemas\response\Milestone
+   */
+  abstract public function milestone(string $index): \iota\schemas\response\Milestone;
+
+  /**
+   * @param string $index
+   *
+   * @return schemas\response\Milestone
+   */
+  abstract public function milestoneUtxoChanges(string $index): \iota\schemas\response\Milestone;
 }
