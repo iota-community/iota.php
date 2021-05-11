@@ -32,10 +32,10 @@ class singleNode extends \iota\client {
    *
    * @param string $messageId
    *
-   * @return \iota\schemas\Message
+   * @return \iota\schemas\response\Message
    * @throws \Exception
    */
-  public function message(string $messageId): \iota\schemas\Message {
+  public function message(string $messageId): \iota\schemas\response\Message {
     return (new \iota\api\messages($this))->get($messageId);
   }
 

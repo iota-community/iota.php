@@ -14,7 +14,6 @@ class messages extends \iota\api {
    * @throws \Exception
    */
   public function submit(\iota\schemas\request\SubmitMessage $message): \iota\schemas\response\SubmitMessage {
-
     return new \iota\schemas\response\SubmitMessage($this->_client->fetchArray("post", "messages", $message->__toJSON()));
   }
 
@@ -34,11 +33,11 @@ class messages extends \iota\api {
    *
    * @param string $messageId
    *
-   * @return \iota\schemas\Message
+   * @return \iota\schemas\response\Message
    * @throws \Exception
    */
-  public function get(string $messageId): \iota\schemas\Message {
-    return new \iota\schemas\Message($this->_client->fetchArray("get", "messages/{$messageId}"));
+  public function get(string $messageId): \iota\schemas\response\Message {
+    return new \iota\schemas\response\Message($this->_client->fetchArray("get", "messages/{$messageId}"));
   }
 
   /**

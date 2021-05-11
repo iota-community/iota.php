@@ -4,7 +4,12 @@
  *
  * @package iota\helper
  */
-class json {
+class json implements \ArrayAccess, \Iterator, \Countable, \Serializable {
+  use \iota\system\php\iterator\iterator;
+  use \iota\system\php\iterator\arrayaccess;
+  use \iota\system\php\iterator\countable;
+  use \iota\system\php\iterator\serializable;
+
   /**
    * @var bool
    */
@@ -19,7 +24,8 @@ class json {
     if(!$this->str) {
       $this->str = '';
     }
-    $this->isJSON = \is_string($str) && \is_array(\json_decode($str, true)) && (\json_last_error() == JSON_ERROR_NONE) ? true : false;
+    $this->_data = \json_decode($this->str, true) ?? [];
+    $this->isJSON = \is_string($this->str) && \is_array($this->decode(true)) && (\json_last_error() == JSON_ERROR_NONE) ? true : false;
   }
 
   /**

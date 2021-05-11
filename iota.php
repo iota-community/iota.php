@@ -22,9 +22,10 @@
     if(\file_exists($_dir . $_file)) {
       include_once($_dir . $_file);
 
-      return;
+      return true;
     }
-    throw new \Exception("class not found " . $classname . " . '" . ($_dir . $_file) . "'");
+    //throw new \Exception("class not found " . $classname . " . '" . ($_dir . $_file) . "'");
+    return false;
   });
   /**
    * Class iota

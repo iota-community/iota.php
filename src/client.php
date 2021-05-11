@@ -84,13 +84,20 @@ abstract class client {
    * @param string           $route
    * @param helper\json|null $_requestData
    *
-   * @return mixed
+   * @return helper\json
    * @throws \Exception
    */
-  public function fetchArray(string $method, string $route, \iota\helper\json|null $_requestData = null) {
+  public function fetchJSON(string $method, string $route, \iota\helper\json|null $_requestData = null) {
+    $this->fetch($method, $route, $_requestData);
+    $_content = $this->_handle->getContent();
+    if(!($_json = new \iota\helper\json($_content))->isJSON) {
+      die($_json);
+    }
+    if(isset($_json['error'])) {
+      die(new \iota\schemas\response\Error($_json['error']));
+    }
 
-    return $this->fetchJSON($method, $route, $_requestData)
-                ->__toArray();
+    return $_json;
   }
 
   /**
@@ -98,18 +105,12 @@ abstract class client {
    * @param string           $route
    * @param helper\json|null $_requestData
    *
-   * @return helper\json
+   * @return array
    * @throws \Exception
    */
-  public function fetchJSON(string $method, string $route, \iota\helper\json|null $_requestData = null) {
-    $this->fetch($method, $route, $_requestData);
-    $_content = $this->_handle->getContent();
-    if(!($_json = new \iota\helper\json($_content))->isJSON || isset($_json->decode(true)['error'])) {
-
-      die($_content);
-    }
-
-    return new \iota\helper\json($this->_handle->getContent());
+  public function fetchArray(string $method, string $route, \iota\helper\json|null $_requestData = null) {
+    return $this->fetchJSON($method, $route, $_requestData)
+                ->__toArray();
   }
 
   /**
@@ -144,9 +145,9 @@ abstract class client {
   /**
    * @param string $messageId
    *
-   * @return schemas\Message
+   * @return schemas\response\Message
    */
-  abstract public function message(string $messageId): \iota\schemas\Message;
+  abstract public function message(string $messageId): \iota\schemas\response\Message;
 
   /**
    * @param schemas\request\SubmitMessage $message

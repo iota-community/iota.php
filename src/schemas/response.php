@@ -5,9 +5,12 @@
  * @package iota\schemas
  */
 abstract class response extends \iota\schemas {
+  /**
+   * response constructor.
+   *
+   * @param array $dat
+   */
   public function __construct(array $dat = []) {
-    foreach($dat['data'] as $key => $value) {
-      $this->_parse($key, $value);
-    }
+    parent::__construct($dat['data'] ?? $dat);
   }
 }
