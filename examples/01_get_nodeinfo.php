@@ -4,7 +4,7 @@
   // create client
   $client = new iota('https://api.lb-0.testnet.chrysalis2.com');
   // print result of node information
-  var_dump($client->health());
+  echo "Health: " . ($client->health() ? "ok" : "error"). LF;
   // print result of node information
   echo $info = $client->info();
   // print single informations
@@ -21,4 +21,6 @@
   echo $info->latestMilestoneIndex . LF;
   echo $info->confirmedMilestoneIndex . LF;
   echo $info->pruningIndex . LF;
-  print_r($info->features) . LF;
+  print_r($info->features); echo LF;
+  // one line node information
+  echo (new iota('https://api.lb-0.testnet.chrysalis2.com'))->info();
