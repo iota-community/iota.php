@@ -13,7 +13,10 @@ class milestones extends \iota\api {
    * @return \iota\schemas\response\Milestone
    */
   public function get(string $index): \iota\schemas\response\Milestone {
-    return new \iota\schemas\response\Milestone($this->_client->fetchArray("get", "milestones/{$index}"));
+    return $this->fetch([
+      'route'  => "milestones/{$index}",
+      'return' => \iota\schemas\response\Milestone::class,
+    ]);
   }
 
   /**
@@ -24,6 +27,9 @@ class milestones extends \iota\api {
    * @return \iota\schemas\response\UTXOChanges
    */
   public function utxoChanges(string $index): \iota\schemas\response\UTXOChanges {
-    return new \iota\schemas\response\UTXOChanges($this->_client->fetchArray("get", "milestones/{$index}/utxo-changes"));
+    return $this->fetch([
+      'route'  => "milestones/{$index}/utxo-changes",
+      'return' => \iota\schemas\response\Milestone::class,
+    ]);
   }
 }

@@ -12,14 +12,18 @@ class node extends \iota\api {
    * @return string
    */
   public function health(): bool {
-    $_status = $this->_client->fetchStatus("get", "/health");
-    if($_status['http_code'] == '200') {
-      return true;
+    $_status = $this->fetch([
+      'fetch' => 'Status',
+      'route' => "/health",
+    ]);
+    switch($_status['http_code']) {
+      case '200':
+        return true;
+      case '503':
+        return false;
+      default:
+        throw new \Exception("/health Unexpected response code '{$_status['http_code']}'");
     }
-    if($_status['http_code'] == '503') {
-      return false;
-    }
-    throw new \Exception("/health Unexpected response code '{$_status['http_code']}'");
   }
 
   /**
@@ -28,6 +32,9 @@ class node extends \iota\api {
    * @return \iota\schemas\response\Info
    */
   public function info(): \iota\schemas\response\info {
-    return new \iota\schemas\response\Info($this->_client->fetchArray("get", "info"));
+    return $this->fetch([
+      'route'  => "info",
+      'return' => \iota\schemas\response\Info::class,
+    ]);
   }
 }

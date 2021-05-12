@@ -14,7 +14,12 @@ class messages extends \iota\api {
    * @throws \Exception
    */
   public function submit(\iota\schemas\request\SubmitMessage $message): \iota\schemas\response\SubmitMessage {
-    return new \iota\schemas\response\SubmitMessage($this->_client->fetchArray("post", "messages", $message->__toJSON()));
+    return $this->fetch([
+      'method'      => 'post',
+      'route'       => "messages",
+      'requestData' => $message->__toJSON(),
+      'return'      => \iota\schemas\response\SubmitMessage::class,
+    ]);
   }
 
   /**
@@ -25,7 +30,11 @@ class messages extends \iota\api {
    * @return \iota\schemas\response\MessagesFind
    */
   public function find(string $index): \iota\schemas\response\MessagesFind {
-    return new \iota\schemas\response\MessagesFind($this->_client->fetchArray("get", "messages?index={$index}"));
+    return $this->fetch([
+      'route'  => "messages",
+      'query'  => ['index' => $index],
+      'return' => \iota\schemas\response\MessagesFind::class,
+    ]);
   }
 
   /**
@@ -37,7 +46,10 @@ class messages extends \iota\api {
    * @throws \Exception
    */
   public function get(string $messageId): \iota\schemas\response\Message {
-    return new \iota\schemas\response\Message($this->_client->fetchArray("get", "messages/{$messageId}"));
+    return $this->fetch([
+      'route'  => "messages/{$messageId}",
+      'return' => \iota\schemas\response\Message::class,
+    ]);
   }
 
   /**
@@ -49,7 +61,10 @@ class messages extends \iota\api {
    * @throws \Exception
    */
   public function getMetadata(string $messageId): \iota\schemas\response\MessageMetadata {
-    return new \iota\schemas\response\MessageMetadata($this->_client->fetchArray("get", "messages/{$messageId}/metadata"));
+    return $this->fetch([
+      'route'  => "messages/{$messageId}/metadata",
+      'return' => \iota\schemas\response\MessageMetadata::class,
+    ]);
   }
 
   /**
@@ -60,18 +75,24 @@ class messages extends \iota\api {
    * @return \iota\schemas\response\MessageChildren
    */
   public function getChildren(string $messageId): \iota\schemas\response\MessageChildren {
-    return new \iota\schemas\response\MessageChildren($this->_client->fetchArray("get", "messages/{$messageId}/children"));
+    return $this->fetch([
+      'route'  => "messages/{$messageId}/children",
+      'return' => \iota\schemas\response\MessageChildren::class,
+    ]);
   }
 
   /**
    * Find a message by its identifer. This endpoint returns the given message raw data.
-   * todo@st:create binary class
+   * todo@st:create binary fetch
    *
    * @param string $messageId
    *
    * @return string binary
    */
   public function getRaw(string $messageId): string {
-    return $this->_client->fetch("get", "messages/{$messageId}/raw");
+    return $this->fetch([
+      'fetch' => 'Binary',
+      'route' => "messages/{$messageId}/raw",
+    ]);
   }
 }

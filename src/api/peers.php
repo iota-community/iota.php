@@ -11,7 +11,10 @@ class peers extends \iota\api {
    * @return \iota\schemas\response\Peers
    */
   public function list(): \iota\schemas\response\Peers {
-    return new \iota\schemas\response\Peers($this->_client->fetchArray("get", "peers"));
+    return $this->fetch([
+      'route'  => "peers",
+      'return' => \iota\schemas\response\Peers::class,
+    ]);
   }
 
   /**
@@ -22,7 +25,10 @@ class peers extends \iota\api {
    * @return \iota\schemas\response\Peer
    */
   public function get(string $peerId): \iota\schemas\response\Peer {
-    return new \iota\schemas\response\Peer($this->_client->fetchArray("get", "peers/{$peerId}"));
+    return $this->fetch([
+      'route'  => "peers/{$peerId}",
+      'return' => \iota\schemas\response\Peer::class,
+    ]);
   }
 
   /**
@@ -33,12 +39,17 @@ class peers extends \iota\api {
    *
    * @return \iota\schemas\response\AddPeer
    */
-  public function add(string $multiAddress, string $alias = ""): \iota\schemas\response\AddPeer {
+  public function add(string $multiAddress, string $alias = null): \iota\schemas\response\AddPeer {
     $_request               = new \iota\schemas\request\AddPeer();
     $_request->multiAddress = $multiAddress;
-    $_request->alias        = $alias;
+    $_request->alias        = $alias ?? '';
 
-    return new \iota\schemas\response\AddPeer($this->_client->fetchArray("post", "peers", $_request->__toJSON()));
+    return $this->fetch([
+      'method'      => 'post',
+      'route'       => "peers",
+      'requestData' => $_request->__toJSON(),
+      'return'      => \iota\schemas\response\AddPeer::class,
+    ]);
   }
 
   /**
@@ -48,7 +59,9 @@ class peers extends \iota\api {
    *
    * @return string
    */
-  public function delete(string $peerId): string {
-    return $this->_client->fetch("delete", "peers/{$peerId}");
+  public function delete(string $peerId): void {
+    $this->fetch([
+      'route' => "peers/{$peerId}",
+    ]);
   }
 }

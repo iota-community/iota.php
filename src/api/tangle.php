@@ -11,6 +11,9 @@ class tangle extends \iota\api {
    * @return \iota\schemas\response\Tips
    */
   public function tips(): \iota\schemas\response\Tips {
-    return new \iota\schemas\response\Tips($this->_client->fetchArray("get","tips"));
+    return $this->fetch([
+      'route'  => "tips",
+      'return' => \iota\schemas\response\Tips::class,
+    ]);
   }
 }
