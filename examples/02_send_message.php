@@ -3,6 +3,6 @@
   require_once("../iota.php");
   // create client
   $client = new iota('https://api.lb-0.testnet.chrysalis2.com');
-  //
-  echo $_result = $client->sendMessage(\iota\converter::strtohex('MY-DATA-INDEX'), \iota\converter::strtohex('IOTA, 🚀!'));
+  // send Message
+  echo $_result = $client->sendMessage(\iota\converter::bin2hex('MY-DATA-INDEX'), \iota\converter::bin2hex('IOTA, 🚀!'));
   //echo $_result->messageId;
