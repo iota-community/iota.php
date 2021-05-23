@@ -24,6 +24,7 @@
 
       return true;
     }
+
     //throw new \Exception("class not found " . $classname . " . '" . ($_dir . $_file) . "'");
     return false;
   });
@@ -47,5 +48,42 @@
       $_request->payload->data  = $data;
 
       return (new \iota\api\messages($this))->submit($_request);
+    }
+
+    /**
+     * @param string $seed
+     *
+     * @return \iota\type\seed\ed25519
+     */
+    static public function Ed25519Seed(string $seed) {
+      return new \iota\type\seed\ed25519($seed);
+    }
+
+    /**
+     * @param string|array $mnemonic
+     *
+     * @return \iota\type\seed\ed25519
+     * @throws Exception
+     */
+    static public function Ed25519Seed_fromMnemonic(string|array $mnemonic): \iota\type\seed\ed25519 {
+      return \iota\type\seed\ed25519::fromMnemonic($mnemonic);
+    }
+
+    /**
+     * @param string $publicKey
+     *
+     * @return \iota\type\address\ed25519
+     */
+    static public function Ed25519Address(string $publicKey) {
+      return new \iota\type\address\ed25519($publicKey);
+    }
+
+    /**
+     * @param string|null $initialPath
+     *
+     * @return \iota\crypto\Bip32Path
+     */
+    static public function Bip32Path(?string $initialPath = null): \iota\crypto\Bip32Path {
+      return new \iota\crypto\Bip32Path($initialPath);
     }
   }
