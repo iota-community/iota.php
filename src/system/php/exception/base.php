@@ -1,15 +1,8 @@
 <?php namespace iota\system\php\exception;
 /**
- * The Base class provides a sourcl-specific exception class
- * for try/catch blocks.
+ * The Base class provides a sourcl-specific exception class for try/catch blocks.
  *
- * @package      scl\core\system\php\exception
- * @author       StefanBraun <stefan.braun@sourcl.com>
- * @copyright    Copyright (c) 2017, StefanBraun
- * @version      2017.11
- *               $LastChangedRevision: 11 $
- *               $LastChangedDate: 2017-11-12 18:47:17 +0100 (So, 12 Nov 2017) $
- *               $Author: StefanBraun $
+ * @package iota\system\php\exception
  */
 class base extends \Exception {
   /**
