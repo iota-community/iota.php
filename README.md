@@ -15,7 +15,10 @@ production.
 
 # Requirements
  + PHP8+
- + PHP Extensions: php_curl
+ + PHP Extensions: 
+   + [ext-curl](http://php.net/manual/en/book.curl.php)
+   + [ext-sodium](http://php.net/manual/en/book.sodium.php) (api client don't need this)
+
 
 # Example
 ```php
@@ -32,6 +35,8 @@ production.
 
 Please find other examples in the [./examples](examples) folder.
 
+
+<hr>
 
 ## Joining the discussion
 
