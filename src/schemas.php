@@ -34,8 +34,10 @@ abstract class schemas {
    */
   protected function _parse_init($className, $value, string $_index = 'type'): mixed {
     $_className = "\\iota\\schemas\\{$className}";
-    if($_ret = \constant("{$_className}::iota_{$className}_{$_index}_{$value[$_index]}")) {
-      return new $_ret($value);
+    if(\defined("{$_className}::iota_{$className}_{$_index}_{$value[$_index]}")) {
+      $_r = \constant("{$_className}::iota_{$className}_{$_index}_{$value[$_index]}");
+
+      return new $_r($value);
     }
 
     return $value;
