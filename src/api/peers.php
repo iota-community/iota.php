@@ -20,7 +20,7 @@ class peers extends \iota\api {
   /**
    * Get information about a given peer.
    *
-   * @param string|null $peerId
+   * @param string $peerId
    *
    * @return \iota\schemas\response\Peer
    */
@@ -61,7 +61,8 @@ class peers extends \iota\api {
    */
   public function delete(string $peerId): void {
     $this->fetch([
-      'route' => "peers/{$peerId}",
+      'method' => 'delete',
+      'route'  => "peers/{$peerId}",
     ]);
   }
 }
