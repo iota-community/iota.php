@@ -65,14 +65,15 @@ class client {
     }
     // set post data
     if($_requestData) {
-      $this->_handle->setOption(CURLOPT_POSTFIELDS, $_requestData);
+      $this->_handle->setOption(CURLOPT_POSTFIELDS, (string)$_requestData);
     }
     if($this->_user && $this->_pass) {
       if(!\strstr($_url, "https://")) {
         throw new \iota\exception\client("Basic authentication requires the endpoint to be https");
       }
+      $this->_handle->setOption(CURLOPT_HTTPAUTH, CURLAUTH_ANY);
       $this->_handle->setOption(CURLOPT_USERPWD, $this->_user . ":" . $this->_pass);
-      //$this->_headers[] = "Authorization: Basic " . \iota\converter::strtobase64($this->_user . ":" . $this->_pass);
+      //$this->_headers[] = "Authorization: Basic " . \iota\converter::base64_encode($this->_user . ":" . $this->_pass);
     }
     $this->_handle->setOption(CURLOPT_HTTPHEADER, $this->_headers);
 
@@ -87,11 +88,11 @@ class client {
    * @return helper\json
    * @throws \Exception
    */
-  public function fetchJSON(string $method, string $route, \iota\helper\json|null $_requestData = null) {
+  public function fetchJSON(string $method, string $route, \iota\helper\json|null $_requestData = null): \iota\helper\json {
     $this->fetch($method, $route, $_requestData);
     $_content = $this->_handle->getContent();
     if(!($_json = new \iota\helper\json($_content))->isJSON) {
-      die($_json);
+      die("Bad content: " . $_content);
     }
     if(isset($_json['error'])) {
       die(new \iota\schemas\response\Error($_json['error']));
@@ -108,7 +109,7 @@ class client {
    * @return array
    * @throws \Exception
    */
-  public function fetchArray(string $method, string $route, \iota\helper\json|null $_requestData = null) {
+  public function fetchArray(string $method, string $route, \iota\helper\json|null $_requestData = null): array {
     return $this->fetchJSON($method, $route, $_requestData)
                 ->__toArray();
   }
