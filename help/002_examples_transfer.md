@@ -26,7 +26,7 @@
 
 ```php
   $seed           = iota::Ed25519Seed_fromMnemonic("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally");
-  echo $client->send($seed, 0, "atoi1qpup0r22zvmlvptmsdaxtkycgpf6ak2ps2xwc94tmgnazzy0qj8l72pqmyx", 1000000, iota::createIndexation("#iota.php", "transaction test! follow me on Twitter @SourCL_Stefan"));
+  echo $client->send($seed, 0, "atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e", 1000000, iota::createIndexation("#iota.php", "transaction test! follow me on Twitter @SourCL_Stefan"));
 ```
 
 
