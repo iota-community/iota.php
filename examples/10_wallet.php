@@ -15,7 +15,7 @@
   echo "#### genesisWallet ###############" . LF;
   echo "Seed: " . $genesisWalletSeed . LF;
   echo "Ed25519 Address: " . $genesisEd25519Address->toAddress() . LF;
-  echo "Bech32 Address: " . $genesisEd25519Address->toBech32Adress(($_client->info())->bech32HRP) . LF;
+  echo "Bech32 Address: " . $genesisEd25519Address->toBech32Address(($_client->info())->bech32HRP) . LF;
   echo "##################################" . LF;
   //
   $walletSeed           = iota::Ed25519Seed("e57fb750f3a3a67969ece5bd9ae7eef5b2256a818b2aac458941f7274985a410");
@@ -27,5 +27,5 @@
   echo "Seed: " . $walletSeed . LF;
   echo "Path: " . $walletPath . LF;
   echo "Ed25519 Address: " . $walletEd25519Address->toAddress() . LF;
-  echo "Bech32 Address: " . $walletEd25519Address->toBech32Adress(($_client->info())->bech32HRP) . LF;
+  echo "Bech32 Address: " . $walletEd25519Address->toBech32Address(($_client->info())->bech32HRP) . LF;
   echo "##################################" . LF;

@@ -4,11 +4,11 @@
   // create client
   $client = new iota('https://api.lb-0.testnet.chrysalis2.com');
   //
-  $found = $client->messagesFind(\iota\converter::bin2hex('MY-DATA-INDEX'));
+  $found = $client->findMessage('#iota.php');
   if(\count($found->messageIds) > 0) {
     echo "Messages Found: " . \count($found->messageIds) . LF;
-    $lastData = $client->message(\end($found->messageIds));
-    echo \iota\converter::hex2bin($lastData->payload->data) . LF;
+    $lastData = $client->getMessagePayload(\end($found->messageIds));
+    echo $lastData->data. LF;
   }
   else {
     echo "No Results!" . LF;
