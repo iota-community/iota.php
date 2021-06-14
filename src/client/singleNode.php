@@ -117,6 +117,15 @@ class singleNode extends \iota\client {
   }
 
   /**
+   * @param $peerId
+   *
+   * @return \iota\schemas\response\Peer
+   */
+  public function peer($peerId): \iota\schemas\response\Peer {
+    return (new \iota\api\peers($this))->get($peerId);
+  }
+
+  /**
    * Add a given peer to the node.
    *
    * @param string $multiAddress
