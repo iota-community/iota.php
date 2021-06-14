@@ -36,6 +36,34 @@ class Bip32Path {
   }
 
   /**
+   * @param int $index
+   */
+  public function setCoinType($index = 4218, $_hardend = true): void {
+    $this->_path[1] = $index . ($_hardend ? "'" : "");
+  }
+
+  /**
+   * @param int $index
+   */
+  public function setAccountIndex($index = 0, $_hardend = true): void {
+    $this->_path[2] = $index . ($_hardend ? "'" : "");
+  }
+
+  /**
+   * @param int $index
+   */
+  public function setAddressIndex($index = 0, $_hardend = true): void {
+    $this->_path[4] = $index . ($_hardend ? "'" : "");
+  }
+
+  /**
+   * @param bool $isInternal
+   */
+  public function setChange(bool $val = false, $_hardend = true): void {
+    $this->_path[3] = ($val ? 1 : 0) . ($_hardend ? "'" : "");
+  }
+
+  /**
    *
    */
   public function push(mixed $value): void {

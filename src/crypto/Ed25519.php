@@ -31,4 +31,18 @@ class Ed25519 {
       'publicKey'  => \substr($_keys, self::$PRIVATE_KEY_SIZE * 2, self::$PUBLIC_KEY_SIZE * 2),
     ];
   }
+
+  /**
+   * @param string $secretKey
+   * @param string $message
+   *
+   * @return string
+   * @throws \SodiumException
+   * @throws \iota\exception\converter
+   */
+  static public function sign(string $secretKey, string $message) {
+    $_sign = \iota\converter::bin2hex(\sodium_crypto_sign(\iota\converter::hex2bin($message), \iota\converter::hex2bin($secretKey)));
+
+    return \substr($_sign, 0, self::$PRIVATE_KEY_SIZE * 2);
+  }
 }

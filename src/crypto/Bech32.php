@@ -165,8 +165,8 @@ class Bech32 {
       $_t   = $_chk >> 25;
       $_chk = ($_chk & 0x1ffffff) << 5 ^ $values[$_i];
       for($_j = 0; $_j < 5; $_j++) {
-        $value = (($_t >> $_j) & 1) ? self::$_generator[$_j] : 0;
-        $_chk  ^= $value;
+        $_v = (($_t >> $_j) & 1) ? self::$_generator[$_j] : 0;
+        $_chk  ^= $_v;
       }
     }
 
