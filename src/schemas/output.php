@@ -4,7 +4,7 @@
  *
  * @package iota\schemas
  */
-abstract class output extends \iota\schemas {
+class output extends \iota\schemas {
   /**
    * @var int
    */

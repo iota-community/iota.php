@@ -8,7 +8,7 @@ class Transaction extends \iota\schemas\payload {
   /**
    * @var int
    */
-  public int $type;
+  public int $type = 0;
   /**
    * @var string
    */

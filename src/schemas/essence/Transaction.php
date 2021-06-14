@@ -12,13 +12,13 @@ class Transaction extends \iota\schemas\essence {
   /**
    * @var array
    */
-  public array $inputs;
+  public array $inputs = [];
   /**
    * @var array
    */
-  public array $outputs;
+  public array $outputs = [];
   /**
    * @var \iota\schemas\payload
    */
-  public \iota\schemas\payload $payload;
+  public ?\iota\schemas\payload $payload;
 }

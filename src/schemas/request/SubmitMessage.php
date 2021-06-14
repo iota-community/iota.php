@@ -20,5 +20,5 @@ class SubmitMessage extends \iota\schemas\request {
   /**
    * @var string
    */
-  public string $nonce;
+  public string $nonce = "0";
 }
