@@ -20,7 +20,7 @@ class ed25519 {
    * @throws \iota\exception\converter
    */
   public function toAddress(): string {
-    $_hash = \sodium_crypto_generichash(\iota\converter::hex2bin($this->publicKey));
+    $_hash = \iota\hash::blake2b_sum256(\iota\converter::hex2bin($this->publicKey));
 
     return \iota\converter::bin2hex($_hash);
   }
@@ -33,7 +33,7 @@ class ed25519 {
    * @throws \SodiumException
    * @throws \iota\exception\converter
    */
-  public function toBech32Adress(string $hrp, int $_addressType = 0): string {
+  public function toBech32Address(string $hrp, int $_addressType = 0): string {
     $_data = \iota\converter::hex2byteArray($this->toAddress());
     \array_unshift($_data, $_addressType);
     $_data = \iota\converter::bits($_data, count($_data), 8, 5, true);

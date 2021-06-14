@@ -102,6 +102,16 @@ class hash {
   }
 
   /**
+   * @param $data
+   *
+   * @return string
+   */
+  static public function blake2b_sum256($data) {
+    return  \sodium_crypto_generichash($data);
+    //return (new \iota\crypto\Blake2b(32))->hash($data);
+  }
+
+  /**
    * @return array
    */
   static public function algos(): array {
