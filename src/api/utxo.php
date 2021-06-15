@@ -106,7 +106,7 @@ class utxo extends \iota\api {
   /**
    * Returns information about the treasury
    *
-   * @return \iota\schemas\response\Receipts
+   * @return \iota\schemas\response\Treasury
    * @throws \Exception
    */
   public function treasury(): \iota\schemas\response\Treasury {

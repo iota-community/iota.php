@@ -1,6 +1,6 @@
 <?php
   // check PHP Version
-  if(0 > \version_compare(PHP_VERSION, '8.0.0')) {
+  if(0 > version_compare(PHP_VERSION, '8.0.0')) {
     die('PHP >= 8.0.0 needed (' . PHP_VERSION . " is installed)");
     exit;
   }
@@ -9,17 +9,17 @@
    */
   const LF = (PHP_SAPI == 'cli' ? PHP_EOL : "<br />" . PHP_EOL);
   // register autoload
-  \spl_autoload_register(/**
+  spl_autoload_register(/**
    * @param string $classname
    *
    * @return bool
    */ function (string $classname) {
-    $_tmp  = \explode('\\', $classname);
-    $_file = \array_pop($_tmp) . '.php';
-    \array_shift($_tmp);
-    $_dir = __DIR__ . '/src/' . \implode('/', $_tmp) . '/';
+    $_tmp  = explode('\\', $classname);
+    $_file = array_pop($_tmp) . '.php';
+    array_shift($_tmp);
+    $_dir = __DIR__ . '/src/' . implode('/', $_tmp) . '/';
     //
-    if(\file_exists($_dir . $_file)) {
+    if(file_exists($_dir . $_file)) {
       include_once($_dir . $_file);
 
       return true;
@@ -67,7 +67,7 @@
      * @return \iota\schemas\response\Message
      * @throws Exception
      */
-    public function getMessage(string $messageId, $_covertHexToString = true): \iota\schemas\response\Message {
+    public function getMessage(string $messageId,bool $_covertHexToString = true): \iota\schemas\response\Message {
       $_result = $this->message($messageId);
       if($_covertHexToString && $_result) {
         $_result->payload->index = \iota\converter::hex2bin($_result->payload->index);
@@ -84,7 +84,7 @@
      * @return \iota\schemas\payload|false
      * @throws Exception
      */
-    public function getMessagePayload(string $messageId, $_covertHexToString = true): \iota\schemas\payload|false {
+    public function getMessagePayload(string $messageId,bool $_covertHexToString = true): \iota\schemas\payload|false {
       if(($_result = $this->getMessage($messageId, $_covertHexToString)) && $_result->payload) {
         return $_result->payload;
       }
@@ -96,7 +96,7 @@
     /**
      * @param \iota\type\seed\ed25519                $walledSeed
      * @param int                                    $_accountIndex
-     * @param                                        $addressBech32
+     * @param string                                 $addressBech32
      * @param                                        $amount
      * @param false|\iota\schemas\payload\Indexation $_indexation
      *
@@ -104,7 +104,7 @@
      * @throws SodiumException
      * @throws \iota\exception\converter
      */
-    public function send(\iota\type\seed\ed25519 $walledSeed, int $_accountIndex = 0, string $addressBech32, $amount, false|\iota\schemas\payload\Indexation $_indexation = false): \iota\schemas\response\SubmitMessage {
+    public function send(\iota\type\seed\ed25519 $walledSeed, int $_accountIndex, string $addressBech32, $amount, false|\iota\schemas\payload\Indexation $_indexation = false): \iota\schemas\response\SubmitMessage {
       // creating Transaction SubmitMessage
       $_sMsg        = new \iota\schemas\request\SubmitMessage();
       $_transaction = $_sMsg->payload = new \iota\schemas\payload\Transaction();
@@ -155,8 +155,8 @@
         ]);
       }
       // sort inputs / outputs
-      \sort($_essence->inputs);
-      \sort($_essence->outputs);
+      sort($_essence->inputs);
+      sort($_essence->outputs);
       // unlockBlocks
       $_list = [];
       foreach($_essence->inputs as $_k => $input) {
@@ -176,7 +176,7 @@
               'signature' => \iota\crypto\Ed25519::sign(($addressSeed->keyPair())['privateKey'], $_essence->__toHash()),
             ]),
           ]);
-          $_list[$_publicKey]           = \count($_transaction->unlockBlocks) - 1;
+          $_list[$_publicKey]           = count($_transaction->unlockBlocks) - 1;
         }
       }
 
@@ -199,7 +199,7 @@
     }
 
     /**
-     * @param $addressBech32
+     * @param string $addressBech32
      *
      * @return string
      * @throws \iota\exception\converter
@@ -207,7 +207,7 @@
     static public function bech32toEd25519(string $addressBech32): string {
       $_data = \iota\crypto\Bech32::decode($addressBech32)[1];
 
-      return \substr(\iota\converter::byteArray2Hex(\iota\converter::bits($_data, \count($_data), 5, 8, false)), 2);
+      return substr(\iota\converter::byteArray2Hex(\iota\converter::bits($_data, count($_data), 5, 8, false)), 2);
     }
 
     /**

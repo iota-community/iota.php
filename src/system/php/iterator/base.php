@@ -38,7 +38,7 @@ class base implements \Iterator, \ArrayAccess, \Countable, \Serializable {
   }
 
   /**
-   * @return mixed
+   * @return int|string|null
    */
   public function key() {
 

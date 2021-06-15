@@ -34,10 +34,11 @@ class peers extends \iota\api {
   /**
    * Add a given peer to the node.
    *
-   * @param string $multiAddress
-   * @param string $alias
+   * @param string      $multiAddress
+   * @param string|null $alias
    *
    * @return \iota\schemas\response\AddPeer
+   * @throws \Exception
    */
   public function add(string $multiAddress, string $alias = null): \iota\schemas\response\AddPeer {
     $_request               = new \iota\schemas\request\AddPeer();
@@ -57,7 +58,8 @@ class peers extends \iota\api {
    *
    * @param string $peerId
    *
-   * @return string
+   * @return void
+   * @throws \Exception
    */
   public function delete(string $peerId): void {
     $this->fetch([

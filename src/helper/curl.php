@@ -61,7 +61,6 @@ class curl {
     $this->setOption(CURLOPT_TIMEOUT, 0);
     //$this->setOption(CURLOPT_COOKIESESSION, true);
     //$this->setOption(CURLOPT_COOKIEJAR, 'cookie-name');
-
     if(\strstr($_url, "https://")) {
       $this->setOption(CURLOPT_SSL_VERIFYPEER, 0);
       $this->setOption(CURLOPT_SSL_VERIFYHOST, 0);
@@ -86,7 +85,7 @@ class curl {
   /**
    * @return bool
    */
-  public function checkHandle() {
+  public function checkHandle(): bool {
     if($this->getHandle() === false) {
       return false;
     }
@@ -95,7 +94,7 @@ class curl {
   }
 
   /**
-   * @return bool
+   * @return bool|CurlHandle
    */
   public function getHandle() {
     return $this->_handle;
@@ -104,7 +103,7 @@ class curl {
   /**
    * @return string
    */
-  public function exec() {
+  public function exec(): string {
     $_retValue               = \curl_exec($this->_handle);
     $this->_status           = \curl_getinfo($this->_handle);
     $this->_status['_errno'] = \curl_errno($this->_handle);
@@ -136,23 +135,23 @@ class curl {
   /**
    * @return bool
    */
-  public function getActive() {
+  public function getActive(): bool {
     return \is_resource($this->_handle);
   }
 
   /**
-   * @return null
+   * @return mixed
    */
-  public function getContent() {
+  public function getContent(): mixed {
     return $this->_content;
   }
 
   /**
    * @param null $_header
    *
-   * @return bool|null
+   * @return mixed
    */
-  public function getHeader($_header = null) {
+  public function getHeader($_header = null): mixed {
     if(empty($this->_header)) {
       return false;
     }
@@ -172,9 +171,9 @@ class curl {
   /**
    * @param $option
    *
-   * @return bool
+   * @return mixed
    */
-  public function getOption($option) {
+  public function getOption($option): mixed {
     if(isset($this->_options[$option])) {
       return $this->_options[$option];
     }
@@ -185,7 +184,7 @@ class curl {
   /**
    * @return bool
    */
-  public function hasError() {
+  public function hasError(): bool {
     if(isset($this->_status['_error'])) {
       return (empty($this->_status['_error']) ? false : $this->_status['_error']);
     }
@@ -199,7 +198,7 @@ class curl {
    *
    * @return bool
    */
-  public function parseHeader($_header) {
+  public function parseHeader($_header): bool {
     $this->_caseless = [];
     $_array          = \preg_split("/(\r\n)+/", $_header);
     if(\preg_match('/^HTTP/', $_array[0])) {
@@ -220,9 +219,9 @@ class curl {
   /**
    * @param null $_theField
    *
-   * @return bool|null
+   * @return mixed
    */
-  public function getStatus($_theField = null) {
+  public function getStatus($_theField = null): mixed {
     if(empty($_theField)) {
       return $this->_status;
     }
@@ -240,7 +239,7 @@ class curl {
    * @param $option
    * @param $value
    */
-  public function setOption($option, $value) {
+  public function setOption($option, $value): void {
     \curl_setopt($this->_handle, $option, $value);
     $this->_options[$option] = $value;
   }
@@ -250,7 +249,7 @@ class curl {
    *
    * @return array
    */
-  public function &fromPostString(&$postString) {
+  public function &fromPostString(&$postString): array {
     $_ret    = [];
     $_fields = \explode('&', $postString);
     foreach($_fields as $aField) {
@@ -265,9 +264,9 @@ class curl {
    * @param array $data
    * @param null  $_name
    *
-   * @return bool|string
+   * @return string
    */
-  public function &asPostString(array &$data, $_name = null) {
+  public function &asPostString(array &$data, $_name = null): string {
     $_postString = '';
     $_prefix     = $_name;
     if(is_array($data)) {
@@ -291,7 +290,7 @@ class curl {
   /**
    * @return array
    */
-  public function getFollowedHeaders() {
+  public function getFollowedHeaders(): array {
     $_headers = [];
     if($this->_followed) {
       foreach($this->_followed as $_aHeader) {

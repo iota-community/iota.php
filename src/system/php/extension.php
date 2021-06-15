@@ -6,8 +6,7 @@
  */
 abstract class extension {
   /**
-   * @param $varname
-   * @param $value
+   * @param $extension
    *
    * @return $this
    */
@@ -16,10 +15,8 @@ abstract class extension {
   }
 
   /**
-   * @param $varname
-   *
    * @return string
-   */
+*/
   static public function getLoaded() {
     return \get_loaded_extensions();
   }

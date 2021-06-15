@@ -9,7 +9,7 @@ abstract class config {
    * @param $varname
    * @param $value
    *
-   * @return $this
+   * @return false|string
    */
   static public function set($varname, $value) {
     return \ini_set($varname, $value);
@@ -46,8 +46,6 @@ abstract class config {
         return PHP_MINOR_VERSION;
       case 'release_version':
         return PHP_RELEASE_VERSION;
-      case 'minor_version':
-        return PHP_MINOR_VERSION;
     }
 
     return \ini_get($varname);

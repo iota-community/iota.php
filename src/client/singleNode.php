@@ -42,8 +42,7 @@ class singleNode extends \iota\client {
   /**
    * Submit a message. The node takes care of missing* fields and tries to build the message. On success, the message will be stored in the Tangle. This endpoint will return the identifier of the built message. *The node will try to auto-fill the following fields in case they are missing: networkId, parentMessageIds, nonce. If payload is missing, the message will be built without a payload.
    *
-   * @param $index
-   * @param $data
+   * @param \iota\schemas\request\SubmitMessage $message
    *
    * @return \iota\schemas\response\SubmitMessage
    * @throws \Exception
@@ -104,8 +103,8 @@ class singleNode extends \iota\client {
    * @param string $index
    *
    * @return \iota\schemas\response\UTXOChanges
-   */
-  public function milestoneUtxoChanges(string $index): \iota\schemas\response\Milestone {
+*/
+  public function milestoneUtxoChanges(string $index): \iota\schemas\response\UTXOChanges {
     return (new \iota\api\milestones($this))->utxoChanges($index);
   }
 
@@ -128,11 +127,12 @@ class singleNode extends \iota\client {
   /**
    * Add a given peer to the node.
    *
-   * @param string $multiAddress
-   * @param string $alias
+   * @param string      $multiAddress
+   * @param string|null $alias
    *
    * @return \iota\schemas\response\AddPeer
-   */
+   * @throws \Exception
+*/
   public function peerAdd(string $multiAddress, string $alias = null): \iota\schemas\response\AddPeer {
     return (new \iota\api\peers($this))->add($multiAddress, $alias);
   }
@@ -142,8 +142,9 @@ class singleNode extends \iota\client {
    *
    * @param string $peerId
    *
-   * @return string
-   */
+   * @return void
+   * @throws \Exception
+*/
   public function peerDelete(string $peerId): void {
     (new \iota\api\peers($this))->delete($peerId);
   }
@@ -160,12 +161,11 @@ class singleNode extends \iota\client {
   }
 
   /**
-   * Find an output by its identifier.
+   * Get the balance of a bech32-encoded address.
    *
-   * @param string $outputId Identifier of the output encoded in hex. An output is identified by the concatenation of transaction_id+output_index
-   *
-   * @return \iota\schemas\response\Output
-   */
+   * @param string $addressBech32
+   * @return \iota\schemas\response\BalanceAddress
+*/
   public function address(string $addressBech32): \iota\schemas\response\BalanceAddress {
     return (new \iota\api\utxo($this))->addresses($addressBech32);
   }
@@ -221,9 +221,9 @@ class singleNode extends \iota\client {
   /**
    * Returns information about the treasury
    *
-   * @return \iota\schemas\response\Receipts
+   * @return \iota\schemas\response\Treasury
    * @throws \Exception
-   */
+*/
   public function treasury(): \iota\schemas\response\Treasury {
     return (new \iota\api\utxo($this))->treasury();
   }

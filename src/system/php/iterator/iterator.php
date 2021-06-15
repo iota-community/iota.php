@@ -36,7 +36,7 @@ trait iterator {
   }
 
   /**
-   * @return mixed
+   * @return int|string|null
    */
   public function key() {
     return \key($this->_data);

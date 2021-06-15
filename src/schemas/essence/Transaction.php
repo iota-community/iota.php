@@ -18,7 +18,7 @@ class Transaction extends \iota\schemas\essence {
    */
   public array $outputs = [];
   /**
-   * @var \iota\schemas\payload
+   * @var \iota\schemas\payload|null
    */
   public ?\iota\schemas\payload $payload;
 }

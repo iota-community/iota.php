@@ -57,7 +57,8 @@ class Bip32Path {
   }
 
   /**
-   * @param bool $isInternal
+   * @param bool $val
+   * @param bool $_hardend
    */
   public function setChange(bool $val = false, $_hardend = true): void {
     $this->_path[3] = ($val ? 1 : 0) . ($_hardend ? "'" : "");

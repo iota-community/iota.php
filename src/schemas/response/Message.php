@@ -14,7 +14,7 @@ class Message extends \iota\schemas\response {
    */
   public array $parentMessageIds;
   /**
-   * @var \iota\schemas\payload
+   * @var \iota\schemas\payload\Indexation|\iota\schemas\payload\Transaction|\iota\schemas\payload\Milestone|\iota\schemas\payload\Receipt|\iota\schemas\payload\TreasuryTransaction
    */
   public \iota\schemas\payload\Indexation|\iota\schemas\payload\Transaction|\iota\schemas\payload\Milestone|\iota\schemas\payload\Receipt|\iota\schemas\payload\TreasuryTransaction $payload;
   /**

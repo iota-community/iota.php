@@ -10,7 +10,7 @@ class input extends \iota\schemas {
    */
   public int $type;
   /**
-   * @var array
+   * @var string
    */
   public string $transactionId;
   /**

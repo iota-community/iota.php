@@ -19,9 +19,11 @@ class Ed25519 {
   static protected int $SEED_SIZE = 32;
 
   /**
-   * @param $seed
+   * @param string $seed
    *
    * @return array
+   * @throws \SodiumException
+   * @throws \iota\exception\converter
    */
   static public function keyPairFromSeed(string $seed): array {
     $_keys = \iota\converter::bin2hex(\sodium_crypto_sign_seed_keypair(\iota\converter::hex2bin($seed)));

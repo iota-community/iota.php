@@ -58,7 +58,7 @@ class Info extends \iota\schemas\response {
    */
   public int $pruningIndex;
   /**
-   * @var string
+   * @var array
    */
   public array $features;
 }

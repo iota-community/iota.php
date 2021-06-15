@@ -17,8 +17,8 @@ class Bip39 {
   /**
    * Bip39 constructor.
    *
-   * @param int    $wordCount
-   * @param string $_wordlist
+   * @param int               $wordCount
+   * @param string|array|null $_wordlist
    *
    * @throws \Exception
    */
@@ -62,10 +62,10 @@ class Bip39 {
    * @param string|array $words
    * @param bool         $verifyChecksum
    *
-   * @return array
+   * @return \iota\crypto\Mnemonic
    * @throws \Exception
    */
-  public function reverseMnemonic(string|array $words, bool $verifyChecksum = true): \iota\crypto\Mnemonic {
+  public function reverseMnemonic(string|array $words, bool $verifyChecksum = true): Mnemonic {
     if(\is_string($words)) {
       $words = \explode(" ", $words);
     }

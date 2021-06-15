@@ -30,7 +30,7 @@ class ed25519 {
   }
 
   /**
-   * @param $path
+   * @param \iota\crypto\Bip32Path $path
    *
    * @return ed25519
    */

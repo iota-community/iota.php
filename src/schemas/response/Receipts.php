@@ -6,7 +6,7 @@
  */
 class Receipts extends \iota\schemas\response {
   /**
-   * @var string
+   * @var array
    */
   public array $receipts;
 }

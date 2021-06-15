@@ -18,13 +18,13 @@ class json implements \ArrayAccess, \Iterator, \Countable, \Serializable {
   /**
    * json constructor.
    *
-   * @param string $str
+   * @param string|null $str
    */
   public function __construct(public string|null $str) {
     if(!$this->str) {
       $this->str = '';
     }
-    $this->_data = \json_decode($this->str, true) ?? [];
+    $this->_data  = \json_decode($this->str, true) ?? [];
     $this->isJSON = \is_string($this->str) && \is_array($this->decode(true)) && (\json_last_error() == JSON_ERROR_NONE) ? true : false;
   }
 
@@ -35,7 +35,7 @@ class json implements \ArrayAccess, \Iterator, \Countable, \Serializable {
    *
    * @return mixed
    */
-  public function decode(?bool $associative = false, int $depth = 512, int $flags = 0) {
+  public function decode(?bool $associative = false, int $depth = 512, int $flags = 0): mixed {
     return \json_decode($this->str, $associative, $depth, $flags);
   }
 

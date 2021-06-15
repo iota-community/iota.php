@@ -10,11 +10,11 @@ class Transaction extends \iota\schemas\payload {
    */
   public int $type = 0;
   /**
-   * @var string
+   * @var \iota\schemas\essence
    */
   public \iota\schemas\essence $essence;
   /**
-   * @var string
+   * @var array
    */
   public array $unlockBlocks;
 }

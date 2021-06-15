@@ -155,7 +155,7 @@ class Bech32 {
 
   /**
    * @param array $values
-   * @param       $numValues
+   * @param int   $numValues
    *
    * @return int
    */
@@ -177,7 +177,7 @@ class Bech32 {
    * @param string $hrp
    * @param int    $hrpLen
    *
-   * @return array|int[]
+   * @return array
    */
   static public function hrpExpand(string $hrp, int $hrpLen): array {
     $_ep1 = [];
@@ -216,8 +216,8 @@ class Bech32 {
   }
 
   /**
-   * @param       $hrp
-   * @param array $convertedDataChars
+   * @param string $hrp
+   * @param array  $convertedDataChars
    *
    * @return bool
    */
@@ -244,7 +244,7 @@ class Bech32 {
   }
 
   /**
-   * @param $sBech
+   * @param string $sBech
    *
    * @return array
    * @throws \Exception

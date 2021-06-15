@@ -9,7 +9,8 @@ class node extends \iota\api {
    * Returns the health of the node.
    * A node considers itself healthy if its solid milestone is at most two delta away from the latest known milestone, has at least one ongoing gossip stream and the latest known milestone is newer than 5 minutes. This information might be useful for load-balancing or uptime monitoring.
    *
-   * @return string
+   * @return bool
+   * @throws \Exception
    */
   public function health(): bool {
     $_status = $this->fetch([

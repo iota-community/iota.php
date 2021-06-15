@@ -106,7 +106,7 @@ class Blake2b {
    * @param $x
    * @param $s
    *
-   * @return int|mixed
+   * @return mixed
    */
   private function _rs($x, $s): mixed {
     if($s) {
@@ -151,7 +151,7 @@ class Blake2b {
   /**
    * @param $x
    *
-   * @return float|int|mixed
+   * @return mixed
    */
   private function _flatten64($x): mixed {
     return ($x[0] * 4294967296 + $x[1]);
@@ -171,7 +171,7 @@ class Blake2b {
   }
 
   /**
-   * @var \int[][]
+   * @var int[][]
    */
   private $sigma = [
     [

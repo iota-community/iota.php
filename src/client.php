@@ -52,7 +52,7 @@ class client {
    * @param string           $route
    * @param helper\json|null $_requestData
    *
-   * @return array
+   * @return string
    * @throws \Exception
    */
   public function fetch(string $method, string $route, \iota\helper\json|null $_requestData = null) {
@@ -69,7 +69,7 @@ class client {
     }
     if($this->_user && $this->_pass) {
       if(!\strstr($_url, "https://")) {
-        throw new \iota\exception\client("Basic authentication requires the endpoint to be https");
+        throw new exception\client("Basic authentication requires the endpoint to be https");
       }
       $this->_handle->setOption(CURLOPT_HTTPAUTH, CURLAUTH_ANY);
       $this->_handle->setOption(CURLOPT_USERPWD, $this->_user . ":" . $this->_pass);
@@ -122,7 +122,7 @@ class client {
    * @return mixed
    * @throws \Exception
    */
-  public function fetchStatus(string $method, string $route, \iota\helper\json|null $_requestData = null) {
+  public function fetchStatus(string $method, string $route, \iota\helper\json|null $_requestData = null):mixed {
     $this->fetch($method, $route, $_requestData);
 
     return $this->_handle->getStatus();

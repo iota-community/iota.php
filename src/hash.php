@@ -10,7 +10,7 @@ class hash {
    */
   public string $ALGO = "sha512";
   /**
-   * @var string
+   * @var string|null
    */
   public ?string $KEY = null;
   /**

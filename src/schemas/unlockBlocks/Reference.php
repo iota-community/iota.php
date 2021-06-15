@@ -10,7 +10,7 @@ class Reference extends \iota\schemas {
    */
   public int $type = 1;
   /**
-   * @var string
+   * @var int
    */
   public int $reference;
 }
