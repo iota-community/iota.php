@@ -10,40 +10,39 @@
 <img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square" alt=">PHP 8">
 </p>
 
-# Basics examples (Transfer)
+# Examples (Faucet Client)
 
-### Include and create a client
+ Testnet tokens can only be used for testing within the chrysalis testnet
+> Please do not claim tokens if you do not need them and return tokens you do not need. Testnet tokens have no value!
 
+### Include and create a faucet client
 ```php
 <?php
   // include iota lib
   require_once("../iota.php");
   // create client
-  $client = new iota('https://api.lb-0.testnet.chrysalis2.com');
+  $client = new iota\client\faucet();
 ```
 
-### Send transfer
+## get
+```php
+  echo $client->get('atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e');
+```
 
+
+## send
 ```php
   $seed           = iota::Ed25519Seed_fromMnemonic("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally");
-  echo $client->send($seed, 0, "atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e", 1000000, iota::createIndexation("#iota.php", "transaction test! follow me on Twitter @SourCL_Stefan"));
+  echo $client->send($seed, 0, 1000000, iota::createIndexation("#iota.php", "transaction faucet test! follow me on Twitter @SourCL_Stefan"));
 ```
 
+---
 
-<hr>
-
-### Get funds on testnet
-
-Use [faucet client](./004_examples_faucet.md)
-
-
-Or visit: https://faucet.testnet.chrysalis2.com/
 
 
 <hr>
 
 ## Additional Examples
-
 Please find other examples in the [examples](../examples) folder.
 
 

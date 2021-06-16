@@ -4,7 +4,7 @@
  *
  * @package iota
  */
-abstract class api {
+class api {
   /**
    * api constructor.
    *

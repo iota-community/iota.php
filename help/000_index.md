@@ -42,7 +42,9 @@ This library allows you to do the following:
     + ...
 
 
++ [Examples (Faucet Client)](./004_examples_faucet.md)
 + [Examples (API)](./003_examples_api.md)
+
 
 
 + [Troubleshooting](./100_Troubleshooting.md)
