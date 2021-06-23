@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?style=social&logo=discord" alt="Discord"></a>
-  <a href="https://twitter.com/SourCL_Stefan/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
+  <a href="https://twitter.com/IOTAphp/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
   <br>
 
 <img src="https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square" alt="Apache-2.0 license">
@@ -26,7 +26,7 @@
 
 ```php
   $seed           = iota::Ed25519Seed_fromMnemonic("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally");
-  echo $client->send($seed, 0, "atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e", 1000000, iota::createIndexation("#iota.php", "transaction test! follow me on Twitter @SourCL_Stefan"));
+  echo $client->send($seed, 0, "atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e", 1000000, iota::createIndexation("#iota.php", "transaction test! follow me on Twitter @IOTAphp"));
 ```
 
 

@@ -32,7 +32,7 @@
     public function testSendMessage(): void {
       $this->createApiClient();
       //
-      $_result = $this->_client->sendMessage('#iota.php', 'message test! follow me on Twitter @SourCL_Stefan');
+      $_result = $this->_client->sendMessage('#iota.php', 'message test! follow me on Twitter @IOTAphp');
       //
       $this->assertJson((string)$_result, 'client Info returned not a valid json');
       $this->assertIsArray((array)$_result, 'client Info returned not a valid array');
