@@ -1,0 +1,7 @@
+<phpunit backupGlobals="true" colors="true" cacheResult ="false">
+    <testsuites>
+        <testsuite name="IOTA Client API test">
+            <directory suffix='.php'>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
