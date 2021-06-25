@@ -18,11 +18,12 @@ PHP library to use IOTA REST API to help node management and tangle queries.
 
 This library allows you to do the following:
 
-- [x] Create messages with indexation and transaction payloads
-- [x] Get messages and outputs
-- [x] Generate addresses
 - [x] Interact with an IOTA node
-- [x] Get funds on testnet
+  - [x] Create messages with indexation and transaction payloads
+  - [x] Get messages and outputs
+  - [x] Generate addresses
+- [x] Interact with the IOTA Faucet Api 
+  - [x] Get funds on testnet
 
 # Requirements
 
@@ -49,7 +50,12 @@ This library allows you to do the following:
 
 Additional Examples: Please find other examples in the [./examples](examples) folder.
 
-<hr>
+---
+
+### What's next,done
+Check [ToDo](TODO.md)
+
+---
 
 ### Joining the discussion
 
