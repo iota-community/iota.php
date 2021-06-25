@@ -163,7 +163,9 @@
      * @throws ExceptionHelper
      */
     public function testmilestone() {
-      $ret = $this->client->peers();
+      $info = $this->client->info();
+
+      $ret = $this->client->milestone($info->latestMilestoneIndex);
       if($ret instanceof ResponseError) {
         $this->assertInstanceOf(ResponseError::class, $ret);
         $this->assertEquals(403, $ret->code);
@@ -178,7 +180,8 @@
      * @throws ExceptionHelper
      */
     public function testmilestoneUtxoChanges() {
-      $this->assertInstanceOf(ResponseMilestoneUtxoChanges::class, $this->client->milestoneUtxoChanges("637964"));
+      $info = $this->client->info();
+      $this->assertInstanceOf(ResponseMilestoneUtxoChanges::class, $this->client->milestoneUtxoChanges($info->latestMilestoneIndex));
     }
 
     /**

@@ -187,7 +187,7 @@ class SingleNodeClient {
    * @throws ExceptionApi
    * @throws ExceptionHelper
    */
-  public function milestone(string $index): ResponseMilestone|ResponseError {
+  public function milestone(int|string $index): ResponseMilestone|ResponseError {
     return $this->ApiCaller->route('milestones/' . $index)
                            ->callback(ResponseMilestone::class)
                            ->fetchJSON();
@@ -202,7 +202,7 @@ class SingleNodeClient {
    * @throws ExceptionApi
    * @throws ExceptionHelper
    */
-  public function milestoneUtxoChanges(string $index): ResponseMilestoneUtxoChanges|ResponseError {
+  public function milestoneUtxoChanges(int|string $index): ResponseMilestoneUtxoChanges|ResponseError {
     return $this->ApiCaller->route('milestones/' . $index . '/utxo-changes')
                            ->callback(ResponseMilestoneUtxoChanges::class)
                            ->fetchJSON();
