@@ -38,7 +38,7 @@
 ### Convert bech32 to ed25519
 
 ```php
-  echo $client->bech32toEd25519("atoi1qpg4tqh7vj9s7y9zk2smj8t4qgvse9um42l7apdkhw6syp5ju4w3vet6gtj");
+  echo IOTA\Helper\Converter::bech32ToEd25519("atoi1qpg4tqh7vj9s7y9zk2smj8t4qgvse9um42l7apdkhw6syp5ju4w3vet6gtj");
 ```
 
 <hr>
