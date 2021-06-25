@@ -36,6 +36,16 @@
      *
      */
     public function testsend() {
-      $this->assertInstanceOf(sendTokens::class, $this->client->send("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally", 0, 1000000));
+      try {
+        $ret = $this->client->send("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally", 0, 1000000);
+        $this->assertInstanceOf(sendTokens::class, $ret);
+      }
+      catch(\IOTA\Exception\Action $e) {
+        if($e->getMessage() == "There are not enough funds in the inputs for the required balance! amount: 1000000, balance: 0") {
+          $this->assertTrue(true);
+          return;
+        }
+        throw new Exception($e->getMessage());
+      }
     }
   }
