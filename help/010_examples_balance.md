@@ -10,7 +10,7 @@
   <img src="https://github.com/iota-community/iota.php/actions/workflows/phpunit.yml/badge.svg" alt="WorkflowUnitTest">
 </p>
 
-# Basics examples (Transfer)
+# Examples Action (Address Balance)
 
 ### Include and create a client
 
@@ -22,34 +22,20 @@
   $client = new IOTA\Client\SingleNodeClient();
 ```
 
-### Setup seedInput
+### Address Bech32
 
 ```php
-  $seedInput = "giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally";
+  echo $ret = (new IOTA\Action\getBalance($client))->address('atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e')->run();
 ```
 
-or
+
+### Address Ed25519
 
 ```php
-  $seedInput = "a7263c9c84ae6aa9c88ae84bfd224aab87f187b57404d462ab6764c52303bb9ae51f54acc5473b1c366dc8559c04d49d6533edf19110918f9e2474443acd33f3";
+  echo $ret = (new IOTA\Action\getBalance($client))->address('60200bad8137a704216e84f8f9acfe65b972d9f4155becb4815282b03cef99fe')->run();
 ```
 
-### Send transfer
-
-```php
-   echo new IOTA\Action\sendTokens($seedInput, 0, "atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e", 1000000);
-```
-
-<hr>
-
-### Get funds on testnet
-
-Use [faucet client](./004_examples_faucet.md)
-
-Or visit: https://faucet.testnet.chrysalis2.com/
-
-
-<hr>
+---
 
 ## Additional Examples
 

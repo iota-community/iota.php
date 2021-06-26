@@ -38,17 +38,17 @@
      *
      */
     public function testgetBalanceAddressBech32() {
-      $ret = new getBalance($this->client, $this->addressBech32);
+      $ret = (new getBalance($this->client))->address($this->addressBech32);
       $this->assertInstanceOf(getBalance::class, $ret);
-      $this->assertInstanceOf(ResponseBalanceAddress::class, $ret->getReturn());
+      $this->assertInstanceOf(ResponseBalanceAddress::class, $ret->getResult());
     }
 
     /**
      *
      */
     public function testgetBalanceAddressEd25519() {
-      $ret = new getBalance($this->client, $this->addressEd25519);
+      $ret = (new getBalance($this->client))->address($this->addressEd25519);
       $this->assertInstanceOf(getBalance::class, $ret);
-      $this->assertInstanceOf(ResponseBalanceAddress::class, $ret->getReturn());
+      $this->assertInstanceOf(ResponseBalanceAddress::class, $ret->getResult());
     }
   }

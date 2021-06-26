@@ -28,7 +28,6 @@ use IOTA\Type\Ed25519Address;
 use IOTA\Type\Ed25519Seed;
 use SodiumException;
 
-
 /**
  * Class sendTokens
  *
@@ -38,26 +37,107 @@ use SodiumException;
  */
 class sendTokens extends AbstractAction {
   /**
-   * sendTokens constructor.
-   *
-   * @param SingleNodeClient                  $client
-   * @param Ed25519Seed|Mnemonic|string|array $seedInput
-   * @param int                               $_accountIndex
-   * @param string                            $addressBech32
-   * @param int                               $amount
-   * @param PayloadIndexation|null            $_indexation
+   * @var Ed25519Seed
    */
-  public function __construct(protected SingleNodeClient $client, Ed25519Seed|Mnemonic|string|array $seedInput, int $_accountIndex, string $addressBech32, int $amount, ?PayloadIndexation $_indexation = null) {
-    parent::__construct($client, $seedInput, $_accountIndex, $addressBech32, $amount, $_indexation);
-  }
+  protected Ed25519Seed $ed25519Seed;
+  /**
+   * @var int
+   */
+  protected int $accountIndex = 0;
+  /**
+   * @var string|null
+   */
+  protected ?string $addressBech32 = null;
+  /**
+   * @var int|null
+   */
+  protected ?int $amount = null;
+  /**
+   * @var PayloadIndexation
+   */
+  protected PayloadIndexation $indexation;
 
   /**
    * @param Ed25519Seed|Mnemonic|string|array $seedInput
-   * @param int                               $_accountIndex
-   * @param string                            $addressBech32
-   * @param int                               $amount
-   * @param PayloadIndexation|null            $_indexation
    *
+   * @return $this
+   * @throws ExceptionConverter
+   * @throws ExceptionCrypto
+   * @throws ExceptionHelper
+   * @throws ExceptionType
+   */
+  public function seedInput(Ed25519Seed|Mnemonic|string|array $seedInput): self {
+    $this->ed25519Seed = new Ed25519Seed($seedInput);
+
+    return $this;
+  }
+
+  /**
+   * @param int $accountIndex
+   *
+   * @return $this
+   */
+  public function accountIndex(int $accountIndex): self {
+    $this->accountIndex = $accountIndex;
+
+    return $this;
+  }
+
+  /**
+   * @param string $addressBech32
+   *
+   * @return $this
+   */
+  public function toAddressBech32(string $addressBech32): self {
+    $this->addressBech32 = $addressBech32;
+
+    return $this;
+  }
+
+  /**
+   * @param string $addressEd25519
+   *
+   * @return $this
+   * @throws ExceptionConverter
+   * @throws ExceptionCrypto
+   */
+  public function toAddressEd25519(string $addressEd25519): self {
+    $this->addressBech32 = Converter::bech32ToEd25519($addressEd25519);
+
+    return $this;
+  }
+
+  /**
+   * @param string $index
+   * @param string $data
+   * @param bool   $_convertToHex
+   *
+   * @return $this
+   */
+  public function message(string $index = '', string $data = '', bool $_convertToHex = true): self {
+    $this->indexation = new PayloadIndexation($index, $data, $_convertToHex);
+
+    return $this;
+  }
+
+  public function payloadIndexation(PayloadIndexation $indexation): self {
+    $this->indexation = $indexation;
+
+    return $this;
+  }
+
+  /**
+   * @param int $amount
+   *
+   * @return $this
+   */
+  public function amount(int $amount): self {
+    $this->amount = $amount;
+
+    return $this;
+  }
+
+  /**
    * @return ResponseSubmitMessage|ResponseError
    * @throws ExceptionAction
    * @throws ExceptionApi
@@ -67,12 +147,10 @@ class sendTokens extends AbstractAction {
    * @throws ExceptionType
    * @throws SodiumException
    */
-  protected function exec(Ed25519Seed|Mnemonic|string|array $seedInput = '', int $_accountIndex = 0, string $addressBech32 = '', int $amount = 0, ?PayloadIndexation $_indexation = null): ResponseSubmitMessage|ResponseError {
-    $walletSeed = new Ed25519Seed($seedInput);
-    //
+  public function run(): ResponseSubmitMessage|ResponseError {
     $addressPath = new Bip32Path(("m/44'/4218'/0'/0'/0'"));
-    $addressPath->setAccountIndex($_accountIndex);
-    $addressSeed = $walletSeed->generateSeedFromPath($addressPath);
+    $addressPath->setAccountIndex($this->accountIndex);
+    $addressSeed = $this->ed25519Seed->generateSeedFromPath($addressPath);
     $address     = new Ed25519Address(($addressSeed->keyPair())['publicKey']);
     // get outputs
     $_outputs = $this->client->addressesed25519Output($address->toAddress());
@@ -80,26 +158,26 @@ class sendTokens extends AbstractAction {
     // create essence
     $essenceTransaction = new EssenceTransaction();
     // add Indexation
-    if($_indexation) {
-      $essenceTransaction->payload = $_indexation;
+    if(isset($this->indexation)) {
+      $essenceTransaction->payload = $this->indexation;
     }
     // // parse outputs
     $_total = 0;
     foreach(($_outputs)->outputIds as $_id) {
       $_output = $this->client->output($_id);
-      if(!$_output->isSpent && $amount > $_total) {
+      if(!$_output->isSpent && $this->amount > $_total) {
         $essenceTransaction->inputs[] = new Input(0, $_output->transactionId, $_output->outputIndex);
         $_total                       += $_output->output['amount'];
       }
     }
-    if($_total == 0 || $_total < $amount) {
-      throw new ExceptionAction("There are not enough funds in the inputs for the required balance! amount: $amount, balance: $_total");
+    if($_total == 0 || $_total < $this->amount) {
+      throw new ExceptionAction("There are not enough funds in the inputs for the required balance! amount: $this->amount, balance: $_total");
     }
     // transfer to new address
-    $essenceTransaction->outputs[] = new Output(0, new Address(0, Converter::bech32toEd25519($addressBech32)), $amount);
+    $essenceTransaction->outputs[] = new Output(0, new Address(0, Converter::bech32toEd25519($this->addressBech32)), $this->amount);
     // sending remainder back, if amount not zero
-    if($_total - $amount > 0) {
-      $essenceTransaction->outputs[] = new Output(0, new Address(0, $address->toAddress()), ($_total - $amount));
+    if($_total - $this->amount > 0) {
+      $essenceTransaction->outputs[] = new Output(0, new Address(0, $address->toAddress()), ($_total - $this->amount));
     }
     // sort inputs / outputs
     sort($essenceTransaction->inputs);
@@ -119,13 +197,13 @@ class sendTokens extends AbstractAction {
       }
     }
 
-    return $this->return = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
+    return $this->result = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
   }
 
-    /**
+  /**
    * @return ResponseSubmitMessage|ResponseError
    */
-  public function getReturn(): ResponseSubmitMessage|ResponseError {
-    return $this->return;
+  public function getResult(): ResponseSubmitMessage|ResponseError {
+    return parent::getResult();
   }
 }

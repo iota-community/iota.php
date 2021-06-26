@@ -63,7 +63,15 @@ class FaucetClient {
    * @return sendTokens|ResponseSubmitMessage|ResponseError
    */
   public function send(Ed25519Seed|Mnemonic|string|array $seedInput, int $_accountIndex, int $amount, ?PayloadIndexation $_indexation = null): sendTokens|ResponseSubmitMessage|ResponseError {
+    $build = (new sendTokens(new SingleNodeClient()))->amount($amount)
+                                                     ->seedInput($seedInput)
+                                                     ->accountIndex($_accountIndex)
+                                                     ->toAddressBech32('atoi1qrk69lxuxljdgeqt7tucvtdfk3hrvrly7rzz65w57te6drf3expsj3gqrf9')
+                                                     ->message("#iota.php", "transaction faucet resend! follow me on Twitter @IOTAphp");
+    if($_indexation) {
+      $build->payloadIndexation($_indexation);
+    }
 
-    return new sendTokens(new SingleNodeClient(), $seedInput, $_accountIndex, 'atoi1qrk69lxuxljdgeqt7tucvtdfk3hrvrly7rzz65w57te6drf3expsj3gqrf9', $amount, $_indexation ?? new PayloadIndexation("#iota.php", "transaction faucet resend! follow me on Twitter @IOTAphp"));
+    return $build->run();
   }
 }

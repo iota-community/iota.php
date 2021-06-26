@@ -38,7 +38,9 @@ This library allows you to do the following:
 
 
 + Examples (Action)
-    + [Transfer (send)](./002_examples_transfer.md)
+    + [sendTokens](./010_examples_transfer.md)
+    + [getBalance](./010_examples_balance.md)
+    + [sendMessage](./010_examples_sendmessage.md)
   
 
 + Examples (Advanced)

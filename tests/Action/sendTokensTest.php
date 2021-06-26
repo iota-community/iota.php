@@ -66,9 +66,14 @@
      */
     public function testsendTokens(?PayloadIndexation $indexation = null): void {
       try {
-        $ret = new sendTokens($this->client, $this->mnemonic, 0, $this->toAddressBech32, 1000000);
+        $ret = (new sendTokens($this->client))->amount(1000000)
+                                              ->seedInput($this->mnemonic)
+                                              ->toAddressBech32($this->toAddressBech32);
+        if($indexation) {
+          $ret->payloadIndexation($indexation);
+        }
         $this->assertInstanceOf(sendTokens::class, $ret);
-        $this->assertInstanceOf(ResponseSubmitMessage::class, $ret->getReturn());
+        $this->assertInstanceOf(ResponseSubmitMessage::class, $ret->getResult());
       }
       catch(ExceptionAction $e) {
         if($e->getMessage() == "There are not enough funds in the inputs for the required balance! amount: 1000000, balance: 0") {

@@ -38,8 +38,9 @@
      *
      */
     public function testsendMessage() {
-      $ret = new sendMessage($this->client, $this->index, $this->message);
+      $ret = (new sendMessage($this->client))->index('#iota.php')
+                                             ->data('message test! follow me on Twitter @IOTAphp');
       $this->assertInstanceOf(sendMessage::class, $ret);
-      $this->assertInstanceOf(ResponseSubmitMessage::class, $ret->getReturn());
+      $this->assertInstanceOf(ResponseSubmitMessage::class, $ret->getResult());
     }
   }
