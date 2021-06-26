@@ -25,7 +25,8 @@
   "require": {
     "php": ">=8.0.0",
     "ext-curl": "*",
-    "ext-sodium": "*"
+    "ext-sodium": "*",
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5.5"
