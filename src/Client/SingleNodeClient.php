@@ -181,7 +181,7 @@ class SingleNodeClient {
   /**
    * Returns information about a milestone
    *
-   * @param string $index
+   * @param int|string $index
    *
    * @return ResponseMilestone|ResponseError
    * @throws ExceptionApi
@@ -196,7 +196,7 @@ class SingleNodeClient {
   /**
    * Returns all UTXO changes of the given milestone
    *
-   * @param string $index
+   * @param int|string $index
    *
    * @return ResponseMilestoneUtxoChanges|ResponseError
    * @throws ExceptionApi
