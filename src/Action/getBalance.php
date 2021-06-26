@@ -46,10 +46,17 @@ class getBalance extends AbstractAction {
       throw new ExceptionAction('wrong hrp address');
     }
 
-    return match ($addressType) {
+    return $this->return = match ($addressType) {
       1 => $this->client->address($address),
       0 => $this->client->addressEd25519($address),
       default => throw new ExceptionAction('unknown address type'),
     };
+  }
+
+  /**
+   * @return ResponseBalanceAddress|ResponseError
+   */
+  public function getReturn(): ResponseBalanceAddress|ResponseError {
+    return $this->return;
   }
 }

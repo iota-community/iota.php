@@ -38,6 +38,13 @@ class sendMessage extends AbstractAction {
    * @throws ExceptionHelper
    */
   protected function exec(string $index = '', string $data = '', bool $_convertToHex = true): ResponseSubmitMessage|ResponseError {
-    return $this->client->messageSubmit(new PayloadIndexation($index, $data, $_convertToHex));
+    return $this->return = $this->client->messageSubmit(new PayloadIndexation($index, $data, $_convertToHex));
+  }
+
+  /**
+   * @return ResponseSubmitMessage|ResponseError
+   */
+  public function getReturn(): ResponseSubmitMessage|ResponseError {
+    return $this->return;
   }
 }

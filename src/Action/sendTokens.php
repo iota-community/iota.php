@@ -119,6 +119,13 @@ class sendTokens extends AbstractAction {
       }
     }
 
-    return $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
+    return $this->return = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
+  }
+
+    /**
+   * @return ResponseSubmitMessage|ResponseError
+   */
+  public function getReturn(): ResponseSubmitMessage|ResponseError {
+    return $this->return;
   }
 }
