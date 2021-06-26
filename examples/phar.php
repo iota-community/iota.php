@@ -1,6 +1,6 @@
 <?php
   // include iota lib
-  require_once("../dist/iota-php.phar");
+  require_once("../dist/iota.phar");
   // create client
   $client = new IOTA\Client\SingleNodeClient();
 
