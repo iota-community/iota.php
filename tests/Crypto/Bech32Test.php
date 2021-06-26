@@ -14,8 +14,8 @@
    */
   final class Bech32Test extends TestCase {
     protected string $hrp = "atoi";
-    protected string $addressBech32 = "atoi1qpg4tqh7vj9s7y9zk2smj8t4qgvse9um42l7apdkhw6syp5ju4w3vet6gtj";
-    protected string $addressEd25519 = "515582fe648b0f10a2b2a1b91d7502190c979baabfee85b6bbb5020692e55d16";
+    protected string $addressBech32 = "atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e";
+    protected string $addressEd25519 = "60200bad8137a704216e84f8f9acfe65b972d9f4155becb4815282b03cef99fe";
 
     /**
      * @throws Crypto

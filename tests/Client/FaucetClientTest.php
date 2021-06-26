@@ -29,7 +29,7 @@
      * @throws Helper
      */
     public function testget() {
-      $this->assertInstanceOf(AbstractApiResponse::class, $this->client->get("atoi1qpnknjkytwhj009uaucksr03azlz45c4nl5palf2hptsnn5m5hvt5kjllcp"));
+      $this->assertInstanceOf(AbstractApiResponse::class, $this->client->get("atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e"));
     }
 
     /**

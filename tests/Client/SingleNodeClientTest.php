@@ -257,7 +257,7 @@
      * @throws ExceptionHelper
      */
     public function testaddress() {
-      $this->assertInstanceOf(ResponseBalanceAddress::class, $this->client->address("atoi1qpg4tqh7vj9s7y9zk2smj8t4qgvse9um42l7apdkhw6syp5ju4w3vet6gtj"));
+      $this->assertInstanceOf(ResponseBalanceAddress::class, $this->client->address("atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e"));
     }
 
     /**
@@ -265,7 +265,7 @@
      * @throws ExceptionHelper
      */
     public function testaddressesOutput() {
-      $this->assertInstanceOf(ResponseOutputAddress::class, $this->client->addressesOutput("atoi1qpg4tqh7vj9s7y9zk2smj8t4qgvse9um42l7apdkhw6syp5ju4w3vet6gtj"));
+      $this->assertInstanceOf(ResponseOutputAddress::class, $this->client->addressesOutput("atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e"));
     }
 
     /**
@@ -273,7 +273,7 @@
      * @throws ExceptionHelper
      */
     public function testaddressEd25519() {
-      $this->assertInstanceOf(ResponseBalanceAddress::class, $this->client->addressEd25519("515582fe648b0f10a2b2a1b91d7502190c979baabfee85b6bbb5020692e55d16"));
+      $this->assertInstanceOf(ResponseBalanceAddress::class, $this->client->addressEd25519("60200bad8137a704216e84f8f9acfe65b972d9f4155becb4815282b03cef99fe"));
     }
 
     /**
@@ -281,7 +281,7 @@
      * @throws ExceptionHelper
      */
     public function testaddressesOutputEd25519() {
-      $this->assertInstanceOf(ResponseOutputAddress::class, $this->client->addressesed25519Output("515582fe648b0f10a2b2a1b91d7502190c979baabfee85b6bbb5020692e55d16"));
+      $this->assertInstanceOf(ResponseOutputAddress::class, $this->client->addressesed25519Output("60200bad8137a704216e84f8f9acfe65b972d9f4155becb4815282b03cef99fe"));
     }
 
     /**

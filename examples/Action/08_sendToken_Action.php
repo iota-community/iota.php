@@ -14,5 +14,5 @@
   //
   $Indexation = new PayloadIndexation("#iota.php", "transaction test! follow me on Twitter @IOTAphp");
   //
-  echo $ret = new sendTokens($client, $mnemonicWords, 0, 'atoi1qpnknjkytwhj009uaucksr03azlz45c4nl5palf2hptsnn5m5hvt5kjllcp', 1000000, $Indexation);
+  echo $ret = new sendTokens($client, $mnemonicWords, 0, 'atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e', 1000000, $Indexation);
   
