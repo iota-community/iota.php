@@ -52,6 +52,10 @@ class EssenceTransaction extends AbstractApi implements InterfaceSerializer {
       $_ret = array_merge($_ret, $object->serialize());
     }
     // payload
-    return array_merge($_ret, $this->payload->serialize());
+    if(isset($this->payload)) {
+      $_ret = array_merge($_ret, $this->payload->serialize());
+    }
+
+    return $_ret;
   }
 }
