@@ -13,6 +13,8 @@
 ### In Progress 
 
 - [ ] Wallet lib
+- [ ] Builder class
+- [ ] PHPUnit tests
 
 ---
 
@@ -23,9 +25,12 @@
     - [ ] Safe Saving Seeds, according to Iota Stronghold Standard
   
 
-- [ ] QR Code class
 - [ ] Builder class
+- [ ] QR Code class
 
+
+- [ ] PHPUnit tests
+  
 
 - [ ] IOTA Native Digital Assets
 
@@ -40,6 +45,7 @@
 - [x] Create ToDo
 - [x] Create phar
 - [x] Change lib structure
+- [x] PHPUnit tests
 - [x] New Design (logo, header,...)
 
 
