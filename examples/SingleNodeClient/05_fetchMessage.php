@@ -14,5 +14,5 @@
     echo $lastData->payload->data;
   }
   else {
-    echo "No Results!" . LF;
+    echo "No Results!" . PHP_EOL;
   }
