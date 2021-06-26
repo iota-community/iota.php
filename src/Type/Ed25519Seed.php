@@ -28,14 +28,14 @@ class Ed25519Seed {
   /**
    * Ed25519Seed constructor.
    *
-   * @param string $seedInput
+   * @param Ed25519Seed|Mnemonic|string|array $seedInput
    *
    * @throws ExceptionConverter
    * @throws ExceptionCrypto
    * @throws ExceptionHelper
    * @throws ExceptionType
    */
-  public function __construct(string $seedInput) {
+  public function __construct(Ed25519Seed|Mnemonic|string|array $seedInput) {
     if(is_string($seedInput) && (strlen($seedInput) == 64 || strlen($seedInput) == 128) && Converter::isHex($seedInput)) {
       $this->secretKey = $seedInput;
     }
