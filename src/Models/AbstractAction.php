@@ -11,17 +11,9 @@ use IOTA\Client\SingleNodeClient;
  */
 abstract class AbstractAction {
   /**
-   *
-   */
-  const returnResponse = 0;
-  /**
    * @var AbstractApiResponse
    */
   public mixed $result = null;
-  /**
-   * @var int
-   */
-  protected int $return = self::returnResponse;
   /**
    * @var string|array|null
    */
@@ -51,17 +43,6 @@ abstract class AbstractAction {
         $this,
       ]);
     }
-  }
-
-  /**
-   * @param int $int
-   *
-   * @return $this
-   */
-  public function return(int $int = self::returnResponse): self {
-    $this->return = $int;
-
-    return $this;
   }
 
   /**
