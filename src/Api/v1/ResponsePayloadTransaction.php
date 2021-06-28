@@ -27,6 +27,13 @@ class ResponsePayloadTransaction extends AbstractApiResponse {
    *
    */
   protected function parse(): void {
-    $this->defaultParse();
+    foreach($this->_input->__toArray() as $_k => $_v) {
+      $this->{$_k} = match ($_k) {
+        'essence' => match ($_v['type']) {
+          0 => new ResponseEssenceTransaction($_v),
+        },
+        default => $_v,
+      };
+    }
   }
 }

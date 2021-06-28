@@ -19,9 +19,9 @@ class ResponseMessage extends AbstractApiResponse {
    */
   public array $parentMessageIds;
   /**
-   * @var ResponsePayloadIndexation
+   * @var ResponsePayloadIndexation|ResponsePayloadTransaction|ResponsePayloadMilestone|ResponsePayloadTreasuryTransaction
    */
-  public ResponsePayloadIndexation $payload;
+  public ResponsePayloadIndexation|ResponsePayloadTransaction|ResponsePayloadMilestone|ResponsePayloadTreasuryTransaction $payload;
   /**
    * @var string
    */
@@ -31,10 +31,13 @@ class ResponseMessage extends AbstractApiResponse {
    *
    */
   protected function parse(): void {
-    foreach($this->input->__toArray() as $_k => $_v) {
+    foreach($this->_input->__toArray() as $_k => $_v) {
       $this->{$_k} = match ($_k) {
         'payload' => match ($_v['type']) {
+          0 => new ResponsePayloadTransaction($_v),
+          1 => new ResponsePayloadMilestone($_v),
           2 => new ResponsePayloadIndexation($_v),
+          4 => new ResponsePayloadTreasuryTransaction($_v),
         },
         default => $_v,
       };
