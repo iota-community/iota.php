@@ -23,14 +23,22 @@ class ResponseEssenceTransaction extends AbstractApiResponse {
    */
   public array $outputs = [];
   /**
-   * @var array|null
+   * @var ResponsePayloadIndexation|null
    */
-  public ?array $payload;
+  public ?ResponsePayloadIndexation $payload;
 
   /**
    *
    */
   protected function parse(): void {
-    $this->defaultParse();
+    foreach($this->_input->__toArray() as $_k => $_v) {
+      $this->{$_k} = match ($_k) {
+        'payload' => match ($_v['type']) {
+          2 => new ResponsePayloadIndexation($_v),
+          default => $_v,
+        },
+        default => $_v,
+      };
+    }
   }
 }
