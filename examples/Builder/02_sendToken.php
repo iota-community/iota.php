@@ -9,7 +9,7 @@
           ->seedInput("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally")
           ->toAddressBech32('atoi1qzvhzythy64dzx456ccvus357hvhg77cmqrrw4ukuszprtu9fay5ywp5ncz')
           ->message('#iota.php', 'transaction test! follow me on Twitter @IOTAphp')
-          ->callback('responseCheckTransaciton');
+          ->callback('responseCheckTransaction');
 
   $builder->run();
 
@@ -21,10 +21,10 @@
    * @throws \IOTA\Exception\Api
    * @throws \IOTA\Exception\Helper
    */
-  function responseCheckTransaciton($response) {
+  function responseCheckTransaction($response) {
     global $builder;
     if($response instanceof \IOTA\Api\v1\ResponseSubmitMessage) {
-      $ret = $builder->checkTransaciton()
+      $ret = $builder->checkTransaction()
                      ->messageId($response->messageId)
                      ->run();
       echo $ret == "included" ? "OK!" : $ret;

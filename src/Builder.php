@@ -88,7 +88,7 @@ class Builder {
    *
    * @return checkTransaction
    */
-  public function checkTransaciton(int|string|null $name = null): checkTransaction {
+  public function checkTransaction(int|string|null $name = null): checkTransaction {
     return $this->addHandle('sendTokens', $name, new checkTransaction($this->client));
   }
 
