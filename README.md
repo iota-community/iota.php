@@ -1,14 +1,13 @@
-![IOTA.php](./help/images/header.jpg)
+![IOTA.php](./help/images/IOTA_PHP_Banner_Interact.png)
 
-
-<p align="center">
+<p style="text-align:center;">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?style=social&logo=discord" alt="Discord"></a>
   <a href="https://twitter.com/IOTAphp/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
   <br>
-
-<img src="https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square" alt="Apache-2.0 license">
-<img src="https://img.shields.io/badge/IOTA-lightgrey?style=flat&logo=iota" alt="IOTA">
-<img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square" alt=">PHP 8">
+  <a href="https://github.com/iota-community/iota.php/LICENSE" style="text-decoration:none;"><img src="https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square" alt="Apache-2.0 license"></a>
+  <a href="https://www.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/IOTA-lightgrey?style=flat&logo=iota" alt="IOTA"></a>
+  <a href="https://www.php.net/" style="text-decoration:none;"><img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square" alt=">PHP 8"></a>
+  <img src="https://github.com/iota-community/iota.php/actions/workflows/phpunit.yml/badge.svg" alt="WorkflowUnitTest">
 </p>
 
 # About
@@ -19,16 +18,19 @@ PHP library to use IOTA REST API to help node management and tangle queries.
 
 This library allows you to do the following:
 
-- [x] Create messages with indexation and transaction payloads
-- [x] Get messages and outputs
-- [x] Generate addresses
 - [x] Interact with an IOTA node
+  - [x] Create messages with indexation and transaction payloads
+  - [x] Get messages and outputs
+  - [x] Generate addresses
+- [x] Interact with the IOTA Faucet Api 
+  - [x] Get funds on testnet
 
 # Requirements
 
 + PHP 8+
 + PHP Extensions:
     + [ext-curl](http://php.net/manual/en/book.curl.php)
+    + [ext-mbstring](http://php.net/manual/en/book.mbstring.php)
     + [ext-sodium](http://php.net/manual/en/book.sodium.php) (api client don't need this)
 
 # Example
@@ -36,9 +38,9 @@ This library allows you to do the following:
 ```php
 <?php
   // include iota lib
-  require_once("../iota.php");
+  require_once("autoload.php");
   // create client
-  $client = new iota('https://api.lb-0.testnet.chrysalis2.com');
+  $client = new IOTA\Client\SingleNodeClient();
   // print result of node information
   echo $client->info();
 ```
@@ -49,20 +51,29 @@ This library allows you to do the following:
 
 Additional Examples: Please find other examples in the [./examples](examples) folder.
 
-<hr>
+---
 
+### What's next,done
+Check [ToDo](TODO.md)
+
+---
 
 ### Joining the discussion
 
 <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?style=social&logo=discord" alt="Discord"></a>
 <a href="https://twitter.com/IOTAphp/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
 
-If you want to get involved in the community, need help with getting set up, have any issues or just want to discuss IOTA, feel free to join
-our [Discord](https://discord.iota.org/).
+If you want to get involved in the community, need help with getting set up, have any issues or just want to discuss IOTA, feel free to join our
+IOTA [Discord](https://discord.iota.org/) and post in the #php channel.
+
+![IOTA.php](./help/images/discord_help_phpchannel.png)
+
+
+___
 
 > Follow me on Twitter [@IOTAphp](https://twitter.com/IOTAphp)
 
-<hr>
+---
 
 ### Donation
 
@@ -71,8 +82,16 @@ It took me a lot of time to develop **iota.php** and need to pay for the server 
 [<img src="https://img.shields.io/badge/iota1qppu7wdws394euyvflvevsnpdawvsl820c3c3jy92wky6wfj656wqqxtf9m-lightgrey?style=social&logo=iota" alt="IOTA">](./help/100_Donation.md)
 
 
-<hr>
+---
+
+### Special thanks to
+
+ - Andi [@modell_84](https://twitter.com/modell_84) [Graphic designer]
+ - Antonio [@antonionardella](https://twitter.com/antonionardella) [Support]
+ - Vrom [@Vrom14286662](https://twitter.com/Vrom14286662) [Support]
+
+---
 
 # License
 
-The Apache 2.0 license can be found [here](LICENCE.md).
+The Apache 2.0 license can be found [here](LICENSE).

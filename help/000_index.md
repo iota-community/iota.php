@@ -1,13 +1,13 @@
-![IOTA.php](./images/header2.jpg)
+![IOTA.php](./images/IOTA_PHP_Banner_Interact_Help.png)
 
-<p align="center">
+<p style="text-align:center;">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?style=social&logo=discord" alt="Discord"></a>
   <a href="https://twitter.com/IOTAphp/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
   <br>
-
-<img src="https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square" alt="Apache-2.0 license">
-<img src="https://img.shields.io/badge/IOTA-lightgrey?style=flat&logo=iota" alt="IOTA">
-<img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square" alt=">PHP 8">
+  <a href="https://github.com/iota-community/iota.php/LICENSE" style="text-decoration:none;"><img src="https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square" alt="Apache-2.0 license"></a>
+  <a href="https://www.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/IOTA-lightgrey?style=flat&logo=iota" alt="IOTA"></a>
+  <a href="https://www.php.net/" style="text-decoration:none;"><img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square" alt=">PHP 8"></a>
+  <img src="https://github.com/iota-community/iota.php/actions/workflows/phpunit.yml/badge.svg" alt="WorkflowUnitTest">
 </p>
 
 # About
@@ -22,6 +22,7 @@ This library allows you to do the following:
 - [x] Get messages and outputs
 - [x] Generate addresses
 - [x] Interact with an IOTA node
+- [x] Get funds on testnet
 
 # Overview
 
@@ -34,8 +35,13 @@ This library allows you to do the following:
     + [Peers (get)](./002_examples_peers.md)
     + [Message (send|get|fetch)](./002_examples_message.md)
     + [Address (balance|convert)](./002_examples_balance.md)
-    + [Transfer (send)](./002_examples_transfer.md)
 
+
++ Examples (Action)
+    + [sendTokens](./010_examples_transfer.md)
+    + [getBalance](./010_examples_balance.md)
+    + [sendMessage](./010_examples_sendmessage.md)
+  
 
 + Examples (Advanced)
     + [Mnemonic](./050_examples_mnemonic.md)
@@ -57,7 +63,11 @@ ___
 <a href="https://twitter.com/IOTAphp/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
 
 If you want to get involved in the community, need help with getting set up, have any issues or just want to discuss IOTA, feel free to join
-our [Discord](https://discord.iota.org/).
+our IOTA [Discord](https://discord.iota.org/) and post in the #php channel.
+
+![IOTA.php](./images/discord_help_phpchannel.png)
+
+___
 
 > Follow me on Twitter [@IOTAphp](https://twitter.com/IOTAphp)
 

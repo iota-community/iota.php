@@ -1,0 +1,10 @@
+on: push
+name: PHPUnit
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: php-actions/composer@v1
+      - name: PHPUnit for PHP 8
+        uses: chindit/actions-phpunit@1.0.0

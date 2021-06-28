@@ -1,0 +1,44 @@
+{
+  "name": "iota-community/iota.php",
+  "type": "library",
+  "description": "IOTA.php library implementation in PHP",
+  "keywords": [
+    "iota",
+    "chrysalis",
+    "tangle",
+    "crypto"
+  ],
+  "homepage": "https://github.com/iota-community/iota.php",
+  "license": "Apache License 2.0",
+  "authors": [
+    {
+      "name": "Stefan Braun",
+      "homepage": "https://twitter.com/IOTAphp",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/iota-community/iota.php/issues",
+    "source": "https://github.com/iota-community/iota.php",
+    "chat": "https://discord.iota.org/"
+  },
+  "require": {
+    "php": ">=8.0.0",
+    "ext-curl": "*",
+    "ext-sodium": "*",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "iota\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "iota\\": "tests/"
+    }
+  }
+}
