@@ -58,11 +58,12 @@ class getBalance extends AbstractAction {
     if($this->addressTyp === 1 && substr($this->address, 0, 4) != ($this->client->info())->bech32HRP) {
       throw new ExceptionAction('wrong hrp address');
     }
-    $this->result = match ($this->addressTyp) {
+    $this->result = $returnValue = match ($this->addressTyp) {
       1 => $this->client->address($this->address),
       0 => $this->client->addressEd25519($this->address),
       default => throw new ExceptionAction('unknown address type'),
     };
+    $this->callCallback($returnValue);
 
     return $this->result;
   }
