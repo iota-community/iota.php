@@ -23,9 +23,9 @@ class ResponseEssenceTransaction extends AbstractApiResponse {
    */
   public array $outputs = [];
   /**
-   * @var array
+   * @var array|null
    */
-  public array $payload;
+  public ?array $payload;
 
   /**
    *
