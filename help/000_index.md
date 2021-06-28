@@ -39,6 +39,7 @@ This library allows you to do the following:
 
 + Examples (Action)
     + [sendTokens](./010_examples_transfer.md)
+    + [checkTransaction](./010_examples_checktransaction.md)
     + [getBalance](./010_examples_balance.md)
     + [sendMessage](./010_examples_sendmessage.md)
   
