@@ -17,10 +17,8 @@ use IOTA\Helper\Converter;
 use IOTA\Models\AbstractAction;
 use IOTA\Api\v1\PayloadIndexation;
 use IOTA\Api\v1\ResponseError;
-use IOTA\Client\SingleNodeClient;
 use IOTA\Exception\Api as ExceptionApi;
 use IOTA\Exception\Helper as ExceptionHelper;
-use IOTA\Exception\Action as ExceptionAction;
 use IOTA\Exception\Converter as ExceptionConverter;
 use IOTA\Exception\Crypto as ExceptionCrypto;
 use IOTA\Exception\Type as ExceptionType;
@@ -144,7 +142,6 @@ class sendTokens extends AbstractAction {
 
   /**
    * @return ResponseSubmitMessage|ResponseError
-   * @throws ExceptionAction
    * @throws ExceptionApi
    * @throws ExceptionConverter
    * @throws ExceptionCrypto
@@ -176,33 +173,34 @@ class sendTokens extends AbstractAction {
       }
     }
     if($_total == 0 || $_total < $this->amount) {
-      throw new ExceptionAction("There are not enough funds in the inputs for the required balance! amount: $this->amount, balance: $_total");
+      $this->result = $returnValue = new ResponseError(['error' => 901, 'message' => "There are not enough funds in the inputs for the required balance! amount: $this->amount, balance: $_total"]);
     }
-    // transfer to new address
-    $essenceTransaction->outputs[] = new Output(0, new Address(0, Converter::bech32toEd25519($this->addressBech32)), $this->amount);
-    // sending remainder back, if amount not zero
-    if($_total - $this->amount > 0) {
-      $essenceTransaction->outputs[] = new Output(0, new Address(0, $address->toAddress()), ($_total - $this->amount));
-    }
-    // sort inputs / outputs
-    sort($essenceTransaction->inputs);
-    sort($essenceTransaction->outputs);
-    //
-    $payloadTransaction = new PayloadTransaction($essenceTransaction);
-    // unlockBlocks
-    $_list = [];
-    foreach($essenceTransaction->inputs as $input) {
-      $_publicKey = ($addressSeed->keyPair())['publicKey'];
-      if(isset($_list[$_publicKey])) {
-        $payloadTransaction->unlockBlocks[] = new UnlockBlocksReference($_list[$_publicKey]);
+    else {
+      // transfer to new address
+      $essenceTransaction->outputs[] = new Output(0, new Address(0, Converter::bech32toEd25519($this->addressBech32)), $this->amount);
+      // sending remainder back, if amount not zero
+      if($_total - $this->amount > 0) {
+        $essenceTransaction->outputs[] = new Output(0, new Address(0, $address->toAddress()), ($_total - $this->amount));
       }
-      else {
-        $payloadTransaction->unlockBlocks[] = new UnlockBlocksSignature(new Ed25519Signature($_publicKey, Ed25519::sign(($addressSeed->keyPair())['privateKey'], $essenceTransaction->serializeToHash())));
-        $_list[$_publicKey]                 = count($payloadTransaction->unlockBlocks) - 1;
+      // sort inputs / outputs
+      sort($essenceTransaction->inputs);
+      sort($essenceTransaction->outputs);
+      //
+      $payloadTransaction = new PayloadTransaction($essenceTransaction);
+      // unlockBlocks
+      $_list = [];
+      foreach($essenceTransaction->inputs as $input) {
+        $_publicKey = ($addressSeed->keyPair())['publicKey'];
+        if(isset($_list[$_publicKey])) {
+          $payloadTransaction->unlockBlocks[] = new UnlockBlocksReference($_list[$_publicKey]);
+        }
+        else {
+          $payloadTransaction->unlockBlocks[] = new UnlockBlocksSignature(new Ed25519Signature($_publicKey, Ed25519::sign(($addressSeed->keyPair())['privateKey'], $essenceTransaction->serializeToHash())));
+          $_list[$_publicKey]                 = count($payloadTransaction->unlockBlocks) - 1;
+        }
       }
+      $this->result = $returnValue = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
     }
-
-    $this->result = $returnValue = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
 
     $this->callCallback($returnValue);
 

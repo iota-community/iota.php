@@ -10,11 +10,11 @@
   <img src="https://github.com/iota-community/iota.php/actions/workflows/phpunit.yml/badge.svg" alt="WorkflowUnitTest">
 </p>
 
-### In Progress 
+### In Progress
 
 - [ ] Wallet lib
-- [ ] Builder class
 - [ ] PHPUnit tests
+- [ ] Builder class
 
 ---
 
@@ -23,14 +23,17 @@
 - [ ] Wallet lib
     - [ ] Address Searcher
     - [ ] Safe Saving Seeds, according to Iota Stronghold Standard
-  
 
+
+- [ ] Builder class
+- [ ] New Actions
+- [ ] Amount class
 - [ ] Builder class
 - [ ] QR Code class
 
 
 - [ ] PHPUnit tests
-  
+
 
 - [ ] IOTA Native Digital Assets
 
@@ -42,16 +45,17 @@
 
 ### Done ✓
 
+- [ ] Builder class
 - [x] Create ToDo
 - [x] Create phar
 - [x] Change lib structure
-- [x] PHPUnit tests
+- [ ] PHPUnit tests
 - [x] New Design (logo, header,...)
 
 
 - [x] Interact with the IOTA Faucet Api
     - [x] Get funds on testnet
-  
+
 
 - [x] Create help
 

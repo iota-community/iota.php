@@ -73,7 +73,7 @@ ___
 
 > Follow me on Twitter [@IOTAphp](https://twitter.com/IOTAphp)
 
-<hr>
+---
 
 ### Donation
 
@@ -82,7 +82,15 @@ It took me a lot of time to develop **iota.php** and need to pay for the server 
 [<img src="https://img.shields.io/badge/iota1qppu7wdws394euyvflvevsnpdawvsl820c3c3jy92wky6wfj656wqqxtf9m-lightgrey?style=social&logo=iota" alt="IOTA">](./help/100_Donation.md)
 
 
-<hr>
+---
+
+### Special thanks to
+
+ - Andi [@modell_84](https://twitter.com/modell_84) [Graphic designer]
+ - Antonio [@antonionardella](https://twitter.com/antonionardella) [Support]
+ - Vrom [@Vrom14286662](https://twitter.com/Vrom14286662) [Support]
+
+---
 
 # License
 

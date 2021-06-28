@@ -4,4 +4,4 @@
   // create client
   $client = new IOTA\Client\SingleNodeClient();
   // print result of tangle tips
-  echo $ret = $client->message('411cf3c0116faa9f00089a901d72573df508a17c06c29980b2125f9237a67971');
+  echo $ret = $client->message('c41b9bac7f8ec0e37b6e8e28bc0f6e2ce3024927889249323fda4a8a1fae0df5');
