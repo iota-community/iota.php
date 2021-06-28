@@ -16,7 +16,7 @@ class ResponseMessage extends AbstractApiResponse {
    *
    */
   protected function parse(): void {
-    $input         = $this->input->__toArray();
+    $input         = $this->_input->__toArray();
     $this->message = $input['JSON'] ?? $input['message'];
   }
 }

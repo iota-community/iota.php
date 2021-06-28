@@ -11,7 +11,7 @@ use IOTA\Helper\JSON;
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 abstract class AbstractApiResponse extends AbstractApi {
-  protected JSON $input;
+  protected JSON $_input;
 
   /**
    * AbstractApiResponse constructor.
@@ -21,7 +21,7 @@ abstract class AbstractApiResponse extends AbstractApi {
    * @throws ExceptionHelper
    */
   public function __construct(mixed $value) {
-    $this->input = JSON::create($value);
+    $this->_input = JSON::create($value);
     $this->parse();
   }
 
@@ -34,7 +34,7 @@ abstract class AbstractApiResponse extends AbstractApi {
    *
    */
   protected function defaultParse(): void {
-    foreach($this->input->__toArray() as $_k => $_v) {
+    foreach($this->_input->__toArray() as $_k => $_v) {
       $this->{$_k} = $_v;
     }
   }
