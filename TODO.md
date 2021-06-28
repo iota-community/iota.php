@@ -13,8 +13,9 @@
 ### In Progress
 
 - [ ] Wallet lib
-- [ ] PHPUnit tests
-- [ ] Builder class
+- [ ] expand PHPUnit tests
+- [ ] expand new Actions
+- [ ] expand Builder class
 
 ---
 
@@ -24,20 +25,17 @@
     - [ ] Address Searcher
     - [ ] Safe Saving Seeds, according to Iota Stronghold Standard
 
+  
+- [ ] expand new Actions
+- [ ] expand Builder class
+- [ ] expand PHPUnit tests
 
-- [ ] Builder class
-- [ ] New Actions
+
 - [ ] Amount class
-- [ ] Builder class
 - [ ] QR Code class
 
 
-- [ ] PHPUnit tests
-
-
 - [ ] IOTA Native Digital Assets
-
-
 - [ ] Interact with IOTA Streams
 - [ ] Interact with IOTA Identity
 
@@ -45,11 +43,11 @@
 
 ### Done ✓
 
-- [ ] Builder class
+- [x] Builder class
 - [x] Create ToDo
 - [x] Create phar
 - [x] Change lib structure
-- [ ] PHPUnit tests
+- [x] PHPUnit tests
 - [x] New Design (logo, header,...)
 
 
