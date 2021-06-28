@@ -249,7 +249,13 @@
      * @throws ExceptionHelper
      */
     public function testoutput() {
-      $this->assertInstanceOf(ResponseOutput::class, $this->client->output("c7f1f4d740e52b94137e81fbb5eb94abbfc519ccece87172e3b3d457d88c45440000"));
+      $ret = $this->client->output("c7f1f4d740e52b94137e81fbb5eb94abbfc519ccece87172e3b3d457d88c45440000");
+      if($ret instanceof ResponseError) {
+        $this->assertInstanceOf(ResponseError::class, $ret);
+        $this->assertEquals(404, $ret->code);
+      } else {
+        $this->assertInstanceOf(ResponseOutput::class, $ret);
+      }
     }
 
     /**
