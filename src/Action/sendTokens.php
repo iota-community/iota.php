@@ -120,6 +120,11 @@ class sendTokens extends AbstractAction {
     return $this;
   }
 
+  /**
+   * @param PayloadIndexation $indexation
+   *
+   * @return $this
+   */
   public function payloadIndexation(PayloadIndexation $indexation): self {
     $this->indexation = $indexation;
 
@@ -197,7 +202,11 @@ class sendTokens extends AbstractAction {
       }
     }
 
-    return $this->result = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
+    $this->result = $returnValue = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
+
+    $this->callCallback($returnValue);
+
+    return $this->result;
   }
 
   /**
