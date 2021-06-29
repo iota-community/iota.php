@@ -1,12 +1,12 @@
 <?php namespace IOTA\Action;
 
 use IOTA\Api\v1\PayloadIndexation;
+use IOTA\Api\v1\ResponseError;
+use IOTA\Api\v1\ResponseSubmitMessage;
 use IOTA\Exception\Api as ExceptionApi;
 use IOTA\Exception\Helper as ExceptionHelper;
 use IOTA\Exception\Converter as ExceptionConverter;
-use IOTA\Helper\Converter;
 use IOTA\Models\AbstractAction;
-use IOTA\Models\AbstractApiResponse;
 
 /**
  * Class sendMessage
@@ -68,7 +68,7 @@ class sendMessage extends AbstractAction {
    * @throws ExceptionConverter
    * @throws ExceptionHelper
    */
-  public function run(): mixed {
+  public function run(): ResponseSubmitMessage|ResponseError {
     $this->result = $returnValue = $this->client->messageSubmit(new PayloadIndexation($this->index, $this->data, $this->convertToHex));
 
 
