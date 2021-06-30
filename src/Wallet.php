@@ -102,7 +102,7 @@ class Wallet {
    * @throws Exception\Api
    * @throws SodiumException
    */
-  public function searchAddresses(int $maxAccountIndex = 5, int $maxAddressIndex = 5, bool $zeroBalance = true): array {
+  public function searchAddresses(int $maxAccountIndex = 5, int $maxAddressIndex = 5, bool $zeroBalance = false): array {
     $_ret = [];
     for($_i = 0; $_i < $maxAccountIndex; $_i++) {
       for($_j = 0; $_j < $maxAddressIndex; $_j++) {
