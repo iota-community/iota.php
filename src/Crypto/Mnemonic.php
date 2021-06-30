@@ -1,6 +1,8 @@
 <?php namespace IOTA\Crypto;
 
 use IOTA\Exception\Helper as ExceptionHelper;
+use IOTA\Exception\Converter as ExceptionConverter;
+use IOTA\Exception\Crypto as ExceptionCrypto;
 use IOTA\Helper\Hash;
 
 /**
@@ -32,8 +34,23 @@ class Mnemonic {
    */
   public ?string $entropy;
 
+  /**
+   * Mnemonic constructor.
+   *
+   * @param string|array $words
+   */
   public function __construct(string|array $words = []) {
     $this->words = is_string($words) ? explode(" ", $words) : $words;
+  }
+
+  /**
+   * @return Mnemonic
+   * @throws ExceptionConverter
+   * @throws ExceptionCrypto
+   * @throws ExceptionHelper
+   */
+  static public function createRandom(): Mnemonic {
+    return new Mnemonic((new Bip39())->randomMnemonic()->words);
   }
 
   /**
@@ -48,4 +65,12 @@ class Mnemonic {
   public function __toSeed(string $_passphrase = "", int $iterations = 2048, int $_keyLength = 128, bool $_binary = false): string {
     return Hash::pbkdf2Sha512(implode(" ", $this->words), "mnemonic" . $_passphrase, 2048, $_keyLength, $_binary);
   }
+
+  /**
+   * @return string
+   */
+  public function __toString() {
+    return implode(" ", $this->words);
+  }
+
 }
