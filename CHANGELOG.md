@@ -17,9 +17,12 @@
 ### Added
 
 - Wallet class
-    - Address management
-    - send Tokens over Wallet\Address 
-    - Address Searcher
+  - address management
+  - get balance over Wallet\Address 
+  - send tokens over Wallet\Address 
+  - address Searcher
+  
+- Wallet examples
 
 ## 0.1.0 - 2021-06-28
 
