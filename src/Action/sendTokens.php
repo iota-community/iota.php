@@ -43,6 +43,10 @@ class sendTokens extends AbstractAction {
    */
   protected int $accountIndex = 0;
   /**
+   * @var int
+   */
+  protected int $addressIndex = 0;
+  /**
    * @var string|null
    */
   protected ?string $addressBech32 = null;
@@ -77,6 +81,17 @@ class sendTokens extends AbstractAction {
    */
   public function accountIndex(int $accountIndex): self {
     $this->accountIndex = $accountIndex;
+
+    return $this;
+  }
+
+  /**
+   * @param int $addressIndex
+   *
+   * @return $this
+   */
+  public function addressIndex(int $addressIndex): self {
+    $this->addressIndex = $addressIndex;
 
     return $this;
   }
@@ -151,7 +166,8 @@ class sendTokens extends AbstractAction {
    */
   public function run(): ResponseSubmitMessage|ResponseError {
     $addressPath = new Bip32Path(("m/44'/4218'/0'/0'/0'"));
-    $addressPath->setAccountIndex($this->accountIndex);
+    $addressPath->setAccountIndex($this->accountIndex, true);
+    $addressPath->setAddressIndex($this->addressIndex, true);
     $addressSeed = $this->ed25519Seed->generateSeedFromPath($addressPath);
     $address     = new Ed25519Address(($addressSeed->keyPair())['publicKey']);
     // get outputs
@@ -173,7 +189,10 @@ class sendTokens extends AbstractAction {
       }
     }
     if($_total == 0 || $_total < $this->amount) {
-      $this->result = $returnValue = new ResponseError(['error' => 901, 'message' => "There are not enough funds in the inputs for the required balance! amount: $this->amount, balance: $_total"]);
+      $this->result = $returnValue = new ResponseError([
+        'error'   => 901,
+        'message' => "There are not enough funds in the inputs for the required balance! amount: $this->amount, balance: $_total",
+      ]);
     }
     else {
       // transfer to new address
@@ -201,7 +220,6 @@ class sendTokens extends AbstractAction {
       }
       $this->result = $returnValue = $this->client->messageSubmit(new RequestSubmitMessage($payloadTransaction));
     }
-
     $this->callCallback($returnValue);
 
     return $this->result;
