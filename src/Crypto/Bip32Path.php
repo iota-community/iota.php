@@ -50,6 +50,13 @@ class Bip32Path {
   }
 
   /**
+   * @return int|null
+   */
+  public function getCoinType(): int|null {
+    return $this->_path[1] ?? null;
+  }
+
+  /**
    * @param int  $index
    * @param bool $_hardend
    *
@@ -59,6 +66,13 @@ class Bip32Path {
     $this->_path[2] = $index . ($_hardend ? "'" : "");
 
     return $this;
+  }
+
+  /**
+   * @return string|int|null
+   */
+  public function getAccountIndex(): string|int|null {
+    return $this->_path[2] ?? null;
   }
 
   /**
@@ -74,6 +88,13 @@ class Bip32Path {
   }
 
   /**
+   * @return string|int|null
+   */
+  public function getAddressIndex(): string|int|null {
+    return $this->_path[4] ?? null;
+  }
+
+  /**
    * @param bool $val
    * @param bool $_hardend
    *
@@ -83,6 +104,13 @@ class Bip32Path {
     $this->_path[3] = ($val ? 1 : 0) . ($_hardend ? "'" : "");
 
     return $this;
+  }
+
+  /**
+   * @return string|int|null
+   */
+  public function getChange(): string|int|null {
+    return $this->_path[3] ?? null;
   }
 
   /**
