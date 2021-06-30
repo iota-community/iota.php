@@ -44,6 +44,12 @@ This library allows you to do the following:
     + [sendMessage](./010_examples_sendmessage.md)
   
 
++ Examples (Wallet)
+    + [useWallet](./020_examples_wallet.md)
+    + [searchWalletAddress](./020_examples_wallet_searchAddress.md)
+    + [sendTokens](./020_examples_wallet_sendToken.md)
+
+
 + Examples (Advanced)
     + [Mnemonic](./050_examples_mnemonic.md)
     + ...
