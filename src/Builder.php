@@ -33,13 +33,13 @@ class Builder {
   }
 
   /**
-   * @param string     $handleKey
-   * @param string|int $name
-   * @param mixed      $val
+   * @param string          $handleKey
+   * @param mixed           $val
+   * @param string|int|null $name
    *
    * @return mixed
    */
-  private function addHandle(string $handleKey, null|string|int $name = null, mixed $val): mixed {
+  private function addHandle(string $handleKey, mixed $val, null|string|int $name = null): mixed {
     if(!isset($this->handles[$handleKey])) {
       $this->handles[$handleKey] = [];
     }
@@ -71,7 +71,7 @@ class Builder {
    */
   public function sendMessage(int|string|null $name = null): sendMessage {
 
-    return $this->addHandle('sendMessage', $name, new sendMessage($this->client));
+    return $this->addHandle('sendMessage', new sendMessage($this->client), $name);
   }
 
   /**
@@ -80,7 +80,7 @@ class Builder {
    * @return sendTokens
    */
   public function sendTokens(int|string|null $name = null): sendTokens {
-    return $this->addHandle('sendTokens', $name, new sendTokens($this->client));
+    return $this->addHandle('sendTokens', new sendTokens($this->client), $name);
   }
 
   /**
@@ -89,7 +89,7 @@ class Builder {
    * @return checkTransaction
    */
   public function checkTransaction(int|string|null $name = null): checkTransaction {
-    return $this->addHandle('sendTokens', $name, new checkTransaction($this->client));
+    return $this->addHandle('sendTokens', new checkTransaction($this->client), $name);
   }
 
   /**
@@ -98,7 +98,7 @@ class Builder {
    * @return getBalance
    */
   public function getBalance(int|string|null $name = null): getBalance {
-    return $this->addHandle('getBalance', $name, new getBalance($this->client));
+    return $this->addHandle('getBalance', new getBalance($this->client), $name);
   }
 
   /**
@@ -107,7 +107,7 @@ class Builder {
    * @return getMessage
    */
   public function getMessage(int|string|null $name = null): getMessage {
-    return $this->addHandle('getMessage', $name, new getMessage($this->client));
+    return $this->addHandle('getMessage', new getMessage($this->client), $name);
   }
 
   /**
