@@ -12,6 +12,20 @@
 
 # Changelog
 
+## 0.2.1 - 2021-06-30
+
+### Added
+
+- Wallet Help
+  - useWallet
+  - searchWalletAddress
+  - sendTokens
+  
+### Changed
+
+- searchAddresses
+  - zeroBalance default to false
+
 ## 0.2.0 - 2021-06-30
 
 ### Added
