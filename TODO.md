@@ -12,7 +12,7 @@
 
 ### In Progress
 
-- [ ] Wallet lib
+- [ ] expand Wallet class
 - [ ] expand PHPUnit tests
 - [ ] expand new Actions
 - [ ] expand Builder class
@@ -21,8 +21,7 @@
 
 ### Todo
 
-- [ ] Wallet lib
-    - [ ] Address Searcher
+- [ ] Wallet class
     - [ ] Safe Saving Seeds, according to Iota Stronghold Standard
 
   
@@ -43,6 +42,10 @@
 
 ### Done ✓
 
+- [x] Wallet class    
+    - [x] Address management
+    - [x] send Tokens over Wallet\Address 
+    - [x] Address Searcher
 - [x] Builder class
 - [x] Create ToDo
 - [x] Create phar

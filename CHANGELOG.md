@@ -12,6 +12,15 @@
 
 # Changelog
 
+## 0.1.1 - 2021-06-30
+
+### Added
+
+- Wallet class
+    - Address management
+    - send Tokens over Wallet\Address 
+    - Address Searcher
+
 ## 0.1.0 - 2021-06-28
 
 ### Added
