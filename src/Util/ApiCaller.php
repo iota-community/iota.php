@@ -185,7 +185,7 @@ class ApiCaller {
    * @return string
    * @throws ExceptionApi
    */
-  public function fetch(int $timeout = 0): string {
+  public function fetch(int $timeout = 30): string {
     $_url   = $this->API_ENDPOINT . ($this->route[0] != "/" ? $this->basePath . $this->route : substr($this->route, 1));
     $_query = (count($this->query) > 0 ? '?' . http_build_query($this->query) : '');
     //
@@ -197,6 +197,7 @@ class ApiCaller {
     }
     //
     $this->handle->setOption(CURLOPT_CONNECTTIMEOUT, $timeout);
+    $this->handle->setOption(CURLOPT_TIMEOUT, $timeout);
     if($this->method == "DELETE") {
       $this->handle->setOption(CURLOPT_CUSTOMREQUEST, $this->method);
     }
@@ -274,13 +275,16 @@ class ApiCaller {
    * @throws ExceptionApi
    * @throws ExceptionHelper
    */
-  public function fetchJSON(int $timeout = 0): mixed {
+  public function fetchJSON(int $timeout = 30): mixed {
     $this->headers[] = 'accept: application/json';
     $this->headers[] = 'content-type: application/json';
     //
     $this->fetch($timeout);
     $content = $this->handle->getContent();
-    if(!Converter::isJSON($content)) {
+
+
+
+    if($content === null || !Converter::isJSON($content)) {
       if($this->settings['jsonException']) {
         throw new ExceptionApi("No JSON content to fetch");
       }
@@ -298,7 +302,7 @@ class ApiCaller {
    * @return array
    * @throws ExceptionApi|ExceptionHelper
    */
-  public function fetchArray(int $timeout = 0): array {
+  public function fetchArray(int $timeout = 30): array {
     $_ret = $this->fetchJSON($timeout);
 
     return (new JSON($_ret))->__toArray();
@@ -310,7 +314,7 @@ class ApiCaller {
    * @return array|bool
    * @throws ExceptionApi
    */
-  public function fetchStatus(int $timeout = 0): array|bool {
+  public function fetchStatus(int $timeout = 30): array|bool {
     $this->fetch($timeout);
 
     return $this->handle->getStatus();
