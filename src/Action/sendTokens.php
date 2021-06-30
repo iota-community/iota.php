@@ -13,6 +13,7 @@ use IOTA\Api\v1\UnlockBlocksSignature;
 use IOTA\Crypto\Bip32Path;
 use IOTA\Crypto\Ed25519;
 use IOTA\Crypto\Mnemonic;
+use IOTA\Helper\Amount;
 use IOTA\Helper\Converter;
 use IOTA\Models\AbstractAction;
 use IOTA\Api\v1\PayloadIndexation;
@@ -53,7 +54,7 @@ class sendTokens extends AbstractAction {
   /**
    * @var int|null
    */
-  protected ?int $amount = null;
+  protected ?int $amount = 0;
   /**
    * @var PayloadIndexation
    */
@@ -145,12 +146,12 @@ class sendTokens extends AbstractAction {
   }
 
   /**
-   * @param int $amount
+   * @param int|Amount $amount
    *
    * @return $this
    */
-  public function amount(int $amount): self {
-    $this->amount = $amount;
+  public function amount(int|string|Amount $amount): self {
+    $this->amount = (new Amount($amount))->getAmount();
 
     return $this;
   }

@@ -8,6 +8,11 @@ use IOTA\Api\v1\ResponseSubmitMessage;
 use IOTA\Crypto\Mnemonic;
 use IOTA\Exception\Api as ExceptionApi;
 use IOTA\Exception\Helper as ExceptionHelper;
+use IOTA\Exception\Crypto as ExceptionCrypto;
+use IOTA\Exception\Converter as ExceptionConverter;
+use IOTA\Exception\Type as ExceptionType;
+use SodiumException;
+use IOTA\Helper\Amount;
 use IOTA\Type\Ed25519Seed;
 use IOTA\Util\ApiCaller;
 
@@ -57,12 +62,18 @@ class FaucetClient {
   /**
    * @param Ed25519Seed|Mnemonic|string|array $seedInput
    * @param int                               $_accountIndex
-   * @param int                               $amount
+   * @param int|string|Amount                 $amount
    * @param PayloadIndexation|null            $_indexation
    *
    * @return sendTokens|ResponseSubmitMessage|ResponseError
+   * @throws ExceptionApi
+   * @throws ExceptionConverter
+   * @throws ExceptionCrypto
+   * @throws ExceptionHelper
+   * @throws ExceptionType
+   * @throws SodiumException
    */
-  public function send(Ed25519Seed|Mnemonic|string|array $seedInput, int $_accountIndex, int $amount, ?PayloadIndexation $_indexation = null): sendTokens|ResponseSubmitMessage|ResponseError {
+  public function send(Ed25519Seed|Mnemonic|string|array $seedInput, int $_accountIndex, int|string|Amount $amount, ?PayloadIndexation $_indexation = null): sendTokens|ResponseSubmitMessage|ResponseError {
     $build = (new sendTokens(new SingleNodeClient()))->amount($amount)
                                                      ->seedInput($seedInput)
                                                      ->accountIndex($_accountIndex)

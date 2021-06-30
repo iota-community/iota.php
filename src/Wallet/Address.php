@@ -2,6 +2,7 @@
 
 use IOTA\Api\v1\PayloadIndexation;
 use IOTA\Api\v1\ResponseError;
+use IOTA\Helper\Amount;
 use IOTA\Wallet;
 use IOTA\Action\checkTransaction;
 use IOTA\Action\sendTokens;
@@ -94,7 +95,7 @@ class Address {
 
   /**
    * @param string                 $toAddressBech32
-   * @param int                    $amount
+   * @param int|string|Amount      $amount
    * @param PayloadIndexation|null $indexation
    * @param bool                   $checkTransaction
    *
@@ -106,7 +107,7 @@ class Address {
    * @throws ExceptionType
    * @throws SodiumException
    */
-  public function send(string $toAddressBech32, int $amount, ?PayloadIndexation $indexation = null, bool $checkTransaction = true): string {
+  public function send(string $toAddressBech32, int|string|Amount $amount, ?PayloadIndexation $indexation = null, bool $checkTransaction = true): string {
     // build Action\sendTokens
     $send = (new sendTokens($this->wallet->client))->amount($amount)
                                                    ->seedInput($this->wallet->getSeed())
@@ -117,7 +118,6 @@ class Address {
     $indexation ? $send->payloadIndexation($indexation) : $send->message("#iota.php", "wallet address transaction test! follow me on Twitter @IOTAphp");
     // run and check
     $send = $send->run();
-
     if($send instanceof ResponseError) {
       return "error:" . $send->message;
     }
