@@ -41,7 +41,10 @@ class Amount {
    *
    * @throws ExceptionHelper
    */
-  public function __construct(int|string $amount) {
+  public function __construct(int|string|Amount $amount) {
+    if($amount instanceof Amount) {
+      $amount = $amount->getAmount();
+    }
     if(is_numeric($amount) || is_numeric(substr($amount, -2, 1)) && strtolower(substr($amount, -1)) == 'i') {
       $this->amount = (int)$amount;
       $this->unit   = 'i';
@@ -71,5 +74,9 @@ class Amount {
    */
   public function getAmount(): int {
     return (int)$this->amount;
+  }
+
+  public function __toString(): string {
+    return (string)$this->getAmount();
   }
 }

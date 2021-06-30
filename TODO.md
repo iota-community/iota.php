@@ -30,7 +30,6 @@
 - [ ] expand PHPUnit tests
 
 
-- [ ] Amount class
 - [ ] QR Code class
 
 
@@ -42,6 +41,7 @@
 
 ### Done ✓
 
+- [x] Helper\Amount    
 - [x] Wallet class    
     - [x] Address management
     - [x] send Tokens over Wallet\Address 
