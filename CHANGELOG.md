@@ -12,11 +12,17 @@
 
 # Changelog
 
-## 0.2.2 - 2021-06-30
+## 0.2.2 - 2021-07-01
 
 ### Added
 
 - Helper\Amount
+
+### Changed
+
+- Helper\ApiCaller default timeout = 30
+- FaucetClient timeout handle
+
   
 ## 0.2.1 - 2021-06-30
 
