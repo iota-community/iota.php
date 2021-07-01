@@ -37,7 +37,7 @@ class Amount {
   /**
    * Amount constructor.
    *
-   * @param int|string $amount
+   * @param int|string|Amount $amount
    *
    * @throws ExceptionHelper
    */
@@ -53,11 +53,8 @@ class Amount {
       $unit = strtolower(substr($amount, -2));
       $int  = strtolower(substr($amount, 0, -2));
       if(array_key_exists($unit, $this->units)) {
-        $this->unit = $unit;
-        $math       = $int * $this->units[$unit];
-        if(is_float($math)) {
-          throw new ExceptionHelper("calc '$math' mount is not a valid value (amountInput='$amount')");
-        }
+        $this->unit   = $unit;
+        $math         = $int * $this->units[$unit];
         $this->amount = $math;
       }
       else {
@@ -65,7 +62,7 @@ class Amount {
       }
     }
     if($this->amount > $this->max) {
-      throw new ExceptionHelper("Ammount '$this->amount't is higher than max possible '$this->max'");
+      throw new ExceptionHelper("Amount '$this->amount' is higher than max possible '$this->max'");
     }
   }
 
@@ -76,6 +73,62 @@ class Amount {
     return (int)$this->amount;
   }
 
+  /**
+   * @return string
+   */
+  public function toPi(): string {
+    return $this->calcTo('pi');
+  }
+
+  /**
+   * @return string
+   */
+  public function toTi(): string {
+    return $this->calcTo('ti');
+  }
+
+  /**
+   * @return string
+   */
+  public function toGi(): string {
+    return $this->calcTo('gi');
+  }
+
+  /**
+   * @return string
+   */
+  public function toMi(): string {
+    return $this->calcTo('mi');
+  }
+
+  /**
+   * @return string
+   */
+  public function toKi(): string {
+    return $this->calcTo('ki');
+  }
+
+  /**
+   * @return string
+   */
+  public function toi(): string {
+    return $this->calcTo('i');
+  }
+
+  /**
+   * @param $to
+   *
+   * @return string
+   */
+  private function calcTo($to): string {
+    $ret = rtrim(bcdiv($this->amount, $this->units[$to], 15), 0);
+
+    return (substr($ret, -1) == '.' ? substr($ret, 0, -1) : $ret) . $to;
+  }
+
+  /**
+   * @return string
+   */
   public function __toString(): string {
     return (string)$this->getAmount();
   }
