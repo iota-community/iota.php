@@ -6,7 +6,7 @@
   <br>
   <a href="https://github.com/iota-community/iota.php/LICENSE" style="text-decoration:none;"><img src="https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square" alt="Apache-2.0 license"></a>
   <a href="https://www.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/IOTA-lightgrey?style=flat&logo=iota" alt="IOTA"></a>
-  <a href="https://www.php.net/" style="text-decoration:none;"><img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square" alt=">PHP 8"></a>
+  <a href="https://www.php.net/" style="text-decoration:none;"><img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square&logo=php" alt=">PHP 8"></a>
   <img src="https://github.com/iota-community/iota.php/actions/workflows/phpunit.yml/badge.svg" alt="WorkflowUnitTest">
 </p>
 
@@ -54,8 +54,8 @@ or
   echo "#    result: " .  $address_0->send($address_1->getAddressBech32(), $ammount) . PHP_EOL;
   // send Tokens back ;-)
   echo "#--- send Tokens back" . PHP_EOL;
-  echo "#    from:   " . $address_0->getAddressBech32() . " | balance: " . $address_0->getBalance() . PHP_EOL;
-  echo "#    to:     " . $address_1->getAddressBech32() . " | balance: " . $address_1->getBalance() . PHP_EOL;
+  echo "#    from:   " . $address_1->getAddressBech32() . " | balance: " . $address_1->getBalance() . PHP_EOL;
+  echo "#    to:     " . $address_0->getAddressBech32() . " | balance: " . $address_0->getBalance() . PHP_EOL;
   echo "#    result: " . $address_1->send($address_0->getAddressBech32(), $ammount) . PHP_EOL;
   // check balance
   echo "#--- check" . PHP_EOL;
@@ -72,8 +72,8 @@ or
 #    to:   atoi1qzvhzythy64dzx456ccvus357hvhg77cmqrrw4ukuszprtu9fay5ywp5ncz | balance: 234000000
 #    result: 5b75275342eeecb781985890e4fc404d4aa1800051532cc92a49de06968cb0f3:included
 #--- send Tokens back
-#    from:   atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e | balance: 80000000
-#    to:     atoi1qzvhzythy64dzx456ccvus357hvhg77cmqrrw4ukuszprtu9fay5ywp5ncz | balance: 235000000
+#    from:   atoi1qzvhzythy64dzx456ccvus357hvhg77cmqrrw4ukuszprtu9fay5ywp5ncz | balance: 80000000
+#    to:     atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e | balance: 235000000
 #    result: 25e380662a0030c0f4380933f2b46d20816058f31c6101a93cb95272009dd34e:included
 #--- check
 #    Address 0: atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e | balance: 81000000
