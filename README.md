@@ -31,6 +31,7 @@ This library allows you to do the following:
 + PHP Extensions:
     + [ext-curl](http://php.net/manual/en/book.curl.php)
     + [ext-mbstring](http://php.net/manual/en/book.mbstring.php)
+    + [ext-bcmath](http://php.net/manual/en/book.bc.php)
     + [ext-sodium](http://php.net/manual/en/book.sodium.php) (api client don't need this)
 
 # Example
