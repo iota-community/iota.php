@@ -55,6 +55,11 @@ class FaucetClient {
     if(is_string($ret)) {
       $ret = new ResponseMessage(['message' => $ret]);
     }
+    if(is_null($ret)) {
+      $ret = new ResponseError(['error' => '902', 'message' => 'FaucetServer timeout']);
+    }
+
+
 
     return $ret;
   }
