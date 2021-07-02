@@ -46,7 +46,15 @@
   $ed25519Seed = new IOTA\Type\ed25519Seed(((new IOTA\Crypto\Bip39())->reverseMnemonic($words))->__toSeed());
 ```
 
-<hr>
+---
+
+### Create random mnemonic over IOTA\Waller
+
+```php
+  $mnemonic = IOTA\Wallet::createMnemonic();
+```
+
+---
 
 ## Additional Examples
 
