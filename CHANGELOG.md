@@ -12,6 +12,20 @@
 
 # Changelog
 
+## 0.2.3 - 2021-07-12
+
+### Added
+
+- get Historic Balances
+  - Add new Wallet/Address method
+  - Add Example Wallet/05_WalletGetHistoricBalances
+  - Add Help Wallet/020_examples_wallet_getHistoricBalance
+
+### Changed
+
+- checkTransactionTest 
+  - ResponseError
+
 ## 0.2.2 - 2021-07-01
 
 ### Added
