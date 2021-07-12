@@ -5,6 +5,7 @@
   use IOTA\Action\checkTransaction;
   use IOTA\Client\SingleNodeClient;
   use IOTA\Api\v1\ResponseMessageMetadata;
+  use IOTA\Api\v1\ResponseError;
 
   /**
    * Class checkTransactionTest
@@ -13,12 +14,10 @@
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class checkTransactionTest extends TestCase {
-
     /**
      * @var SingleNodeClient
      */
     protected SingleNodeClient $client;
-
 
     /**
      *
@@ -33,7 +32,12 @@
      */
     public function testcheckTransaction() {
       $ret = (new checkTransaction($this->client))->messageId('fcb61f2d45686c539c3437437b2c381cc1bc87959f8ef56cf51919ed86ed1676');
-      $this->assertIsString(checkTransaction::class, $ret->run());
-      $this->assertInstanceOf(ResponseMessageMetadata::class, $ret->getResult());
+      if($ret instanceof ResponseError) {
+        $this->assertInstanceOf(ResponseError::class, $ret);
+      }
+      else {
+        $this->assertIsString(checkTransaction::class, $ret->run());
+        $this->assertInstanceOf(ResponseMessageMetadata::class, $ret->getResult());
+      }
     }
   }
