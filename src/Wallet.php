@@ -120,7 +120,7 @@ class Wallet {
   /**
    * @return array
    */
-  public function getKnownAddresses() {
+  public function getKnownAddresses() : array {
     return $this->addresses;
   }
 }

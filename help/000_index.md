@@ -48,6 +48,7 @@ This library allows you to do the following:
     + [useWallet](./020_examples_wallet.md)
     + [searchWalletAddress](./020_examples_wallet_searchAddress.md)
     + [sendTokens](./020_examples_wallet_sendToken.md)
+    + [getHistoricBalances](./020_examples_wallet_getHistoricBalance.md)
 
 
 + Examples (Advanced)

@@ -3,6 +3,7 @@
 use IOTA\Api\v1\PayloadIndexation;
 use IOTA\Api\v1\ResponseError;
 use IOTA\Helper\Amount;
+use IOTA\Helper\Converter;
 use IOTA\Wallet;
 use IOTA\Action\checkTransaction;
 use IOTA\Action\sendTokens;
@@ -65,6 +66,8 @@ class Address {
   }
 
   /**
+   * Get the balance
+   *
    * @return int
    * @throws ExceptionApi
    * @throws ExceptionConverter
@@ -73,6 +76,36 @@ class Address {
    */
   public function getBalance(): int {
     return ($this->wallet->client->address($this->address->toAddressBetch32($this->wallet->bech32HRP)))->balance;
+  }
+
+  /**
+   * Get all getHistoricBalances
+   *
+   * @param bool $short
+   *
+   * @return array
+   * @throws ExceptionApi
+   * @throws ExceptionConverter
+   * @throws ExceptionHelper
+   * @throws SodiumException
+   */
+  public function getHistoricBalances(bool $short = true): array {
+    $ret    = [];
+    $output = ($this->wallet->client->addressesOutput($this->address->toAddressBetch32($this->wallet->bech32HRP)));
+    foreach($output->outputIds ?? [] as $id) {
+      $output = $this->wallet->client->output($id);
+      $ret[]  = $short ? [
+        'amount'          => $output->output['amount'],
+        'amountMi'        => (new Amount($output->output['amount']))->toMi(),
+        'toAddress'       => $output->output['address']['address'],
+        'toAddressBech32' => Converter::ed25519ToBech32($output->output['address']['address'], $this->wallet->bech32HRP),
+        'isSpent'         => $output->isSpent,
+        'messageId'       => $output->messageId,
+        'transactionId'   => $output->transactionId,
+      ] : $output;
+    }
+
+    return $ret;
   }
 
   /**
