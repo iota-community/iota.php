@@ -7,6 +7,7 @@ use IOTA\Action\sendMessage;
 use IOTA\Action\sendTokens;
 use IOTA\Client\FaucetClient;
 use IOTA\Client\SingleNodeClient;
+use IOTA\Util\Network;
 
 /**
  * Class Builder
@@ -57,9 +58,9 @@ class Builder {
    *
    * @return $this
    */
-  public function client(string $client = 'SingleNodeClient', string $API_ENDPOINT = 'https://api.lb-0.testnet.chrysalis2.com'): self {
+  public function client(string $client = 'SingleNodeClient', string|array|Network $network = 'testnet'): self {
     $client       = "IOTA\Client\\" . $client;
-    $this->client = new $client($API_ENDPOINT);
+    $this->client = new $client($network);
 
     return $this;
   }
