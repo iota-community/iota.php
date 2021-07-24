@@ -34,8 +34,8 @@ class FaucetClient {
    *
    * @throws ExceptionApi
    */
-  public function __construct(protected string $API_ENDPOINT = 'https://faucet.testnet.chrysalis2.com') {
-    $this->ApiCaller = (new ApiCaller($this->API_ENDPOINT));
+  public function __construct() {
+    $this->ApiCaller = (new ApiCaller('https://faucet.testnet.chrysalis2.com'));
   }
 
   /**
@@ -56,10 +56,10 @@ class FaucetClient {
       $ret = new ResponseMessage(['message' => $ret]);
     }
     if(is_null($ret)) {
-      $ret = new ResponseError(['error' => '902', 'message' => 'FaucetServer timeout']);
+      $ret = new ResponseError(['error'   => '902',
+                                'message' => 'FaucetServer timeout',
+      ]);
     }
-
-
 
     return $ret;
   }
