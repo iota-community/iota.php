@@ -51,27 +51,27 @@ class ApiCaller {
   /**
    * ApiCaller constructor.
    *
-   * @param string      $API_ENDPOINT
+   * @param string      $url
    * @param string      $method
    * @param mixed|null  $requestData
    * @param string|null $userPass
    *
    * @throws ExceptionApi
    */
-  public function __construct(protected string $API_ENDPOINT, protected string $method = 'get', protected mixed $requestData = null, protected ?string $userPass = null) {
-    $this->endpoint($API_ENDPOINT);
+  public function __construct(protected string $url, protected string $method = 'get', protected mixed $requestData = null, protected ?string $userPass = null) {
+    $this->url($url);
     $this->method($method);
     $this->requestData($requestData);
     $this->userPass($userPass);
   }
 
   /**
-   * @param string $API_ENDPOINT
+   * @param string $url
    *
    * @return $this
    */
-  public function endpoint(string $API_ENDPOINT): self {
-    $this->API_ENDPOINT = $API_ENDPOINT . (substr($this->API_ENDPOINT, -1) == '/' ? '' : '/');
+  public function url(string $url): self {
+    $this->url = $url . (substr($this->url, -1) == '/' ? '' : '/');
 
     return $this;
   }
@@ -186,7 +186,7 @@ class ApiCaller {
    * @throws ExceptionApi
    */
   public function fetch(int $timeout = 30): string {
-    $_url   = $this->API_ENDPOINT . ($this->route[0] != "/" ? $this->basePath . $this->route : substr($this->route, 1));
+    $_url   = $this->url . ($this->route[0] != "/" ? $this->basePath . $this->route : substr($this->route, 1));
     $_query = (count($this->query) > 0 ? '?' . http_build_query($this->query) : '');
     //
     try {
@@ -281,9 +281,6 @@ class ApiCaller {
     //
     $this->fetch($timeout);
     $content = $this->handle->getContent();
-
-
-
     if($content === null || !Converter::isJSON($content)) {
       if($this->settings['jsonException']) {
         throw new ExceptionApi("No JSON content to fetch");
