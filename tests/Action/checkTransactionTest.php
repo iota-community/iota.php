@@ -32,8 +32,8 @@
      */
     public function testcheckTransaction() {
       $ret = (new checkTransaction($this->client))->messageId('fcb61f2d45686c539c3437437b2c381cc1bc87959f8ef56cf51919ed86ed1676');
-      if($ret instanceof ResponseError) {
-        $this->assertInstanceOf(ResponseError::class, $ret);
+      if($ret->getResult() instanceof ResponseError) {
+        $this->assertInstanceOf(ResponseError::class, $ret->getResult());
       }
       else {
         $this->assertIsString(checkTransaction::class, $ret->run());
