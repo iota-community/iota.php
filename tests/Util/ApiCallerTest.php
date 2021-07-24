@@ -16,7 +16,7 @@
     /**
      * @var string
      */
-    protected string $API_ENDPOINT = 'https://api.lb-0.testnet.chrysalis2.com';
+    protected string $url = 'https://api.lb-0.testnet.chrysalis2.com';
     /**
      * @var ApiCaller
      */
@@ -26,8 +26,8 @@
      * @throws Api
      */
     protected function setUp(): void {
-      $this->api = (new ApiCaller($this->API_ENDPOINT))->basePath('api/v1/')
-                                                       ->route('info');
+      $this->api = (new ApiCaller($this->url))->basePath('api/v1/')
+                                              ->route('info');
     }
 
     /**
