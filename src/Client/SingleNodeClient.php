@@ -25,6 +25,7 @@ use IOTA\Api\v1\ResponseReceipts;
 use IOTA\Api\v1\ResponseTreasury;
 use IOTA\Api\v1\RequestAddPeer;
 use IOTA\Api\v1\RequestSubmitMessage;
+use IOTA\Util\Network;
 
 /**
  * Class SingleNodeClient
@@ -33,6 +34,10 @@ use IOTA\Api\v1\RequestSubmitMessage;
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class SingleNodeClient {
+  /**
+   * @var Network
+   */
+  protected Network $network;
   /**
    * @var ApiCaller
    */
@@ -43,8 +48,9 @@ class SingleNodeClient {
    *
    * @throws ExceptionApi
    */
-  public function __construct(protected string $API_ENDPOINT = 'https://api.lb-0.testnet.chrysalis2.com') {
-    $this->ApiCaller = (new ApiCaller($this->API_ENDPOINT))->basePath('api/v1/');
+  public function __construct(string|array|Network $network = 'testnet') {
+    $this->network   = new Network($network);
+    $this->ApiCaller = (new ApiCaller($this->network->API_ENDPOINT))->basePath($this->network->API_ENDPOINT_basePath);
   }
 
   /**
