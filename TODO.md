@@ -12,10 +12,8 @@
 
 ### In Progress
 
+- [ ] IOTA Identity
 - [ ] expand Wallet class
-- [ ] expand PHPUnit tests
-- [ ] expand new Actions
-- [ ] expand Builder class
 
 ---
 
@@ -34,13 +32,14 @@
 
 
 - [ ] IOTA Native Digital Assets
-- [ ] Interact with IOTA Streams
-- [ ] Interact with IOTA Identity
+- [ ] IOTA Streams
+- [ ] IOTA Identity
 
 ---
 
 ### Done ✓
 
+- [x] Network class    
 - [x] Helper\Amount    
 - [x] Wallet class    
     - [x] Address management
