@@ -30,6 +30,7 @@ This library allows you to do the following:
 
 
 + [Examples (Basics)](./002_examples.md)
+    + [Network (testnet|mainnet)](./002_examples_network.md)
     + [Client (info|health|tips)](./002_examples_clientinfo.md)
     + [Milestone (get)](./002_examples_milestone.md)
     + [Peers (get)](./002_examples_peers.md)
