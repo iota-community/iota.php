@@ -3,6 +3,7 @@
   require_once("../../autoload.php");
   // create client
   $builder = new IOTA\Builder();
+  #$builder->client('SingleNodeClient', 'testnet');
   // send message
   $builder->sendMessage('MessageTransfare1')
           ->index('#iota.php')

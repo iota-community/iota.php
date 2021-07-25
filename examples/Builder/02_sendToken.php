@@ -3,6 +3,7 @@
   require_once("../../autoload.php");
   // create client
   $builder = new IOTA\Builder();
+  #$builder->client('SingleNodeClient', 'testnet');
   // sendToken
   $builder->sendTokens()
           ->amount(1000000)
