@@ -48,6 +48,21 @@
     /**
      * @throws ExceptionApi
      */
+    public function testClientNetwork() {
+      $this->client = new SingleNodeClient('testnet');
+      $this->assertIsBool($this->client->health());
+      $this->client = new SingleNodeClient('mainnet');
+      $this->assertIsBool($this->client->health());
+      $this->client = new SingleNodeClient('https://api.lb-0.testnet.chrysalis2.com/');
+      $this->assertIsBool($this->client->health());
+      $this->client = new SingleNodeClient(\IOTA\Util\Network::testnet);
+      $this->assertIsBool($this->client->health());
+    }
+
+
+    /**
+     * @throws ExceptionApi
+     */
     public function testhealth() {
       $this->assertIsBool($this->client->health());
     }
