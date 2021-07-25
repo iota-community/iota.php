@@ -8,6 +8,7 @@
   <a href="https://www.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/IOTA-lightgrey?style=flat&logo=iota" alt="IOTA"></a>
   <a href="https://www.php.net/" style="text-decoration:none;"><img src="https://img.shields.io/badge/PHP->= 8.x-blue?style=flat-square&logo=php" alt=">PHP 8"></a>
   <img src="https://github.com/iota-community/iota.php/actions/workflows/phpunit.yml/badge.svg" alt="WorkflowUnitTest">
+  <a href="https://packagist.org/packages/iota-community/iota.php/" style="text-decoration:none;"><img src="https://poser.pugx.org/iota-community/iota.php/v/stable.png" alt=">packagist_stable"></a>
 </p>
 
 # About
@@ -82,14 +83,6 @@ It took me a lot of time to develop **iota.php** and need to pay for the server 
 
 [<img src="https://img.shields.io/badge/iota1qppu7wdws394euyvflvevsnpdawvsl820c3c3jy92wky6wfj656wqqxtf9m-lightgrey?style=social&logo=iota" alt="IOTA">](./help/100_Donation.md)
 
-
----
-
-### Special thanks to
-
- - Andi [@modell_84](https://twitter.com/modell_84) [Graphic designer]
- - Antonio [@antonionardella](https://twitter.com/antonionardella) [Support]
- - Vrom [@Vrom14286662](https://twitter.com/Vrom14286662) [Support]
 
 ---
 
