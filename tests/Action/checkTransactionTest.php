@@ -32,12 +32,13 @@
      */
     public function testcheckTransaction() {
       $ret = (new checkTransaction($this->client))->messageId('fcb61f2d45686c539c3437437b2c381cc1bc87959f8ef56cf51919ed86ed1676');
-      if($ret->getResult() instanceof ResponseError) {
+      $result = $ret->getResult();
+      if($result instanceof ResponseError) {
         $this->assertInstanceOf(ResponseError::class, $ret->getResult());
       }
       else {
         $this->assertIsString(checkTransaction::class, $ret->run());
-        $this->assertInstanceOf(ResponseMessageMetadata::class, $ret->getResult());
+        $this->assertInstanceOf(ResponseMessageMetadata::class, $result);
       }
     }
   }
