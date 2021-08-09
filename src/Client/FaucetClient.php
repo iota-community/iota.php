@@ -30,9 +30,7 @@ class FaucetClient {
   protected ApiCaller $ApiCaller;
 
   /**
-   * SingleNodeClient constructor.
-   *
-   * @throws ExceptionApi
+   * FaucetClient constructor.
    */
   public function __construct() {
     $this->ApiCaller = (new ApiCaller('https://faucet.testnet.chrysalis2.com'));
