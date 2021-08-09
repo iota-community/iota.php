@@ -53,8 +53,8 @@ class Builder {
   }
 
   /**
-   * @param string $client
-   * @param string $API_ENDPOINT
+   * @param string               $client
+   * @param string|array|Network $network
    *
    * @return $this
    */
