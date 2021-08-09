@@ -39,7 +39,7 @@ class Ed25519Seed {
     if(is_string($seedInput) && (strlen($seedInput) == 64 || strlen($seedInput) == 128) && Converter::isHex($seedInput)) {
       $this->secretKey = $seedInput;
     }
-    elseif($seedInput instanceof Mnemonic || (is_string($seedInput) && str_word_count($seedInput) == 24) || (is_array($seedInput) && count($seedInput))) {
+    elseif($seedInput instanceof Mnemonic || (is_string($seedInput) && str_word_count($seedInput) == 24) || (is_array($seedInput) && count($seedInput) == 24)) {
       if($seedInput instanceof Mnemonic) {
         $seedInput = $seedInput->words;
       }
