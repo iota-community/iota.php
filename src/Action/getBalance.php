@@ -20,7 +20,7 @@ class getBalance extends AbstractAction {
    */
   protected string $address;
   /**
-   * @var string
+   * @var int|null
    */
   protected ?int $addressTyp;
 
@@ -29,9 +29,6 @@ class getBalance extends AbstractAction {
    * @param int|null $addressType
    *
    * @return $this
-   * @throws ExceptionAction
-   * @throws ExceptionApi
-   * @throws ExceptionHelper
    */
   public function address(string $address = '', ?int $addressType = null): self {
     $this->address    = $address;
@@ -41,9 +38,6 @@ class getBalance extends AbstractAction {
   }
 
   /**
-   * @param string   $address
-   * @param int|null $addressType
-   *
    * @return ResponseBalanceAddress|ResponseError
    * @throws ExceptionAction
    * @throws ExceptionApi

@@ -63,9 +63,8 @@ class sendMessage extends AbstractAction {
   }
 
   /**
-   * @return mixed
+   * @return ResponseSubmitMessage|ResponseError
    * @throws ExceptionApi
-   * @throws ExceptionConverter
    * @throws ExceptionHelper
    */
   public function run(): ResponseSubmitMessage|ResponseError {

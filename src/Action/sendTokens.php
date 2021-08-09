@@ -146,9 +146,10 @@ class sendTokens extends AbstractAction {
   }
 
   /**
-   * @param int|Amount $amount
+   * @param int|string|Amount $amount
    *
    * @return $this
+   * @throws ExceptionHelper
    */
   public function amount(int|string|Amount $amount): self {
     $this->amount = (new Amount($amount))->getAmount();
