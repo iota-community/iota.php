@@ -16,6 +16,10 @@ class Network {
   /**
    * @var string
    */
+  public string $NAME;
+  /**
+   * @var string
+   */
   public string $API_ENDPOINT;
   /**
    * @var string
@@ -44,7 +48,10 @@ class Network {
     'atoi1',
     'iota',
   ];
-  const alias     = [
+  /**
+   *
+   */
+  const alias = [
     [
       'api.lb-0.testnet.chrysalis2.com',
       'testnet',
@@ -60,18 +67,20 @@ class Network {
    *
    */
   const testnet = [
+    'NAME'                  => 'testnet',
     'API_ENDPOINT'          => 'https://' . self::alias[0][0],
     'API_ENDPOINT_basePath' => self::basePath,
-    'EXPLORER'              => self::explorerUrl . 'testnet',
+    'EXPLORER'              => self::explorerUrl . 'testnet/',
     'bech32HRP'             => self::bech32HRP[0],
   ];
   /**
    *
    */
   const mainnet = [
+    'NAME'                  => 'mainnet',
     'API_ENDPOINT'          => 'https://' . self::alias[1][0],
     'API_ENDPOINT_basePath' => self::basePath,
-    'EXPLORER'              => self::explorerUrl . 'mainnet',
+    'EXPLORER'              => self::explorerUrl . 'mainnet/',
     'bech32HRP'             => self::bech32HRP[1],
   ];
 
@@ -129,11 +138,13 @@ class Network {
     }
     //set HRP
     $bech32HRP = $bech32HRP ?? $ret->bech32HRP;
+    $name      = ($bech32HRP == 'iota' ? 'mainnet' : 'testnet');
     // set explorer url
-    $explorerUrl = $explorerUrl ?? self::explorerUrl . ($bech32HRP == 'iota' ? 'mainnet' : 'testnet');
+    $explorerUrl = $explorerUrl ?? self::explorerUrl . $name;
 
     // return Network
     return new Network([
+      'NAME'                  => $name,
       'API_ENDPOINT'          => $nodeApiUrl,
       'API_ENDPOINT_basePath' => $basePath,
       'EXPLORER'              => $explorerUrl,
@@ -159,6 +170,7 @@ class Network {
    * @return $this
    */
   protected function parseNetwork(Network $network): self {
+    $this->NAME                  = $network->NAME;
     $this->API_ENDPOINT          = $network->API_ENDPOINT;
     $this->API_ENDPOINT_basePath = $network->API_ENDPOINT_basePath;
     $this->EXPLORER              = $network->EXPLORER;
@@ -172,10 +184,11 @@ class Network {
    * @param array $fallback
    */
   protected function parseArray(array $array, array $fallback = self::testnet): void {
-    $this->API_ENDPOINT          = $array['API_ENDPOINT'] ?? $array[0] ?? $fallback['API_ENDPOINT'];
-    $this->API_ENDPOINT_basePath = $array['API_ENDPOINT_basePath'] ?? $array[1] ?? $fallback['API_ENDPOINT_basePath'];
-    $this->EXPLORER              = $array['EXPLORER'] ?? $array[2] ?? $fallback['EXPLORER'];
-    $this->bech32HRP             = $array['bech32HRP'] ?? $array[3] ?? $fallback['bech32HRP'];
+    $this->NAME                  = $array['NAME'] ?? $array[0] ?? $fallback['NAME'];
+    $this->API_ENDPOINT          = $array['API_ENDPOINT'] ?? $array[1] ?? $fallback['API_ENDPOINT'];
+    $this->API_ENDPOINT_basePath = $array['API_ENDPOINT_basePath'] ?? $array[2] ?? $fallback['API_ENDPOINT_basePath'];
+    $this->EXPLORER              = $array['EXPLORER'] ?? $array[3] ?? $fallback['EXPLORER'];
+    $this->bech32HRP             = $array['bech32HRP'] ?? $array[4] ?? $fallback['bech32HRP'];
   }
 
   /**
@@ -195,5 +208,14 @@ class Network {
     else {
       throw new ExceptionUtil("Unknown network '$name'");
     }
+  }
+
+  /**
+   * @param string $messageId
+   *
+   * @return string
+   */
+  public function getExplorerUrlMessage(string $messageId): string {
+    return $this->EXPLORER . "message/" . $messageId;
   }
 }
