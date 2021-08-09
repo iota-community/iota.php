@@ -134,6 +134,90 @@ class Converter {
   }
 
   /**
+   * @param string $val
+   * @param string $alphabet
+   *
+   * @return string
+   * @throws ExceptionConverter
+   */
+  static public function base58_encode(string $val, string $alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"): string {
+    $val   = Converter::isHex($val) ? Converter::hex2String($val) : $val;
+
+    $alphabet_len = strlen($alphabet);
+    if(strlen($val) === 0) {
+      return '';
+    }
+    $bytes   = array_values(unpack('C*', $val));
+    $decimal = $bytes[0];
+    for($i = 1, $l = count($bytes); $i < $l; $i++) {
+      $decimal = bcmul($decimal, 256);
+      $decimal = bcadd($decimal, $bytes[$i]);
+    }
+    $output = '';
+    while($decimal >= $alphabet_len) {
+      $div     = bcdiv($decimal, $alphabet_len);
+      $mod     = (int)bcmod($decimal, $alphabet_len);
+      $output  .= $alphabet[$mod];
+      $decimal = $div;
+    }
+    if($decimal > 0) {
+      $output .= $alphabet[$decimal];
+    }
+    $output = strrev($output);
+    foreach($bytes as $byte) {
+      if($byte === 0) {
+        $output = $alphabet[0] . $output;
+        continue;
+      }
+      break;
+    }
+
+    return $output;
+  }
+
+  /**
+   * @param string $val
+   * @param string $alphabet
+   *
+   * @return string
+   * @throws ExceptionConverter
+   */
+  static public function base58_decode(string $val, string $alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"): string {
+    $alphabet_len = strlen($alphabet);
+    if(strlen($val) === 0) {
+      return '';
+    }
+    $indexes = array_flip(str_split($alphabet));
+    $chars   = str_split($val);
+    //
+    foreach($chars as $char) {
+      if(isset($indexes[$char]) === false) {
+        throw new ExceptionConverter('Invalid characters ($char: "' . $char . '", $val: "' . $val . '") ');
+      }
+    }
+    $decimal = $indexes[$chars[0]];
+    for($i = 1, $l = count($chars); $i < $l; $i++) {
+      $decimal = bcmul($decimal, $alphabet_len);
+      $decimal = bcadd($decimal, $indexes[$chars[$i]]);
+    }
+    $output = '';
+    while($decimal > 0) {
+      $byte    = (int)bcmod($decimal, 256);
+      $output  = pack('C', $byte) . $output;
+      $decimal = bcdiv($decimal, 256);
+    }
+    foreach($chars as $char) {
+      if($indexes[$char] === 0) {
+        $output = "\x00" . $output;
+        continue;
+      }
+      break;
+    }
+
+    return $output;
+  }
+
+  /**
    * @param array $data
    * @param int   $inLen
    * @param int   $fromBits
@@ -270,5 +354,29 @@ class Converter {
     $data = Bech32::decode($addressBech32)[1];
 
     return substr(self::byteArray2Hex(self::bits($data, count($data), 5, 8, false)), 2);
+  }
+
+  /**
+   * @param array $input
+   *
+   * @return array
+   */
+  static public function canonicalize(array $input): array {
+    ksort($input);
+    foreach($input as $k => $v) {
+      $ret[$k] = is_array($v) ? self::canonicalize($v) : stripslashes($v);
+    }
+
+    return $ret ?? [];
+  }
+
+  /**
+   * @param string|array $input
+   *
+   * @return string
+   */
+  static public function canonicalizeJSON(string|array $input): string {
+
+    return stripslashes(json_encode(self::canonicalize(is_string($input) ? json_decode($input, true) : $input)));
   }
 }
