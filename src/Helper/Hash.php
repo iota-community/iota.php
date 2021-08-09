@@ -115,6 +115,8 @@ class Hash {
    * @throws SodiumException
    */
   static public function blake2b_sum256(string $data): string {
+    $data = Converter::isHex($data) ? Converter::hex2String($data) : $data;
+
     return sodium_crypto_generichash($data);
   }
 
