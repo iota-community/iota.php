@@ -1,4 +1,6 @@
 <?php namespace IOTA\Identity;
+use IOTA\Util\Keys;
+
 /**
  * Class Result
  *
@@ -24,7 +26,11 @@ class Result {
    */
   public ?string $messageId;
   /**
-   * @var array|null
+   * @var Keys
    */
-  public ?array $keys;
+  public Keys $keys;
+  /**
+   * @var Keys|null
+   */
+  public ?Keys $keysService;
 }

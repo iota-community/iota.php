@@ -83,23 +83,28 @@ class Document extends AbstractMap {
    * @throws \IOTA\Exception\Converter
    */
   static public function fromArray(array $array): Document {
-    if(!in_array([
-      'id',
-      'authentication',
-      'created',
-      'updated',
-    ], $array)) {
-      throw new ExceptionIdentity('Wrong document default input');
+    if(!isset($array['id'])) {
+      throw new ExceptionIdentity('Empty id');
+    }
+    if(!isset($array['created'])) {
+      throw new ExceptionIdentity('Empty created');
+    }
+    if(!isset($array['updated'])) {
+      throw new ExceptionIdentity('Empty updated');
     }
     if(!isset($array['authentication']) && count($array['authentication']) > 0) {
       throw new ExceptionIdentity('Empty authentication');
     }
     //
-    $uri       = Uri::parse($array['id']);
+    $uri       = Uri::parse($array['authentication'][array_key_last($array['authentication'])]['id']);
     $publicKey = Converter::base58_decode($array['authentication'][array_key_last($array['authentication'])]['publicKeyBase58']);
     //
     $authentication    = new Authentication($uri, $publicKey);
-    $document          = new Document($uri, $authentication);
+    $authentication->controller = $array['authentication'][array_key_last($array['authentication'])]['controller'];
+    $authentication->type = $array['authentication'][array_key_last($array['authentication'])]['type'];
+    //
+
+    $document          = new Document(Uri::parse($array['id']), $authentication);
     $document->created = $array['created'];
     $document->updated = $array['updated'];
     //

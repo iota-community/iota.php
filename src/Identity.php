@@ -13,6 +13,7 @@ use IOTA\Identity\Document;
 use IOTA\Identity\Result;
 use IOTA\Identity\Service;
 use IOTA\Identity\Uri;
+use IOTA\Util\Keys;
 use IOTA\Util\Network;
 use IOTA\Exception\Identity as ExceptionIdentity;
 use SodiumException;
@@ -31,60 +32,88 @@ class Identity {
    */
   protected Network $network;
   /**
-   * @var array|null
+   * @var Uri
    */
-  protected ?array $keys;
+  protected Uri $uri;
+  /**
+   * @var Keys
+   */
+  protected Keys $keys;
 
   /**
-   * Identity constructor.
+   * @param string|Uri|null        $uriInput
+   * @param Keys|array|string|null $keyInput
+   * @param string|array|Network   $network
    *
-   * @param string|array|Network $network
-   *
+   * @throws ExceptionIdentity
    * @throws Exception\Api
+   * @throws Exception\Converter
    * @throws Exception\Helper
    * @throws Exception\Util
-   */
-  public function __construct(string|array|Network $network = 'testnet') {
-    $this->network($network);
-  }
-
-  /**
-   * @param string|array|Network $network
-   *
-   * @throws Exception\Api
-   * @throws Exception\Helper
-   * @throws Exception\Util
-   */
-  public function network(string|array|Network $network = 'testnet') {
-    $this->network = new Network($network);
-  }
-
-  /**
-   * @param string $secretKey
-   * @param string $publicKey
-   *
-   * @return $this
-   */
-  public function keys(string $secretKey, string $publicKey): self {
-    if(strlen($secretKey) == 64) {
-      $secretKey = $secretKey . $publicKey;
-    }
-    $this->keys['secret'] = $secretKey;
-    $this->keys['public'] = $publicKey;
-
-    return $this;
-  }
-
-  /**
-   * @return $this
    * @throws SodiumException
    */
-  public function generateKeys(): self {
-    $keys                 = Ed25519::keyPair();
-    $this->keys['secret'] = $keys['privateKey'];
-    $this->keys['public'] = $keys['publicKey'];
+  public function __construct(string|Uri|null $uriInput = null, Keys|array|string $keyInput = null, string|array|Network $network = 'testnet') {
 
-    return $this;
+    $this->keys    = new Keys($keyInput ?? Ed25519::keyPair());
+    $this->network = new Network($network);
+    // Uri
+    if($uriInput instanceof Uri) {
+      $this->uri = $uriInput;
+    }
+    elseif(is_string($uriInput) && str_contains($uriInput, ':')) {
+      $this->uri = Uri::parse($uriInput);
+    }
+    elseif(is_string($uriInput) && !str_contains($uriInput, ':')) {
+      $this->uri = new Uri('iota' . ($this->network->NAME != 'mainnet' ? ':test' : ''), $uriInput);
+    }
+    elseif($uriInput == null) {
+      $this->uri = new Uri('iota' . ($this->network->NAME != 'mainnet' ? ':test' : ''), self::createID($this->keys->public));
+    }
+    if($this->uri->getId() !== self::createID($this->keys->public)) {
+      throw new ExceptionIdentity('Differences in DID found');
+    }
+  }
+
+  /**
+   * @param string $publicKey
+   *
+   * @return string
+   * @throws Exception\Converter
+   * @throws SodiumException
+   */
+  static public function createID(string $publicKey): string {
+    return Converter::base58_encode(Hash::blake2b_sum256($publicKey));
+  }
+
+  /**
+   * @return false|Result
+   * @throws ExceptionIdentity
+   * @throws Exception\Api
+   * @throws Exception\Converter
+   * @throws Exception\Helper
+   */
+  public function checkIdIndexTangleExists(): false|Result {
+    $client = new SingleNodeClient($this->network);
+    $found  = ($client)->messagesFind($this->uri->getId());
+    if(count($found->messageIds) == 0) {
+      return false;
+    }
+    $messageId = $found->messageIds[0];
+    //
+    $message = (new getMessage($client))->messageId($messageId)
+                                        ->run();
+    if($message instanceof ResponseError) {
+      throw new ExceptionIdentity("Unknown messageId '$messageId'");
+    }
+    //
+    $result               = new Result();
+    $result->uri          = $this->uri;
+    $result->keys         = $this->keys;
+    $result->explorerLink = $this->network->getExplorerUrlMessage($messageId);
+    $result->messageId    = $messageId;
+    $result->document     = Document::fromJson($message->payload->data);
+
+    return $result;
   }
 
   /**
@@ -98,25 +127,25 @@ class Identity {
    * @throws SodiumException
    */
   public function create(?string $fragment = '#key'): Result {
-    if(!isset($this->keys)) {
-      $this->generateKeys();
+    $this->uri->setFragment($fragment);
+    // check DID exists
+    if(($check = $this->checkIdIndexTangleExists())) {
+      return $check;
     }
-    $id  = Converter::base58_encode(Hash::blake2b_sum256($this->keys['public']));
-    $uri = new Uri('iota' . ($this->network->NAME != 'mainnet' ? ':test' : ''), $id, null, $fragment);
     //
-    $authentication = new Authentication($uri, $this->keys['public']);
-    $document       = new Document($uri);
+    $authentication = new Authentication($this->uri, $this->keys->public);
+    $document       = new Document($this->uri);
     $document->setAuthentication($authentication);
     // sign Document
     $signedDocument = $this->signDocument($document);
     // send Document to tangle
-    $response = $this->sendToTangle($uri, $signedDocument);
+    $response = $this->sendToTangle($this->uri, $signedDocument);
     if($response instanceof ResponseError) {
       throw new ExceptionIdentity("Send to Tangle error '$response->message'");
     }
     //
     $result               = new Result();
-    $result->uri          = $uri;
+    $result->uri          = $this->uri;
     $result->keys         = $this->keys;
     $result->explorerLink = $this->network->getExplorerUrlMessage($response->messageId);
     $result->messageId    = $response->messageId;
@@ -136,23 +165,23 @@ class Identity {
    * @throws Exception\Helper
    * @throws SodiumException
    */
-  public function manipulate(string|Document $document, string $previousMessageId): Result {
+  public function manipulate(string|Document $document, string $previousMessageId, Service $service, Keys|array|string $serviceKeyInput): Result {
     if(is_string($document)) {
       $document = Document::fromJson($document);
     }
     // verify
     if(!self::verify($document->__toJSON())) {
+      var_dump($document->__toJSON());
       throw new ExceptionIdentity("Document sign error! Verify return 'false'");
     }
     // generate new Key
-    $keys = Ed25519::keyPair();
+    $keys = new Keys($serviceKeyInput);
     // Uri
     $uri = Uri::parse($document->id . '#newKey');
     // add verificationMethod
-    $authentication = new Authentication($uri, $keys['publicKey']);
+    $authentication = new Authentication($uri, $keys->public);
     $document->setVerificationMethod($authentication);
     // add Service
-    $service = new Service($uri);
     $document->setService($service);
     // set previousMessageId
     $document->setPreviousMessageId($previousMessageId);
@@ -167,6 +196,7 @@ class Identity {
     $result               = new Result();
     $result->uri          = $uri;
     $result->keys         = $this->keys;
+    $result->keysService  = $keys;
     $result->explorerLink = $this->network->getExplorerUrlMessage($response->messageId);
     $result->messageId    = $response->messageId;
     $result->document     = $signedDocument;
@@ -189,7 +219,7 @@ class Identity {
     // message to jcs
     $message = Converter::canonicalizeJSON($document->__toJSON());
     // sign message
-    $signature = Ed25519::sign($this->keys['secret'], $message);
+    $signature = Ed25519::sign($this->keys->secret, $message);
     // set signatureValue
     $document->proof->signatureValue = Converter::base58_encode($signature);
     // verify

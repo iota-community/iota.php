@@ -1,5 +1,4 @@
 <?php namespace IOTA\Identity;
-
 /**
  * Class Uri
  *
@@ -20,6 +19,10 @@ class Uri {
    * @var string
    */
   static protected string $delimiterFragment = '#';
+  /**
+   * @var string|null
+   */
+  protected ?string $fragment = null;
 
   /**
    * Uri constructor.
@@ -29,7 +32,7 @@ class Uri {
    * @param string|null $path
    * @param string|null $fragment
    */
-  public function __construct(protected string $method, protected string $id, protected ?string $path = null, protected ?string $fragment = null) {
+  public function __construct(protected string $method, protected string $id, protected ?string $path = null, ?string $fragment = null) {
     // normalize path
     if(!empty($this->path) && is_string($this->path) && $this->path !== self::$delimiterPath) {
       // Check path beginns with delimiterPath
@@ -39,11 +42,19 @@ class Uri {
       // set delimiter to end
       $this->path = rtrim($this->path, self::$delimiterPath);
     }
+    $this->normalizeFragment($fragment);
+  }
+
+  /**
+   * @param string|null $fragment
+   */
+  private function normalizeFragment(?string $fragment = null) {
     // normalize fragment
-    if(!empty($this->fragment) && is_string($this->fragment) && $this->fragment !== self::$delimiterFragment) {
+    if(!empty($fragment) && is_string($fragment) && $fragment !== self::$delimiterFragment) {
       // set delimiter to end
-      $this->fragment = ltrim($this->fragment, self::$delimiterFragment);
+      $fragment = ltrim($fragment, self::$delimiterFragment);
     }
+    $this->fragment = $fragment;
   }
 
   /**
@@ -53,6 +64,7 @@ class Uri {
    */
   static public function parse(string $uri): Uri {
     $m = explode(":", $uri);
+
     array_shift($m); // scheme
     $id       = array_pop($m);
     $method   = implode(":", $m);
@@ -69,6 +81,16 @@ class Uri {
     }
 
     return new Uri($method, $id, $path, $fragment);
+  }
+
+  /**
+   * @param string|null $fragment
+   *
+   * @return $this
+   */
+  public function setFragment(?string $fragment = null) : self {
+    $this->normalizeFragment($fragment);
+    return $this;
   }
 
   /**
