@@ -74,7 +74,7 @@ class Ed25519Seed {
    * @throws SodiumException
    */
   public function keyPair(): array {
-    $signKeyPair = Ed25519::keyPairFromSeed($this->secretKey);
+    $signKeyPair = Ed25519::keyPairFromSeed(substr($this->secretKey, 0, 64));
 
     return [
       'publicKey'  => $signKeyPair['publicKey'],
