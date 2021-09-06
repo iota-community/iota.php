@@ -23,7 +23,9 @@ This library allows you to do the following:
 - [x] Get messages and outputs
 - [x] Generate addresses
 - [x] Interact with an IOTA node
-- [x] Get funds on testnet
+- [x] create Identity
+- [x] manipulate Identity
+- [x] verify Identity
 
 # Overview
 
@@ -62,6 +64,16 @@ This library allows you to do the following:
 + [Examples (API)](./003_examples_api.md)
 
 
+### Identity
+
++ Examples (Identity)
+    + [createIdentity](./060_examples_createIdentity.md)
+    + [manipulateIdentity](./060_examples_manipulateIdentity.md)
+    + [verifyIdentity](./060_examples_verifyIdentity.md)
+  
+
+
+### Troubleshooting
 
 + [Troubleshooting](./100_Troubleshooting.md)
 
