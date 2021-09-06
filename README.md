@@ -25,6 +25,8 @@ This library allows you to do the following:
   - [x] Generate addresses
 - [x] Interact with the IOTA Faucet Api 
   - [x] Get funds on testnet
+- [x] Decentralized Identifiers (DID) 
+  - [x] create, manipulate, verify
 
 # Requirements
 
