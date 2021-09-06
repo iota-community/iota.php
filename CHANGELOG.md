@@ -13,6 +13,24 @@
 
 # Changelog
 
+## 0.4.0 - 2021-09-06
+Iota DID, create/manipulate/verify IOTA Identity.
+
+### Added
+
+- Identity classes
+- Canonicalie JSON
+- decode, encode base58
+- Util Keys
+- Identity examples
+- Identity help
+
+### Changed
+
+- Help
+- Check the parameters if isHex
+- Keypair from Seed > 64 
+
 ## 0.3.0 - 2021-07-25
 Connects you to the testnet / mainnet more easily and automatically has the settings for the node, explorer and bech32HRP.
 

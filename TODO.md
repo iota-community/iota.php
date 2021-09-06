@@ -13,7 +13,7 @@
 
 ### In Progress
 
-- [ ] IOTA Identity
+- [ ] expand IOTA Identity
 - [ ] expand Wallet class
 
 ---
@@ -34,11 +34,16 @@
 
 - [ ] IOTA Native Digital Assets
 - [ ] IOTA Streams
-- [ ] IOTA Identity
 
 ---
 
 ### Done ✓
+
+- [x] IOTA Identity  
+    - [x] create Identity
+    - [x] manipulate Identity 
+    - [x] verify Identity
+  
 
 - [x] Network class    
 - [x] Helper\Amount    
