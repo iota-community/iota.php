@@ -27,7 +27,7 @@ class Address {
   /**
    * @var Bip32Path
    */
-  protected Bip32Path $path;
+  public Bip32Path $path;
   /**
    * @var Ed25519Address
    */
@@ -47,7 +47,7 @@ class Address {
    * @throws ExceptionType
    * @throws SodiumException
    */
-  public function __construct(protected Wallet $wallet, int $accountIndex = 0, int $addressIndex = 0, bool $isInternal = false) {
+  public function __construct(public Wallet $wallet, int $accountIndex = 0, int $addressIndex = 0, bool $isInternal = false) {
     $this->path = new Bip32Path("m/44'/4218'/0'/0'/0'");
     $this->path->setAccountIndex($accountIndex, true);
     $this->path->setAddressIndex($addressIndex, true);
