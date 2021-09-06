@@ -2,6 +2,6 @@
   // include iota lib
   require_once("../../autoload.php");
   // verify TangleMessage
-  $result = \IOTA\Identity::verifyTangleMessage("1795ee882f61a51478723b5098ead9866ec4427ac1a4e74bc4a1e4d77c8e6a13");
+  $result = \IOTA\Identity::verifyTangleMessage("30e10e1995b66d1be864a16b692b08b63d4e02eaa737f88d134d8678fd05b081");
   // output
   var_dump($result);
