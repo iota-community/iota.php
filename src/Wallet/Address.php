@@ -74,8 +74,13 @@ class Address {
    * @throws ExceptionHelper
    * @throws SodiumException
    */
-  public function getBalance(): int {
-    return ($this->wallet->client->address($this->address->toAddressBetch32($this->wallet->bech32HRP)))->balance;
+  public function getBalance(): int|null {
+    $result = $this->wallet->client->address($this->address->toAddressBetch32($this->wallet->bech32HRP));
+    if($result instanceof ResponseError) {
+      return null;
+    }
+
+    return $result->balance;
   }
 
   /**
