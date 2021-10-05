@@ -73,7 +73,12 @@
           $ret->payloadIndexation($indexation);
         }
         $this->assertInstanceOf(sendTokens::class, $ret);
-        $this->assertInstanceOf(ResponseSubmitMessage::class, $ret->getResult());
+
+        if($ret->getResult() instanceof \IOTA\Api\v1\ResponseError) {
+          throw new ExceptionAction($ret->getResult()->message);
+        } else {
+          $this->assertInstanceOf(ResponseSubmitMessage::class, $ret->getResult());
+        }
       }
       catch(ExceptionAction $e) {
         if($e->getMessage() == "There are not enough funds in the inputs for the required balance! amount: 1000000, balance: 0") {
