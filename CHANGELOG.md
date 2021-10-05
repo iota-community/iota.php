@@ -12,6 +12,15 @@
 </p>
 
 # Changelog
+## 0.4.1 - 2021-10-05
+TESTNET to DEVNET update
+
+### Changed
+
+- Network class
+- SingleNodeClient
+- FaucetClient
+- Unit tests
 
 ## 0.4.0 - 2021-09-06
 Iota DID, create/manipulate/verify IOTA Identity.
