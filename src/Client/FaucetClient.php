@@ -2,7 +2,7 @@
 
 use IOTA\Action\sendTokens;
 use IOTA\Api\Faucet\ResponseMessage;
-use IOTA\Api\Faucet\ResponseError;
+use IOTA\Api\v1\ResponseError;
 use IOTA\Api\v1\PayloadIndexation;
 use IOTA\Api\v1\ResponseSubmitMessage;
 use IOTA\Crypto\Mnemonic;
@@ -11,6 +11,7 @@ use IOTA\Exception\Helper as ExceptionHelper;
 use IOTA\Exception\Crypto as ExceptionCrypto;
 use IOTA\Exception\Converter as ExceptionConverter;
 use IOTA\Exception\Type as ExceptionType;
+use IOTA\Helper\JSON;
 use SodiumException;
 use IOTA\Helper\Amount;
 use IOTA\Type\Ed25519Seed;
@@ -33,7 +34,7 @@ class FaucetClient {
    * FaucetClient constructor.
    */
   public function __construct() {
-    $this->ApiCaller = (new ApiCaller('https://faucet.testnet.chrysalis2.com'));
+    $this->ApiCaller = (new ApiCaller('https://faucet.chrysalis-devnet.iota.cafe'));
   }
 
   /**
@@ -43,19 +44,21 @@ class FaucetClient {
    * @throws ExceptionApi
    * @throws ExceptionHelper
    */
-  public function get(string $addressBech32): ResponseMessage|ResponseError {
-    $ret = $this->ApiCaller->route('api')
-                           ->query(['address' => $addressBech32])
+  public function get(string $addressBech32): ResponseMessage|ResponseError|JSON {
+    $ret = $this->ApiCaller->route('api/plugins/faucet/enqueue')
+                           ->requestData('{"address":"' . $addressBech32 . '"}')
                            ->settings('jsonData', 'message')
                            ->settings('jsonException', false)
+                           ->method('POST')
                            ->callback(ResponseMessage::class)
                            ->fetchJSON();
     if(is_string($ret)) {
       $ret = new ResponseMessage(['message' => $ret]);
     }
     if(is_null($ret)) {
-      $ret = new ResponseError(['error'   => '902',
-                                'message' => 'FaucetServer timeout',
+      $ret = new ResponseError([
+        'error'   => '902',
+        'message' => 'FaucetServer timeout',
       ]);
     }
 

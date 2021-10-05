@@ -29,7 +29,7 @@
      * @throws Helper
      */
     public function testget() {
-      $this->assertInstanceOf(AbstractApiResponse::class, $this->client->get("atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e"));
+      $this->assertInstanceOf(\IOTA\Helper\JSON::class, $this->client->get("atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e"));
     }
 
     /**
@@ -38,7 +38,13 @@
     public function testsend() {
       try {
         $ret = $this->client->send("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally", 0, 1000000);
-        $this->assertInstanceOf(ResponseSubmitMessage::class, $ret);
+
+        if($ret instanceof \IOTA\Api\v1\ResponseError) {
+          throw new \IOTA\Exception\Action($ret->message);
+        }
+        else {
+          $this->assertInstanceOf(ResponseSubmitMessage::class, $ret);
+        }
       }
       catch(\IOTA\Exception\Action $e) {
         if($e->getMessage() == "There are not enough funds in the inputs for the required balance! amount: 1000000, balance: 0") {
