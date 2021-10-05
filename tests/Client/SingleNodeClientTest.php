@@ -49,13 +49,13 @@
      * @throws ExceptionApi
      */
     public function testClientNetwork() {
-      $this->client = new SingleNodeClient('testnet');
+      $this->client = new SingleNodeClient('devnet');
       $this->assertIsBool($this->client->health());
       $this->client = new SingleNodeClient('mainnet');
       $this->assertIsBool($this->client->health());
-      $this->client = new SingleNodeClient('https://api.lb-0.testnet.chrysalis2.com/');
+      $this->client = new SingleNodeClient('https://api.lb-0.h.chrysalis-devnet.iota.cafe/');
       $this->assertIsBool($this->client->health());
-      $this->client = new SingleNodeClient(\IOTA\Util\Network::testnet);
+      $this->client = new SingleNodeClient(\IOTA\Util\Network::devnet);
       $this->assertIsBool($this->client->health());
     }
 
@@ -190,14 +190,6 @@
       }
     }
 
-    /**
-     * @throws ExceptionApi
-     * @throws ExceptionHelper
-     */
-    public function testmilestoneUtxoChanges() {
-      $info = $this->client->info();
-      $this->assertInstanceOf(ResponseMilestoneUtxoChanges::class, $this->client->milestoneUtxoChanges($info->latestMilestoneIndex));
-    }
 
     /**
      * @throws ExceptionApi

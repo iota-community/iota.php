@@ -16,7 +16,7 @@
     /**
      * @var string
      */
-    protected string $url = 'https://api.lb-0.testnet.chrysalis2.com';
+    protected string $url = 'https://api.lb-0.h.chrysalis-devnet.iota.cafe';
     /**
      * @var ApiCaller
      */
