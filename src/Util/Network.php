@@ -53,8 +53,8 @@ class Network {
    */
   const alias = [
     [
-      'api.lb-0.testnet.chrysalis2.com',
-      'testnet',
+      'api.lb-0.h.chrysalis-devnet.iota.cafe',
+      'devnet',
       'test',
     ],
     [
@@ -66,11 +66,11 @@ class Network {
   /**
    *
    */
-  const testnet = [
-    'NAME'                  => 'testnet',
+  const devnet = [
+    'NAME'                  => 'devnet',
     'API_ENDPOINT'          => 'https://' . self::alias[0][0],
     'API_ENDPOINT_basePath' => self::basePath,
-    'EXPLORER'              => self::explorerUrl . 'testnet/',
+    'EXPLORER'              => self::explorerUrl . 'devnet/',
     'bech32HRP'             => self::bech32HRP[0],
   ];
   /**
@@ -93,7 +93,7 @@ class Network {
    * @throws ExceptionHelper
    * @throws ExceptionUtil
    */
-  public function __construct(string|array|Network $input = self::testnet) {
+  public function __construct(string|array|Network $input = self::devnet) {
     if($input instanceof Network) {
       return $this->parseNetwork($input);
     }
@@ -138,7 +138,7 @@ class Network {
     }
     //set HRP
     $bech32HRP = $bech32HRP ?? $ret->bech32HRP;
-    $name      = ($bech32HRP == 'iota' ? 'mainnet' : 'testnet');
+    $name      = ($bech32HRP == 'iota' ? 'mainnet' : 'devnet');
     // set explorer url
     $explorerUrl = $explorerUrl ?? self::explorerUrl . $name;
 
@@ -183,7 +183,7 @@ class Network {
    * @param array $array
    * @param array $fallback
    */
-  protected function parseArray(array $array, array $fallback = self::testnet): void {
+  protected function parseArray(array $array, array $fallback = self::devnet): void {
     $this->NAME                  = $array['NAME'] ?? $array[0] ?? $fallback['NAME'];
     $this->API_ENDPOINT          = $array['API_ENDPOINT'] ?? $array[1] ?? $fallback['API_ENDPOINT'];
     $this->API_ENDPOINT_basePath = $array['API_ENDPOINT_basePath'] ?? $array[2] ?? $fallback['API_ENDPOINT_basePath'];
@@ -200,7 +200,7 @@ class Network {
     $name = strtolower($name);
     //
     if(in_array($name, self::alias[0])) {
-      $this->parseArray(self::testnet);
+      $this->parseArray(self::devnet);
     }
     elseif(in_array($name, self::alias[1])) {
       $this->parseArray(self::mainnet);

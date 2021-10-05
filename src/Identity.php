@@ -52,7 +52,7 @@ class Identity {
    * @throws Exception\Util
    * @throws SodiumException
    */
-  public function __construct(string|Uri|null $uriInput = null, Keys|array|string $keyInput = null, string|array|Network $network = 'testnet') {
+  public function __construct(string|Uri|null $uriInput = null, Keys|array|string $keyInput = null, string|array|Network $network = 'devnet') {
 
     $this->keys    = new Keys($keyInput ?? Ed25519::keyPair());
     $this->network = new Network($network);
@@ -283,7 +283,7 @@ class Identity {
    * @throws Exception\Helper
    * @throws SodiumException
    */
-  static public function verifyTangleMessage(string $messageId, string|array|Network $network = 'testnet'): bool {
+  static public function verifyTangleMessage(string $messageId, string|array|Network $network = 'devnet'): bool {
     $ret = (new getMessage(new SingleNodeClient($network)))->messageId($messageId)
                                                            ->run();
     if($ret instanceof ResponseError) {

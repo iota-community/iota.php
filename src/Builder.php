@@ -58,7 +58,7 @@ class Builder {
    *
    * @return $this
    */
-  public function client(string $client = 'SingleNodeClient', string|array|Network $network = 'testnet'): self {
+  public function client(string $client = 'SingleNodeClient', string|array|Network $network = 'devnet'): self {
     $client       = "IOTA\Client\\" . $client;
     $this->client = new $client($network);
 
