@@ -29,7 +29,23 @@
      * @throws Helper
      */
     public function testget() {
-      $this->assertInstanceOf(\IOTA\Helper\JSON::class, $this->client->get("atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e"));
+      try {
+        $ret = $this->client->get("atoi1qpszqzadsym6wpppd6z037dvlejmjuke7s24hm95s9fg9vpua7vluehe53e");
+        if($ret instanceof \IOTA\Api\v1\ResponseError) {
+          throw new \IOTA\Exception\Action($ret->message);
+        }
+        else {
+          $this->assertInstanceOf(\IOTA\Helper\JSON::class, $ret);
+        }
+      }
+      catch(\IOTA\Exception\Action $e) {
+        if($e->getMessage() == "You already have enough coins on your address.") {
+          $this->assertTrue(true);
+
+          return;
+        }
+        throw new Exception($e->getMessage());
+      }
     }
 
     /**
@@ -38,7 +54,6 @@
     public function testsend() {
       try {
         $ret = $this->client->send("giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally", 0, 1000000);
-
         if($ret instanceof \IOTA\Api\v1\ResponseError) {
           throw new \IOTA\Exception\Action($ret->message);
         }
