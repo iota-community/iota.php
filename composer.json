@@ -33,12 +33,12 @@
   },
   "autoload": {
     "psr-4": {
-      "iota\\": "src/"
+      "IOTA\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "iota\\": "tests/"
+      "IOTA\\": "tests/"
     }
   }
 }
