@@ -7,6 +7,9 @@ use IOTA\Action\sendMessage;
 use IOTA\Action\sendTokens;
 use IOTA\Client\FaucetClient;
 use IOTA\Client\SingleNodeClient;
+use IOTA\Crypto\Bip39;
+use IOTA\Crypto\Mnemonic;
+use IOTA\Type\Ed25519Seed;
 use IOTA\Util\Network;
 
 /**
@@ -124,5 +127,39 @@ class Builder {
     }
 
     return $ret;
+  }
+
+  /**
+   * @return Mnemonic
+   * @throws Exception\Converter
+   * @throws Exception\Crypto
+   * @throws Exception\Helper
+   */
+  static public function createRandomMnemonic() : Mnemonic {
+    return (new Bip39())->randomMnemonic();
+  }
+
+  /**
+   * @return Ed25519Seed
+   * @throws Exception\Converter
+   * @throws Exception\Crypto
+   * @throws Exception\Helper
+   * @throws Exception\Type
+   */
+  static public function createRandomEd25519Seed() : Ed25519Seed {
+    return new Ed25519Seed(self::createRandomMnemonic());
+  }
+
+  /**
+   * @param Ed25519Seed|Mnemonic|string|array $seedInput
+   *
+   * @return Ed25519Seed
+   * @throws Exception\Converter
+   * @throws Exception\Crypto
+   * @throws Exception\Helper
+   * @throws Exception\Type
+   */
+  static public function createEd25519Seed(Ed25519Seed|Mnemonic|string|array $seedInput) : Ed25519Seed {
+    return new Ed25519Seed($seedInput);
   }
 }
