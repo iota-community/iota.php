@@ -10,6 +10,7 @@ use IOTA\Exception\Converter as ExceptionConverter;
 use IOTA\Exception\Crypto as ExceptionCrypto;
 use IOTA\Exception\Type as ExceptionType;
 use IOTA\Helper\Converter;
+use IOTA\Util\Keys;
 use SodiumException;
 
 /**
@@ -69,17 +70,17 @@ class Ed25519Seed {
   }
 
   /**
-   * @return array
+   * @return Keys
    * @throws ExceptionConverter
    * @throws SodiumException
    */
-  public function keyPair(): array {
+  public function keyPair(): Keys {
     $signKeyPair = Ed25519::keyPairFromSeed(substr($this->secretKey, 0, 64));
 
-    return [
+    return new Keys([
       'publicKey'  => $signKeyPair['publicKey'],
       'privateKey' => $signKeyPair['privateKey'],
-    ];
+    ]);
   }
 
   /**

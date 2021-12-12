@@ -55,7 +55,7 @@ class Address {
     //
     $_addressSeed  = $wallet->getSeed()
                             ->generateSeedFromPath($this->path);
-    $this->address = new Ed25519Address(($_addressSeed->keyPair())['publicKey']);
+    $this->address = new Ed25519Address(($_addressSeed->keyPair())->public);
   }
 
   /**

@@ -171,7 +171,7 @@ class sendTokens extends AbstractAction {
     $addressPath->setAccountIndex($this->accountIndex, true);
     $addressPath->setAddressIndex($this->addressIndex, true);
     $addressSeed = $this->ed25519Seed->generateSeedFromPath($addressPath);
-    $address     = new Ed25519Address(($addressSeed->keyPair())['publicKey']);
+    $address     = new Ed25519Address(($addressSeed->keyPair())->public);
     // get outputs
     $_outputs = $this->client->addressesed25519Output($address->toAddress());
     //
@@ -211,12 +211,12 @@ class sendTokens extends AbstractAction {
       // unlockBlocks
       $_list = [];
       foreach($essenceTransaction->inputs as $input) {
-        $_publicKey = ($addressSeed->keyPair())['publicKey'];
+        $_publicKey = ($addressSeed->keyPair())->public;
         if(isset($_list[$_publicKey])) {
           $payloadTransaction->unlockBlocks[] = new UnlockBlocksReference($_list[$_publicKey]);
         }
         else {
-          $payloadTransaction->unlockBlocks[] = new UnlockBlocksSignature(new Ed25519Signature($_publicKey, Ed25519::sign(($addressSeed->keyPair())['privateKey'], $essenceTransaction->serializeToHash())));
+          $payloadTransaction->unlockBlocks[] = new UnlockBlocksSignature(new Ed25519Signature($_publicKey, Ed25519::sign(($addressSeed->keyPair())->secret, $essenceTransaction->serializeToHash())));
           $_list[$_publicKey]                 = count($payloadTransaction->unlockBlocks) - 1;
         }
       }
