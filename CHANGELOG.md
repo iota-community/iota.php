@@ -12,6 +12,24 @@
 </p>
 
 # Changelog
+## 0.4.2 - 2021-12-12
+Library update
+
+### Added
+
+- example DIDmnemonic
+- Wrapper for Mnemonic, Ed25519Seed
+- DID conflict error
+
+### Changed
+
+- update help (mnemonic example)
+- use object (Util\Keys) instead of array
+- remove ':test' method form DID scheme
+- change readme banner
+- fix composer.json (case sensitive)
+
+# Changelog
 ## 0.4.1 - 2021-10-05
 TESTNET to DEVNET update
 
