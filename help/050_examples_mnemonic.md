@@ -32,7 +32,13 @@
 
 ```php
   $mnemonic = (new IOTA\Crypto\Bip39())->randomMnemonic();
-  #echo \implode(" ", $mnemonic->words)
+  #echo $mnemonic
+```
+or 
+
+```php
+  $_mnemonic = \IOTA\Builder::createRandomMnemonic();
+  #echo $mnemonic
 ```
 
 ### Get seed from mnemonic
@@ -46,6 +52,19 @@
 ```php
   $ed25519Seed = new IOTA\Type\ed25519Seed(((new IOTA\Crypto\Bip39())->reverseMnemonic($words))->__toSeed());
 ```
+
+or
+
+```php
+  $ed25519Seed = \IOTA\Builder::createEd25519Seed(Ed25519Seed|Mnemonic|string|array $seedInput);
+```
+
+or random
+
+```php
+  $ed25519Seed = \IOTA\Builder::createRandomEd25519Seed();
+```
+
 
 ---
 
