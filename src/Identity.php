@@ -64,10 +64,10 @@ class Identity {
       $this->uri = Uri::parse($uriInput);
     }
     elseif(is_string($uriInput) && !str_contains($uriInput, ':')) {
-      $this->uri = new Uri('iota' . ($this->network->NAME != 'mainnet' ? ':test' : ''), $uriInput);
+      $this->uri = new Uri('iota', $uriInput);
     }
     elseif($uriInput == null) {
-      $this->uri = new Uri('iota' . ($this->network->NAME != 'mainnet' ? ':test' : ''), self::createID($this->keys->public));
+      $this->uri = new Uri('iota', self::createID($this->keys->public));
     }
     if($this->uri->getId() !== self::createID($this->keys->public)) {
       throw new ExceptionIdentity('Differences in DID found');
@@ -112,6 +112,10 @@ class Identity {
     $result->explorerLink = $this->network->getExplorerUrlMessage($messageId);
     $result->messageId    = $messageId;
     $result->document     = Document::fromJson($message->payload->data);
+
+    if($this->uri->getDid() !== $result->document->id) {
+      throw new ExceptionIdentity("Uri conflict '{$this->uri->getDid()}' '{$result->document->id}'");
+    }
 
     return $result;
   }
@@ -171,7 +175,6 @@ class Identity {
     }
     // verify
     if(!self::verify($document->__toJSON())) {
-      var_dump($document->__toJSON());
       throw new ExceptionIdentity("Document sign error! Verify return 'false'");
     }
     // generate new Key
