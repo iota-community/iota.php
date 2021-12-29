@@ -46,6 +46,7 @@ class ApiCaller {
     'jsonException' => true,
     'jsonData'      => 'data',
     'jsonError'     => 'error',
+    'jsonCode'     => 'code',
   ];
 
   /**
@@ -327,6 +328,8 @@ class ApiCaller {
     $content = new JSON($content);
     $check   = $content->__toArray();
     switch(array_key_first($check)) {
+      case $this->settings['jsonCode']:
+        return new ResponseError($check);
       case $this->settings['jsonError']:
         return new ResponseError($check[$this->settings['jsonError']]);
       case $this->settings['jsonData']:
