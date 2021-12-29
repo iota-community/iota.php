@@ -19,14 +19,18 @@ PHP library to use IOTA REST API to help node management and tangle queries.
 
 This library allows you to do the following:
 
-- [x] Interact with an IOTA node
-  - [x] Create messages with indexation and transaction payloads
+#### Interact with an IOTA SingleNode (Hornet, Bee)
+  - [x] Create messages with indexation 
+  - [x] Create messages with transaction payloads (send Tokens)
   - [x] Get messages and outputs
-  - [x] Generate addresses
-- [x] Interact with the IOTA Faucet Api 
-  - [x] Get funds on testnet
-- [x] Decentralized Identifiers (DID) 
+#### Wallet/Crypto 
+  - [x] Generate mnemonic, seeds, addresses
+#### Interact with the IOTA Faucet Api 
+  - [x] Get funds on devnet
+#### Decentralized Identifiers (DID) 
   - [x] create, manipulate, verify
+#### Interact with an IOTA PermaNode (Chronicle)
+  - [x] Get messages and outputs
 
 # Requirements
 

@@ -71,3 +71,7 @@
     - [x] Create messages with indexation
     - [x] Get messages and outputs
     - [x] Generate addresses 
+  
+
+- [x] Interact with the IOTA PermaNode Api
+    - [x] Get messages and outputs

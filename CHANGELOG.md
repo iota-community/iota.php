@@ -12,6 +12,30 @@
 </p>
 
 # Changelog
+## 0.5.0 - 2021-12-29
+Interact with an IOTA PermaNode (Chronicle)
+
+### Added
+
+- PermaNodeClient (Interact with Chronicle API)
+
+  (health, info, message, messageFind, messageChildren, messageMetadata, milestone, output)
+
+ 
+- Examples (PermaNodeClient)
+  - 01_getNodeHealth 
+  - 02_getNodeInfo 
+  - 04_getMessage 
+  - 05_fetchMessage 
+  - 09_getMilestone 
+
+### Changed
+
+- ApiCaller (new array key "code")
+- [Help (Index)](./help/000_index.md)
+- [README](./README.md)
+
+# Changelog
 ## 0.4.2 - 2021-12-12
 Library update 
 
