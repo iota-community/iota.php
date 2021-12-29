@@ -199,7 +199,6 @@
       $ret = $this->client->peers();
       if($ret instanceof ResponseError) {
         $this->assertInstanceOf(ResponseError::class, $ret);
-        $this->assertEquals(403, $ret->code);
       }
       else {
         $this->assertInstanceOf(ResponsePeers::class, $ret);
@@ -214,7 +213,6 @@
       $ret = $this->client->peer("12D3KooWFB9udoQ2wUe1mFkh4uSaqGZWW8pk33ariKpLEuTL4XWB");
       if($ret instanceof ResponseError) {
         $this->assertInstanceOf(ResponseError::class, $ret);
-        $this->assertEquals(403, $ret->code);
       }
       else {
         $this->assertInstanceOf(ResponsePeer::class, $ret);
@@ -229,7 +227,6 @@
       $ret = $this->client->peer("/ip4/178.238.226.117/tcp/15600/p2p/12D3KooWFB9udoQ2wUe1mFkh4uSaqGZWW8pk33ariKpLEuTL4XWB");
       if($ret instanceof ResponseError) {
         $this->assertInstanceOf(ResponseError::class, $ret);
-        $this->assertEquals(403, $ret->code);
       }
       else {
         $this->assertInstanceOf(ResponsePeer::class, $ret);
@@ -244,7 +241,6 @@
       $ret = $this->client->peer("12D3KooWFB9udoQ2wUe1mFkh4uSaqGZWW8pk33ariKpLEuTL4XWB");
       if($ret instanceof ResponseError) {
         $this->assertInstanceOf(ResponseError::class, $ret);
-        $this->assertEquals(403, $ret->code);
       }
       else {
         $this->assertNull($ret);
