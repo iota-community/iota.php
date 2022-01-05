@@ -8,5 +8,5 @@
   // create client
   $client = new SingleNodeClient();
   //
-  echo $ret = (new getMessage($client))->messageId("fcb61f2d45686c539c3437437b2c381cc1bc87959f8ef56cf51919ed86ed1676")
+  echo $ret = (new getMessage($client))->messageId("7633345d8eaf3baf0178d1ce7ec8bcf0262cd83bc1bbdfc96dc5aa2085bd5569")
                                        ->run();
