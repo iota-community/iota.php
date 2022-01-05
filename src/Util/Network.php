@@ -34,20 +34,18 @@ class Network {
    */
   public string $bech32HRP;
   /**
-   *
+   * @var string
    */
-  const explorerUrl = 'https://explorer.iota.org/';
+  public string $faucet_API_ENDPOINT;
   /**
-   *
+   * @var string
    */
-  const basePath = 'api/v1/';
+  public string $faucet_API_ENDPOINT_basePath;
   /**
-   *
+   * @var string
    */
-  const bech32HRP = [
-    'atoi1',
-    'iota',
-  ];
+  public string $faucet_address;
+  const default = self::comnet;
   /**
    *
    */
@@ -55,6 +53,7 @@ class Network {
     [
       'api.lb-0.h.chrysalis-devnet.iota.cafe',
       'devnet',
+      'chrysalis-devnet',
       'test',
     ],
     [
@@ -62,38 +61,64 @@ class Network {
       'mainnet',
       'main',
     ],
+    [
+      'iota-node.usegate.online:444',
+      'comnet',
+      'comnet1',
+      'com',
+    ],
   ];
   /**
    *
    */
   const devnet = [
-    'NAME'                  => 'devnet',
-    'API_ENDPOINT'          => 'https://' . self::alias[0][0],
-    'API_ENDPOINT_basePath' => self::basePath,
-    'EXPLORER'              => self::explorerUrl . 'devnet/',
-    'bech32HRP'             => self::bech32HRP[0],
+    'NAME'                         => 'devnet',
+    'API_ENDPOINT'                 => 'https://api.lb-0.h.chrysalis-devnet.iota.cafe',
+    'API_ENDPOINT_basePath'        => 'api/v1/',
+    'EXPLORER'                     => 'https://explorer.iota.org/devnet/',
+    'bech32HRP'                    => 'atoi1',
+    'faucet_API_ENDPOINT'          => 'https://faucet.chrysalis-devnet.iota.cafe',
+    'faucet_API_ENDPOINT_basePath' => 'api/plugins/faucet',
+    'faucet_address'               => 'atoi1qrk69lxuxljdgeqt7tucvtdfk3hrvrly7rzz65w57te6drf3expsj3gqrf9',
+  ];
+  /**
+   *
+   */
+  const comnet = [
+    'NAME'                         => 'comnet1',
+    'API_ENDPOINT'                 => 'https://iota-node.usegate.online:444',
+    'API_ENDPOINT_basePath'        => 'api/v1/',
+    'EXPLORER'                     => 'https://iota-node.usegate.online:444/explorer/',
+    'bech32HRP'                    => 'atoi1',
+    'faucet_API_ENDPOINT'          => 'https://comnet.tanglekit.de',
+    'faucet_API_ENDPOINT_basePath' => 'api',
+    'faucet_address'               => 'atoi1qzh6ud4kq52700n7ulxyzmh32r376nhqa56gluq6j3ym3jh6fx82yyr846r',
   ];
   /**
    *
    */
   const mainnet = [
-    'NAME'                  => 'mainnet',
-    'API_ENDPOINT'          => 'https://' . self::alias[1][0],
-    'API_ENDPOINT_basePath' => self::basePath,
-    'EXPLORER'              => self::explorerUrl . 'mainnet/',
-    'bech32HRP'             => self::bech32HRP[1],
+    'NAME'                         => 'mainnet',
+    'API_ENDPOINT'                 => 'https://chrysalis-nodes.iota.org',
+    'API_ENDPOINT_basePath'        => 'api/v1/',
+    'EXPLORER'                     => 'https://explorer.iota.org/mainnet/',
+    'bech32HRP'                    => 'iota',
+    'faucet_API_ENDPOINT'          => '',
+    'faucet_API_ENDPOINT_basePath' => '',
+    'faucet_address'               => '',
   ];
 
   /**
-   * Network constructor.
-   *
-   * @param string|array|Network $input
+   * @param string|array|Network|null $input
    *
    * @throws ExceptionApi
    * @throws ExceptionHelper
    * @throws ExceptionUtil
    */
-  public function __construct(string|array|Network $input = self::devnet) {
+  public function __construct(string|array|Network|null $input = null) {
+    if($input === null) {
+      $input = self::default;
+    }
     if($input instanceof Network) {
       return $this->parseNetwork($input);
     }
@@ -121,7 +146,7 @@ class Network {
    * @throws ExceptionHelper
    * @throws ExceptionUtil
    */
-  static public function fromNode(string $nodeApiUrl, ?string $basePath = self::basePath, ?string $explorerUrl = null, ?string $bech32HRP = null): Network {
+  static public function fromNode(string $nodeApiUrl, ?string $basePath = 'api/v1/', ?string $explorerUrl = null): Network {
     // check Communication
     $ApiCaller = (new ApiCaller($nodeApiUrl))->basePath($basePath);
     try {
@@ -136,11 +161,9 @@ class Network {
     if(!$ret instanceof ResponseInfo) {
       throw new ExceptionUtil("Can not connect to '$nodeApiUrl' with basePath '$basePath'");
     }
-    //set HRP
-    $bech32HRP = $bech32HRP ?? $ret->bech32HRP;
-    $name      = ($bech32HRP == 'iota' ? 'mainnet' : 'devnet');
+    $name = ($ret->bech32HRP == 'iota' ? 'mainnet' : 'devnet/comnet');
     // set explorer url
-    $explorerUrl = $explorerUrl ?? self::explorerUrl . $name;
+    $explorerUrl = $explorerUrl ?? 'https://explorer.iota.org/' . $name;
 
     // return Network
     return new Network([
@@ -148,7 +171,10 @@ class Network {
       'API_ENDPOINT'          => $nodeApiUrl,
       'API_ENDPOINT_basePath' => $basePath,
       'EXPLORER'              => $explorerUrl,
-      'bech32HRP'             => $bech32HRP,
+      'bech32HRP'             => $ret->bech32HRP,
+      //'faucet_API_ENDPOINT'          => $faucet_API_ENDPOINT,
+      //'faucet_API_ENDPOINT_basePath' => $faucet_API_ENDPOINT_basePath,
+      //'faucet_address' => $faucet_address,
     ]);
   }
 
@@ -170,11 +196,14 @@ class Network {
    * @return $this
    */
   protected function parseNetwork(Network $network): self {
-    $this->NAME                  = $network->NAME;
-    $this->API_ENDPOINT          = $network->API_ENDPOINT;
-    $this->API_ENDPOINT_basePath = $network->API_ENDPOINT_basePath;
-    $this->EXPLORER              = $network->EXPLORER;
-    $this->bech32HRP             = $network->bech32HRP;
+    $this->NAME                         = $network->NAME;
+    $this->API_ENDPOINT                 = $network->API_ENDPOINT;
+    $this->API_ENDPOINT_basePath        = $network->API_ENDPOINT_basePath;
+    $this->EXPLORER                     = $network->EXPLORER;
+    $this->bech32HRP                    = $network->bech32HRP;
+    $this->faucet_API_ENDPOINT          = $network->faucet_API_ENDPOINT;
+    $this->faucet_API_ENDPOINT_basePath = $network->faucet_API_ENDPOINT_basePath;
+    $this->faucet_address               = $network->faucet_address;
 
     return $this;
   }
@@ -183,12 +212,15 @@ class Network {
    * @param array $array
    * @param array $fallback
    */
-  protected function parseArray(array $array, array $fallback = self::devnet): void {
-    $this->NAME                  = $array['NAME'] ?? $array[0] ?? $fallback['NAME'];
-    $this->API_ENDPOINT          = $array['API_ENDPOINT'] ?? $array[1] ?? $fallback['API_ENDPOINT'];
-    $this->API_ENDPOINT_basePath = $array['API_ENDPOINT_basePath'] ?? $array[2] ?? $fallback['API_ENDPOINT_basePath'];
-    $this->EXPLORER              = $array['EXPLORER'] ?? $array[3] ?? $fallback['EXPLORER'];
-    $this->bech32HRP             = $array['bech32HRP'] ?? $array[4] ?? $fallback['bech32HRP'];
+  protected function parseArray(array $array, array $fallback = self::default): void {
+    $this->NAME                         = $array['NAME'] ?? $array[0] ?? $fallback['NAME'];
+    $this->API_ENDPOINT                 = $array['API_ENDPOINT'] ?? $array[1] ?? $fallback['API_ENDPOINT'];
+    $this->API_ENDPOINT_basePath        = $array['API_ENDPOINT_basePath'] ?? $array[2] ?? $fallback['API_ENDPOINT_basePath'];
+    $this->EXPLORER                     = $array['EXPLORER'] ?? $array[3] ?? $fallback['EXPLORER'];
+    $this->bech32HRP                    = $array['bech32HRP'] ?? $array[4] ?? $fallback['bech32HRP'];
+    $this->faucet_API_ENDPOINT          = $array['faucet_API_ENDPOINT'] ?? $array[5] ?? $fallback['faucet_API_ENDPOINT'];
+    $this->faucet_API_ENDPOINT_basePath = $array['faucet_API_ENDPOINT_basePath'] ?? $array[6] ?? $fallback['faucet_API_ENDPOINT_basePath'];
+    $this->faucet_address               = $array['faucet_address'] ?? $array[7] ?? $fallback['faucet_address'];
   }
 
   /**
@@ -204,6 +236,9 @@ class Network {
     }
     elseif(in_array($name, self::alias[1])) {
       $this->parseArray(self::mainnet);
+    }
+    elseif(in_array($name, self::alias[2])) {
+      $this->parseArray(self::comnet);
     }
     else {
       throw new ExceptionUtil("Unknown network '$name'");

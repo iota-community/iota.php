@@ -12,6 +12,7 @@ use IOTA\Exception\Crypto as ExceptionCrypto;
 use IOTA\Exception\Converter as ExceptionConverter;
 use IOTA\Exception\Type as ExceptionType;
 use IOTA\Helper\JSON;
+use IOTA\Util\Network;
 use SodiumException;
 use IOTA\Helper\Amount;
 use IOTA\Type\Ed25519Seed;
@@ -26,6 +27,10 @@ use IOTA\Util\ApiCaller;
  */
 class FaucetClient {
   /**
+   * @var Network
+   */
+  protected Network $network;
+  /**
    * @var ApiCaller
    */
   protected ApiCaller $ApiCaller;
@@ -33,8 +38,9 @@ class FaucetClient {
   /**
    * FaucetClient constructor.
    */
-  public function __construct() {
-    $this->ApiCaller = (new ApiCaller('https://faucet.chrysalis-devnet.iota.cafe'));
+  public function __construct(string|array|Network|null $network = null) {
+    $this->network   = new Network($network);
+    $this->ApiCaller = (new ApiCaller($this->network->faucet_API_ENDPOINT))->basePath($this->network->faucet_API_ENDPOINT_basePath);
   }
 
   /**
@@ -45,7 +51,8 @@ class FaucetClient {
    * @throws ExceptionHelper
    */
   public function get(string $addressBech32): ResponseMessage|ResponseError|JSON {
-    $ret = $this->ApiCaller->route('api/plugins/faucet/enqueue')
+
+    $ret = $this->ApiCaller->route('enqueue')
                            ->requestData('{"address":"' . $addressBech32 . '"}')
                            ->settings('jsonData', 'message')
                            ->settings('jsonException', false)
@@ -83,7 +90,7 @@ class FaucetClient {
     $build = (new sendTokens(new SingleNodeClient()))->amount($amount)
                                                      ->seedInput($seedInput)
                                                      ->accountIndex($_accountIndex)
-                                                     ->toAddressBech32('atoi1qrk69lxuxljdgeqt7tucvtdfk3hrvrly7rzz65w57te6drf3expsj3gqrf9')
+                                                     ->toAddressBech32($this->network->faucet_address)
                                                      ->message("#iota.php", "transaction faucet resend! follow me on Twitter @IOTAphp");
     if($_indexation) {
       $build->payloadIndexation($_indexation);

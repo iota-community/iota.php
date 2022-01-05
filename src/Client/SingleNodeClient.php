@@ -48,7 +48,7 @@ class SingleNodeClient {
    *
    * @throws ExceptionApi
    */
-  public function __construct(string|array|Network $network = 'devnet') {
+  public function __construct(string|array|Network|null $network = null) {
     $this->network   = new Network($network);
     $this->ApiCaller = (new ApiCaller($this->network->API_ENDPOINT))->basePath($this->network->API_ENDPOINT_basePath);
   }

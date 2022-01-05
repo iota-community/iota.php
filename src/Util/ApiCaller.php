@@ -284,6 +284,7 @@ class ApiCaller {
     $content = $this->handle->getContent();
     if($content === null || !Converter::isJSON($content)) {
       if($this->settings['jsonException']) {
+        echo $content;
         throw new ExceptionApi("No JSON content to fetch");
       }
       else {
