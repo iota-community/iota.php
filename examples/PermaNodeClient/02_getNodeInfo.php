@@ -6,6 +6,7 @@
 
   // print result of node information
   echo $ret = $client->info();
+  echo PHP_EOL;
   // print single informations
   echo $ret->name . PHP_EOL;
   echo $ret->version . PHP_EOL;
