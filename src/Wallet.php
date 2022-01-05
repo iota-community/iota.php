@@ -104,8 +104,8 @@ class Wallet {
    */
   public function searchAddresses(int $maxAccountIndex = 5, int $maxAddressIndex = 5, bool $zeroBalance = false): array {
     $_ret = [];
-    for($_i = 0; $_i < $maxAccountIndex; $_i++) {
-      for($_j = 0; $_j < $maxAddressIndex; $_j++) {
+    for($_i = 0; $_i <= $maxAccountIndex; $_i++) {
+      for($_j = 0; $_j <= $maxAddressIndex; $_j++) {
         $_r = $this->address($_i, $_j);
         if(($_r->getBalance()) == 0 && $zeroBalance == false) {
           continue;
