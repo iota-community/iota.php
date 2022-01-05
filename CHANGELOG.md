@@ -12,6 +12,20 @@
 </p>
 
 # Changelog
+## 0.5.1 - 2022-01-05
+Network Update
+
+### Added
+
+- IOTA 1.5 Comnet
+- Faucet setting to network class
+
+### Changed
+
+- set comnet as default network (reason: PoW is disabled in default devnet node)
+- binding faucet api call to network class
+
+
 ## 0.5.0 - 2021-12-29
 Interact with an IOTA PermaNode (Chronicle)
 
