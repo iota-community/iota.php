@@ -13,7 +13,9 @@
 
 # About
 
-PHP library to use IOTA REST API to help node management and tangle queries.
+PHP library to interact with an IOTA SingleNode or PermaNode. Create, manipulate, verify IOTA DIDs. Create wallets, mnemonic, seeds, addresses. 
+
+The aim of the IOTAphp lib is to offer PHP developers an easy way to interact with the Tangle. 
 
 > Please be aware that this library is in an early development state and the API of the library as well as the IOTA protocol is subject to change, it is NOT ready to use in production.
 
