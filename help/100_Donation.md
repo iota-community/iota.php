@@ -18,9 +18,9 @@ If you want to support me or if my work helps you, kindly consider a small donat
 
 
 
-|         |         |            |
-|:------------- | ------------- | -------------:|
-| <img src="https://img.shields.io/badge/IOTA-lightgrey?style=social&logo=iota" alt="IOTA"> | iota1qpw8lvfgz6gt9u8qtcjmmez3vtqve6fdzqkdaah9wdz9llgvhs3psrtx5xd | <a href="iota://wallet/send/iota1qpw8lvfgz6gt9u8qtcjmmez3vtqve6fdzqkdaah9wdz9llgvhs3psrtx5xd"><img src="https://img.shields.io/badge/open Firefly-lightgrey?style=flat&logo=iota" alt="IOTA Donate"></a>
+|         |         |
+|:------------- |  -------------:|
+| <img src="https://img.shields.io/badge/IOTA-lightgrey?style=social&logo=iota" alt="IOTA"> | iota1qpw8lvfgz6gt9u8qtcjmmez3vtqve6fdzqkdaah9wdz9llgvhs3psrtx5xd
 
 
 ___
