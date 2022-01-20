@@ -21,4 +21,4 @@
   echo $ret->latestMilestoneIndex . PHP_EOL;
   echo $ret->confirmedMilestoneIndex . PHP_EOL;
   echo $ret->pruningIndex . PHP_EOL;
-  print_r($ret->features);
+  echo $ret->features;
