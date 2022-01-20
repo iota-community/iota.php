@@ -17,7 +17,7 @@ Api Update
 
 ### Added
 
-- ResponseArray
+- Api/ResponseArray
 
 ### Changed
 
