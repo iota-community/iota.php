@@ -12,6 +12,18 @@
 </p>
 
 # Changelog
+## 0.5.2 - 2022-01-20
+Api Update
+
+### Added
+
+- ResponseArray
+
+### Changed
+
+- Api now uses ResponseArray (Object) instead of array
+- Example SingleNodeClient/02_getNodeInfo
+
 ## 0.5.1 - 2022-01-05
 Network Update
 
