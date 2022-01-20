@@ -1,5 +1,6 @@
 <?php namespace IOTA\Api\v1;
 
+use IOTA\Api\ResponseArray;
 use IOTA\Models\AbstractApiResponse;
 
 /**
@@ -63,9 +64,9 @@ class ResponseInfo extends AbstractApiResponse {
    */
   public int $pruningIndex;
   /**
-   * @var array
+   * @var ResponseArray
    */
-  public array $features;
+  public ResponseArray $features;
 
   /**
    *

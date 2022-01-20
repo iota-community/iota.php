@@ -1,5 +1,6 @@
 <?php namespace IOTA\Models;
 
+use IOTA\Api\ResponseArray;
 use IOTA\Exception\Helper as ExceptionHelper;
 use IOTA\Helper\JSON;
 
@@ -35,6 +36,9 @@ abstract class AbstractApiResponse extends AbstractApi {
    */
   protected function defaultParse(): void {
     foreach($this->_input->__toArray() as $_k => $_v) {
+      if(is_array($_v)) {
+        $_v = new ResponseArray($_v);
+      }
       $this->{$_k} = $_v;
     }
   }

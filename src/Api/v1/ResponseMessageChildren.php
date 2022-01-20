@@ -1,5 +1,6 @@
 <?php namespace IOTA\Api\v1;
 
+use IOTA\Api\ResponseArray;
 use IOTA\Models\AbstractApiResponse;
 
 /**
@@ -25,7 +26,7 @@ class ResponseMessageChildren extends AbstractApiResponse {
   /**
    * @var array
    */
-  public array $childrenMessageIds;
+  public ResponseArray $childrenMessageIds;
 
   /**
    *

@@ -1,5 +1,6 @@
 <?php namespace IOTA\Api\v1;
 
+use IOTA\Api\ResponseArray;
 use IOTA\Models\AbstractApiResponse;
 
 /**
@@ -13,7 +14,7 @@ class ResponseTips extends AbstractApiResponse {
   /**
    * @var array
    */
-  public array $tipMessageIds;
+  public ResponseArray $tipMessageIds;
 
   /**
    *

@@ -187,7 +187,7 @@ class sendTokens extends AbstractAction {
       $_output = $this->client->output($_id);
       if(!$_output->isSpent && $this->amount > $_total) {
         $essenceTransaction->inputs[] = new Input(0, $_output->transactionId, $_output->outputIndex);
-        $_total                       += $_output->output['amount'];
+        $_total                       += $_output->output->amount;
       }
     }
     if($_total == 0 || $_total < $this->amount) {

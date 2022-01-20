@@ -1,5 +1,6 @@
 <?php namespace IOTA\Api\v1;
 
+use IOTA\Api\ResponseArray;
 use IOTA\Models\AbstractApiResponse;
 
 /**
@@ -17,7 +18,7 @@ class ResponseMessageMetadata extends AbstractApiResponse {
   /**
    * @var array
    */
-  public array $parentMessageIds;
+  public ResponseArray $parentMessageIds;
   /**
    * @var bool
    */
