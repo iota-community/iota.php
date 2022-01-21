@@ -276,7 +276,7 @@ class ApiCaller {
    * @throws ExceptionApi
    * @throws ExceptionHelper
    */
-  public function fetchJSON(int $timeout = 30): mixed {
+  public function fetchJSON(int $timeout = 30, bool $useJSONHandler = true): mixed {
     $this->headers[] = 'accept: application/json';
     $this->headers[] = 'content-type: application/json';
     //
@@ -291,8 +291,14 @@ class ApiCaller {
         return $content;
       }
     }
+    if($useJSONHandler) {
+      return $this->JSONHandle($content);
+    }
+    if(isset($this->callback)) {
+      return new $this->callback($content);
+    }
 
-    return $this->JSONHandle($content);
+    return $content;
   }
 
   /**
