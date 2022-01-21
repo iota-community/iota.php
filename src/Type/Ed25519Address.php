@@ -49,6 +49,16 @@ class Ed25519Address {
    * @throws ExceptionConverter
    * @throws SodiumException
    */
+  public function toAddressBase58(): string {
+    return Converter::base58_encode($this->toAddress());
+  }
+
+
+  /**
+   * @return string
+   * @throws ExceptionConverter
+   * @throws SodiumException
+   */
   public function __toString(): string {
     return $this->toAddress();
   }
