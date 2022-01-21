@@ -37,6 +37,19 @@ class Ed25519Seed {
    * @throws ExceptionType
    */
   public function __construct(Ed25519Seed|Mnemonic|string|array $seedInput) {
+    // base58 decoded Input
+    if(is_string($seedInput) && strlen($seedInput) == 44) {
+      $seedInput_new = Converter::base58_decode($seedInput);
+      // convert if seedInput_new isnt a hex
+      if(strlen($seedInput_new) == 32 && !Converter::isHex($seedInput_new)) {
+        $seedInput_new = Converter::string2Hex($seedInput_new);
+      }
+      // check seedInput_new
+      if(strlen($seedInput_new) == 64 && Converter::isHex($seedInput_new)) {
+        $seedInput = $seedInput_new;
+      }
+    }
+    // default seedInput as Hex
     if(is_string($seedInput) && (strlen($seedInput) == 64 || strlen($seedInput) == 128) && Converter::isHex($seedInput)) {
       $this->secretKey = $seedInput;
     }
