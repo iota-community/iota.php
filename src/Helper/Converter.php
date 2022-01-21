@@ -141,8 +141,7 @@ class Converter {
    * @throws ExceptionConverter
    */
   static public function base58_encode(string $val, string $alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"): string {
-    $val   = Converter::isHex($val) ? Converter::hex2String($val) : $val;
-
+    $val = Converter::isHex($val) ? Converter::hex2String($val) : $val;
     $alphabet_len = strlen($alphabet);
     if(strlen($val) === 0) {
       return '';
@@ -378,5 +377,24 @@ class Converter {
   static public function canonicalizeJSON(string|array $input): string {
 
     return stripslashes(json_encode(self::canonicalize(is_string($input) ? json_decode($input, true) : $input)));
+  }
+
+  /**
+   * @param $dst
+   * @param $a
+   * @param $b
+   *
+   * @return string|int
+   */
+  static public function XORBytes($dst, $a, $b): string|int {
+    $n = min(strlen($b), strlen($a));
+    if($n == 0) {
+      return 0;
+    }
+    for($i = 0; $i < $n; $i++) {
+      $dst[$i] = $a[$i] ^ $b[$i];
+    }
+
+    return $dst;
   }
 }
