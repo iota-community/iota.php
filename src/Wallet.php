@@ -1,13 +1,18 @@
 <?php namespace IOTA;
 
+use Exception;
 use IOTA\Client\SingleNodeClient;
 use IOTA\Crypto\Bip39;
+use IOTA\Crypto\Ed25519;
 use IOTA\Crypto\Mnemonic;
+use IOTA\Helper\Converter;
+use IOTA\Helper\Hash;
 use IOTA\Type\Ed25519Seed;
 use IOTA\Exception\Converter as ExceptionConverter;
 use IOTA\Exception\Crypto as ExceptionCrypto;
 use IOTA\Exception\Helper as ExceptionHelper;
 use IOTA\Exception\Type as ExceptionType;
+use IOTA\Exception\Api as ExceptionApi;
 use SodiumException;
 
 /**
@@ -36,16 +41,14 @@ class Wallet {
   public string $bech32HRP;
 
   /**
-   * Wallet constructor.
-   *
    * @param Ed25519Seed|Mnemonic|string|array $seedInput
    * @param SingleNodeClient|null             $client
    *
-   * @throws Exception\Api
-   * @throws Exception\Converter
-   * @throws Exception\Crypto
-   * @throws Exception\Helper
-   * @throws Exception\Type
+   * @throws ExceptionApi
+   * @throws ExceptionConverter
+   * @throws ExceptionCrypto
+   * @throws ExceptionHelper
+   * @throws ExceptionType
    */
   public function __construct(Ed25519Seed|Mnemonic|string|array $seedInput, ?SingleNodeClient $client = null) {
     $this->_seed     = new Ed25519Seed($seedInput);
@@ -54,10 +57,29 @@ class Wallet {
   }
 
   /**
+   * @param int $count
+   *
+   * @return string
+   * @throws ExceptionConverter
+   * @throws SodiumException
+   * @throws Exception
+   */
+  public function subSeed(int $count = 0) : string {
+    $subSeed    = random_bytes(Ed25519::$SEED_SIZE);
+    $indexBytes = random_bytes(8);
+
+    $indexBytes = pack('V*', $count, $indexBytes);
+    $hashOfIndexBytes = Hash::blake2b_sum256($indexBytes);
+
+    return Converter::string2Hex(Converter::XORBytes($subSeed, Converter::hex2String($this->_seed->secretKey), $hashOfIndexBytes));
+  }
+
+
+  /**
    * @return Mnemonic
-   * @throws Exception\Converter
-   * @throws Exception\Crypto
-   * @throws Exception\Helper
+   * @throws ExceptionConverter
+   * @throws ExceptionCrypto
+   * @throws ExceptionHelper
    */
   static public function createMnemonic(): Mnemonic {
     return (new Bip39())->randomMnemonic();
@@ -95,11 +117,11 @@ class Wallet {
    * @param bool $zeroBalance
    *
    * @return array
+   * @throws ExceptionApi
    * @throws ExceptionConverter
    * @throws ExceptionCrypto
    * @throws ExceptionHelper
    * @throws ExceptionType
-   * @throws Exception\Api
    * @throws SodiumException
    */
   public function searchAddresses(int $maxAccountIndex = 5, int $maxAddressIndex = 5, bool $zeroBalance = false): array {
@@ -120,7 +142,7 @@ class Wallet {
   /**
    * @return array
    */
-  public function getKnownAddresses() : array {
+  public function getKnownAddresses(): array {
     return $this->addresses;
   }
 }
