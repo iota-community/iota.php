@@ -15,15 +15,15 @@ class Ed25519 {
   /**
    * @var int
    */
-  static protected int $PUBLIC_KEY_SIZE = 32;
+  static public int $PUBLIC_KEY_SIZE = 32;
   /**
    * @var int
    */
-  static protected int $PRIVATE_KEY_SIZE = 64;
+  static public int $PRIVATE_KEY_SIZE = 64;
   /**
    * @var int
    */
-  static protected int $SEED_SIZE = 32;
+  static public int $SEED_SIZE = 32;
 
   /**
    * @return array
