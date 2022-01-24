@@ -22,6 +22,33 @@ class Converter {
   }
 
   /**
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function string2Int(string $value): string {
+    return pack("C", $value);
+  }
+
+  /**
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function string2UInt16(string $value): string {
+    return pack("S", $value);
+  }
+
+  /**
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function string2BigInt(string $value): string {
+    return pack("P", $value);
+  }
+
+  /**
    * @param string $val
    *
    * @return string|false
@@ -141,7 +168,7 @@ class Converter {
    * @throws ExceptionConverter
    */
   static public function base58_encode(string $val, string $alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"): string {
-    $val = Converter::isHex($val) ? Converter::hex2String($val) : $val;
+    $val          = Converter::isHex($val) ? Converter::hex2String($val) : $val;
     $alphabet_len = strlen($alphabet);
     if(strlen($val) === 0) {
       return '';
@@ -396,5 +423,53 @@ class Converter {
     }
 
     return $dst;
+  }
+
+  /**
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function serializeInt(string $value): string {
+    return pack("C", $value);
+  }
+
+  /**
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function serializeUInt16(string $value): string {
+    return pack("S", $value);
+  }
+
+  /**
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function serializeBigInt(string $value): string {
+    return pack("P", $value);
+  }
+
+  /**
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function serializeFixedHex(string $value): string {
+    return hex2bin($value);
+  }
+
+  /**
+   * @return string
+   * @throws ExceptionConverter
+   * @throws SodiumException
+   */
+  public function serializeToHash(): string {
+    $_ret = implode('', $this->serialize());
+    $_ret = str_pad(Converter::string2Hex($_ret), 256, '0');
+
+    return Converter::string2Hex(Hash::blake2b_sum256(Converter::hex2String($_ret)));
   }
 }
