@@ -30,7 +30,7 @@
     }
 
     public function testdecode() {
-      $ret = $this->object->decode();
+      $ret = $this->object->__toArray();
       $this->assertIsArray((array)$ret);
     }
 

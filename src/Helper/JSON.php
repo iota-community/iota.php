@@ -1,5 +1,6 @@
 <?php namespace IOTA\Helper;
 
+use ArrayAccess;
 use IOTA\Exception\Helper as ExceptionHelper;
 
 /**
@@ -9,7 +10,12 @@ use IOTA\Exception\Helper as ExceptionHelper;
  * @author       StefanBraun
  * @copyright    Copyright (c) 2021, StefanBraun
  */
-class JSON {
+class JSON implements ArrayAccess {
+  /**
+   * @var array
+   */
+  public array $array;
+
   /**
    * JSON constructor.
    *
@@ -21,6 +27,49 @@ class JSON {
     if(!Converter::isJSON($this->string)) {
       throw new ExceptionHelper("String have to be in JSON format");
     }
+    $this->array = $this->decode(true);
+  }
+
+  /**
+   * @param $offset
+   * @param $value
+   *
+   * @return void
+   */
+  public function offsetSet($offset, $value): void {
+    if(is_null($offset)) {
+      $this->array[] = $value;
+    }
+    else {
+      $this->array[$offset] = $value;
+    }
+  }
+
+  /**
+   * @param $offset
+   *
+   * @return bool
+   */
+  public function offsetExists($offset): bool {
+    return isset($this->array[$offset]);
+  }
+
+  /**
+   * @param $offset
+   *
+   * @return void
+   */
+  public function offsetUnset($offset): void {
+    unset($this->array[$offset]);
+  }
+
+  /**
+   * @param $offset
+   *
+   * @return mixed
+   */
+  public function offsetGet($offset): mixed {
+    return $this->array[$offset] ?? null;
   }
 
   /**
@@ -52,21 +101,31 @@ class JSON {
    *
    * @return mixed
    */
-  public function decode(?bool $associative = false, int $depth = 512, int $flags = 0): mixed {
+  private function decode(?bool $associative = false, int $depth = 512, int $flags = 0): mixed {
     return json_decode($this->string, $associative, $depth, $flags);
+  }
+
+  /**
+   * @param int $flags
+   * @param int $depth
+   *
+   * @return string
+   */
+  public function encode(int $flags = 0, int $depth = 512): string {
+    return json_encode($this->array, $flags, $depth);
   }
 
   /**
    * @return array
    */
   public function __toArray(): array {
-    return $this->decode(true) ?? [];
+    return $this->array;
   }
 
   /**
    * @return string
    */
   public function __toString(): string {
-    return $this->string;
+    return $this->encode();
   }
 }
