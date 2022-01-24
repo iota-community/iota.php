@@ -45,7 +45,7 @@ class Network {
    * @var string
    */
   public string $faucet_address;
-  const default = self::comnet;
+  const default = self::devnet;
   /**
    *
    */
