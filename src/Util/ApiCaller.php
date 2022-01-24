@@ -298,7 +298,7 @@ class ApiCaller {
       return new $this->callback($content);
     }
 
-    return $content;
+    return new JSON($content);
   }
 
   /**
