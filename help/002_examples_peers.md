@@ -30,7 +30,7 @@
   #print_r($result);
 ```
 
-### Get pear
+### Get peer
 
 ```php
   echo $client->peer((string) $peerId);
