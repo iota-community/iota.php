@@ -28,9 +28,9 @@ class ApiCaller {
    */
   protected array $headers = [];
   /**
-   * @var string|null
+   * @var string
    */
-  protected ?string $route;
+  protected string $route = '';
   /**
    * @var array
    */
@@ -46,7 +46,7 @@ class ApiCaller {
     'jsonException' => true,
     'jsonData'      => 'data',
     'jsonError'     => 'error',
-    'jsonCode'     => 'code',
+    'jsonCode'      => 'code',
   ];
 
   /**
@@ -187,7 +187,7 @@ class ApiCaller {
    * @throws ExceptionApi
    */
   public function fetch(int $timeout = 30): string {
-    $_url   = $this->url . ($this->route[0] != "/" ? $this->basePath . $this->route : substr($this->route, 1));
+    $_url   = $this->url . (strlen($this->route) > 0 && $this->route[0] != "/" ? $this->basePath . $this->route : substr($this->route, 1));
     $_query = (count($this->query) > 0 ? '?' . http_build_query($this->query) : '');
     //
     try {
@@ -224,7 +224,7 @@ class ApiCaller {
     $this->method('GET');
     $this->requestData = null;
     $this->query       = [];
-    $this->route       = null;
+    $this->route       = '';
 
     return $_ret;
   }
@@ -284,7 +284,7 @@ class ApiCaller {
     $content = $this->handle->getContent();
     if($content === null || !Converter::isJSON($content)) {
       if($this->settings['jsonException']) {
-        echo $content;
+        var_dump($content);
         throw new ExceptionApi("No JSON content to fetch");
       }
       else {
