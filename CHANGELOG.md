@@ -12,6 +12,30 @@
 </p>
 
 # Changelog
+## 0.5.3 - 2022-01-24
+Lib Update
+
+### Added
+
+- JSON: ArrayAccess
+- Converter: add methods string2Int, string2UInt16, string2BigInt
+- Ed25519Address: add method toAddressBase58
+- Converter: add method xorBytes
+
+### Changed
+
+- ApiCaller: fetchJSON returns JSON width useJSONHandler = false
+- JSON: new methods to call as Array
+- Network: switch default Network to "devnet"
+- ApiCaller: update default value from $route 
+- Models/TraitSerializer: calls Converter methods
+- UnitTest: FaucetClientTest add new Ouput Message
+- Wallet : add method subSeed to create a subSeed from the Seed
+- Wallet: fix docs
+- ApiCaller: param (bool)useJSONHandler
+- Ed25519Seed: Input now allows base58 decoded input
+- Ed25519: statics now public
+
 ## 0.5.2 - 2022-01-20
 Api Update
 
