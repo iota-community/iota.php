@@ -19,7 +19,7 @@ trait TraitSerializer {
    * @return string
    */
   static public function serializeInt(string $value): string {
-    return pack("C", $value);
+    return Converter::string2Int($value);
   }
 
   /**
@@ -28,7 +28,7 @@ trait TraitSerializer {
    * @return string
    */
   static public function serializeUInt16(string $value): string {
-    return pack("S", $value);
+    return Converter::serializeUInt16($value);
   }
 
   /**
@@ -37,7 +37,7 @@ trait TraitSerializer {
    * @return string
    */
   static public function serializeBigInt(string $value): string {
-    return pack("P", $value);
+    return Converter::string2BigInt($value);
   }
 
   /**
@@ -46,7 +46,7 @@ trait TraitSerializer {
    * @return string
    */
   static public function serializeFixedHex(string $value): string {
-    return hex2bin($value);
+    return Converter::hex2String($value);
   }
 
   /**
