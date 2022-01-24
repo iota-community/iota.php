@@ -45,7 +45,7 @@
         }
       }
       catch(\IOTA\Exception\Action $e) {
-        if($e->getMessage() == "You already have enough coins on your address.") {
+        if($e->getMessage() == "You already have enough coins on your address." || $e->getMessage() == "You already have enough funds on your address.") {
           $this->assertTrue(true);
 
           return;
