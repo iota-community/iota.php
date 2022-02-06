@@ -66,9 +66,7 @@ class Address {
   }
 
   /**
-   * Get the balance
-   *
-   * @return int
+   * @return int|null
    * @throws ExceptionApi
    * @throws ExceptionConverter
    * @throws ExceptionHelper
