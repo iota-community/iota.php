@@ -95,7 +95,7 @@ class Identity {
   public function checkIdIndexTangleExists(): false|Result {
     $client = new SingleNodeClient($this->network);
     $found  = ($client)->messagesFind($this->uri->getId());
-    if(count($found->messageIds) == 0) {
+    if(!isset($found->messageIds[0])) {
       return false;
     }
     $messageId = $found->messageIds[0];
