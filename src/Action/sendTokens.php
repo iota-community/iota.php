@@ -174,6 +174,9 @@ class sendTokens extends AbstractAction {
     $address     = new Ed25519Address(($addressSeed->keyPair())->public);
     // get outputs
     $_outputs = $this->client->addressesed25519Output($address->toAddress());
+    if($_outputs->count == 0) {
+      $_outputs = $this->client->addressesed25519Output($address->toAddress(), 1);
+    }
     //
     // create essence
     $essenceTransaction = new EssenceTransaction();
