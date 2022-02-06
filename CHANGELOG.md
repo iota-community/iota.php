@@ -12,6 +12,20 @@
 </p>
 
 # Changelog
+## 0.5.4 - 2022-02-06
+Lib Update
+
+### Added
+
+- Example: SingleNodeClient 10_getOutput.php
+
+### Changed
+
+- sendTokens now check output type 1 if 0 is empty
+- fix docs
+- fix Identity check messageIds
+
+
 ## 0.5.3 - 2022-01-24
 Lib Update
 
