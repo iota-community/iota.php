@@ -12,6 +12,14 @@
 </p>
 
 # Changelog
+## 0.5.5 - 2022-02-07
+Lib Update (fix)
+
+### Changed
+
+- fix: ($value) must be of type Countable|array, IOTA\Api\ResponseArray given
+- example update: 05_fetchMessage 
+
 ## 0.5.4 - 2022-02-06
 Lib Update
 
