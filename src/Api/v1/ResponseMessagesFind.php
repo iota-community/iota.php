@@ -26,12 +26,14 @@ class ResponseMessagesFind extends AbstractApiResponse {
   /**
    * @var array
    */
-  public ResponseArray $messageIds;
+  public array $messageIds;
 
   /**
    *
    */
   protected function parse(): void {
-    $this->defaultParse();
+    foreach($this->_input->__toArray() as $_k => $_v) {
+      $this->{$_k} = $_v;
+    }
   }
 }
