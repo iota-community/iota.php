@@ -13,11 +13,11 @@
 
 # About
 
-PHP library to interact with an IOTA SingleNode or PermaNode. Create, manipulate, verify IOTA DIDs. Create wallets, mnemonic, seeds, addresses. 
+PHP library to interact with an IOTA chrysalis SingleNode or PermaNode. Create, manipulate, verify IOTA DIDs. Create wallets, mnemonic, seeds, addresses. 
 
-The aim of the IOTAphp lib is to offer PHP developers an easy way to interact with the Tangle. 
+The aim of the IOTAphp lib is to offer PHP developers an easy way to interact with the IOTA chrysalis network. 
 
-> Please be aware that this library is in an early development state and the API of the library as well as the IOTA protocol is subject to change, it is NOT ready to use in production.
+> This library is functionally complete, but it is recommended to use iota.rs. The rust library will be more heavily maintained and is more performant.
 
 This library allows you to do the following:
 
@@ -41,7 +41,7 @@ This library allows you to do the following:
     + [ext-curl](http://php.net/manual/en/book.curl.php)
     + [ext-mbstring](http://php.net/manual/en/book.mbstring.php)
     + [ext-bcmath](http://php.net/manual/en/book.bc.php)
-    + [ext-sodium](http://php.net/manual/en/book.sodium.php) (api client don't need this)
+    + [ext-sodium](http://php.net/manual/en/book.sodium.php)
 
 # Example
 
@@ -61,10 +61,6 @@ This library allows you to do the following:
 
 Additional Examples: Please find other examples in the [./examples](examples) folder.
 
----
-
-### What's next,done
-Check [ToDo](TODO.md)
 
 ---
 

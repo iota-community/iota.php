@@ -11,29 +11,11 @@
   <a href="https://packagist.org/packages/iota-community/iota.php/" style="text-decoration:none;"><img src="https://poser.pugx.org/iota-community/iota.php/v/stable.png" alt=">packagist_stable"></a>
 </p>
 
-### In Progress
 
-- [ ] expand IOTA Identity
-- [ ] expand Wallet class
-
----
 
 ### Todo
 
-- [ ] Wallet class
-    - [ ] Safe Saving Seeds, according to Iota Stronghold Standard
 
-  
-- [ ] expand new Actions
-- [ ] expand Builder class
-- [ ] expand PHPUnit tests
-
-
-- [ ] QR Code class
-
-
-- [ ] IOTA Native Digital Assets
-- [ ] IOTA Streams
 
 ---
 
