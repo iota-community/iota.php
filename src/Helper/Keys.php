@@ -1,4 +1,4 @@
-<?php namespace IOTA\Util;
+<?php namespace IOTA\Helper;
 
 use Exception;
 use IOTA\Crypto\Ed25519;

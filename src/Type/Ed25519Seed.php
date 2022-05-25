@@ -10,7 +10,7 @@ use IOTA\Exception\Converter as ExceptionConverter;
 use IOTA\Exception\Crypto as ExceptionCrypto;
 use IOTA\Exception\Type as ExceptionType;
 use IOTA\Helper\Converter;
-use IOTA\Util\Keys;
+use IOTA\Helper\Keys;
 use SodiumException;
 
 /**

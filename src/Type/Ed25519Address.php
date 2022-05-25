@@ -53,7 +53,6 @@ class Ed25519Address {
     return Converter::base58_encode($this->toAddress());
   }
 
-
   /**
    * @return string
    * @throws ExceptionConverter

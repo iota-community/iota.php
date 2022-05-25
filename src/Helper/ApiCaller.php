@@ -1,4 +1,4 @@
-<?php namespace IOTA\Util;
+<?php namespace IOTA\Helper;
 
 use IOTA\Api\v1\ResponseError;
 use IOTA\Exception\Helper as ExceptionHelper;

@@ -4,7 +4,7 @@
   use IOTA\Exception\Api;
   use IOTA\Exception\Helper;
   use PHPUnit\Framework\TestCase;
-  use IOTA\Util\ApiCaller;
+  use IOTA\Helper\ApiCaller;
 
   /**
    * Class ApiCallerTest

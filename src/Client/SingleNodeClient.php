@@ -6,7 +6,7 @@ use IOTA\Exception\Api as ExceptionApi;
 use IOTA\Exception\Helper as ExceptionHelper;
 use IOTA\Helper\Converter;
 use IOTA\Helper\JSON;
-use IOTA\Util\ApiCaller;
+use IOTA\Helper\ApiCaller;
 use IOTA\Api\v1\ResponseError;
 use IOTA\Api\v1\ResponseInfo;
 use IOTA\Api\v1\ResponseTips;
@@ -25,7 +25,7 @@ use IOTA\Api\v1\ResponseReceipts;
 use IOTA\Api\v1\ResponseTreasury;
 use IOTA\Api\v1\RequestAddPeer;
 use IOTA\Api\v1\RequestSubmitMessage;
-use IOTA\Util\Network;
+use IOTA\Helper\Network;
 
 /**
  * Class SingleNodeClient

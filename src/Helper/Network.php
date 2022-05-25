@@ -1,7 +1,6 @@
-<?php namespace IOTA\Util;
+<?php namespace IOTA\Helper;
 
 use IOTA\Api\v1\ResponseInfo;
-use IOTA\Exception\Util as ExceptionUtil;
 use IOTA\Exception\Api as ExceptionApi;
 use IOTA\Exception\Helper as ExceptionHelper;
 
@@ -10,7 +9,7 @@ use IOTA\Exception\Helper as ExceptionHelper;
  *
  * @package      IOTA\Helper
  * @author       StefanBraun @IOTAphp
- * @copyright    Copyright (c) 2021, StefanBraun
+ * @copyright    Copyright (c) 2022, StefanBraun
  */
 class Network {
   /**
@@ -113,7 +112,6 @@ class Network {
    *
    * @throws ExceptionApi
    * @throws ExceptionHelper
-   * @throws ExceptionUtil
    */
   public function __construct(string|array|Network|null $input = null) {
     if($input === null) {
@@ -144,7 +142,6 @@ class Network {
    * @return Network
    * @throws ExceptionApi
    * @throws ExceptionHelper
-   * @throws ExceptionUtil
    */
   static public function fromNode(string $nodeApiUrl, ?string $basePath = 'api/v1/', ?string $explorerUrl = null): Network {
     // check Communication
@@ -159,7 +156,7 @@ class Network {
     }
     // need ResponseInfo
     if(!$ret instanceof ResponseInfo) {
-      throw new ExceptionUtil("Can not connect to '$nodeApiUrl' with basePath '$basePath'");
+      throw new ExceptionHelper("Can not connect to '$nodeApiUrl' with basePath '$basePath'");
     }
     $name = ($ret->bech32HRP == 'iota' ? 'mainnet' : 'devnet/comnet');
     // set explorer url
@@ -184,7 +181,6 @@ class Network {
    * @return Network
    * @throws ExceptionApi
    * @throws ExceptionHelper
-   * @throws ExceptionUtil
    */
   static public function fromUrl($nodeApiUrl): Network {
     return self::fromNode($nodeApiUrl);
@@ -226,7 +222,8 @@ class Network {
   /**
    * @param string $name
    *
-   * @throws ExceptionUtil
+   * @return void
+   * @throws ExceptionHelper
    */
   protected function pareName(string $name): void {
     $name = strtolower($name);
@@ -241,7 +238,7 @@ class Network {
       $this->parseArray(self::comnet);
     }
     else {
-      throw new ExceptionUtil("Unknown network '$name'");
+      throw new ExceptionHelper("Unknown network '$name'");
     }
   }
 
