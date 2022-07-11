@@ -12,6 +12,22 @@
 </p>
 
 # Changelog
+## 1.5.1 - 2022-07-11
+Lib Update
+
+### Added
+
+- Example: 06_sendTokenAndCheckTranscation
+
+### Changed
+
+- SingeNodeClient, network is now public
+
+## 1.5 - 2022-05-16
+ Lib stable release
+
+---
+
 ## 0.5.5 - 2022-02-07
 Lib Update (fix)
 
