@@ -37,7 +37,7 @@ class SingleNodeClient {
   /**
    * @var Network
    */
-  protected Network $network;
+  public Network $network;
   /**
    * @var ApiCaller
    */
