@@ -11,6 +11,14 @@
   <a href="https://packagist.org/packages/iota-community/iota.php/" style="text-decoration:none;"><img src="https://poser.pugx.org/iota-community/iota.php/v/stable.png" alt=">packagist_stable"></a>
 </p>
 
+
+# Changelog
+## 1.5.2 - 2022-08-15
+Lib Update (fix)
+
+### Changed
+- fix: No confirmed transaction if PayloadIndexation is empty
+
 # Changelog
 ## 1.5.1 - 2022-07-11
 Lib Update
