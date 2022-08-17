@@ -11,9 +11,9 @@
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class ResponseTest extends TestCase {
-    protected string $str = "follow me on Twitter @IOTAphp";
-    protected string $json = '{"data": "follow me on Twitter @IOTAphp"}';
-    protected array $array = ['data' => "follow me on Twitter @IOTAphp"];
+    protected string $str = "follow me on Twitter @tanglePHP";
+    protected string $json = '{"data": "follow me on Twitter @tanglePHP"}';
+    protected array $array = ['data' => "follow me on Twitter @tanglePHP"];
     protected string $jsonError = '{"error":{"code":"403","message":"Forbidden, error: code=403, message=Forbidden"}}';
 
     public function testJSON() {

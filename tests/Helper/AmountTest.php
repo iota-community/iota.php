@@ -7,7 +7,7 @@
   /**
    * Class AmountTest
    *
-   * @author       StefanBraun @IOTAphp
+   * @author       StefanBraun @tanglePHP
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class AmountTest extends TestCase {

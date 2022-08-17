@@ -7,7 +7,7 @@ use IOTA\Helper\JSON;
  * Class AbstractDid
  *
  * @package      IOTA\Models
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 abstract class AbstractMap {

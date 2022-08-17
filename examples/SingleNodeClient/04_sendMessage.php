@@ -8,4 +8,4 @@
   // create client
   $client = new SingleNodeClient();
   // submit Message
-  echo $ret = $client->messageSubmit(new PayloadIndexation('#iota.php', 'message test! follow me on Twitter @IOTAphp'));
+  echo $ret = $client->messageSubmit(new PayloadIndexation('#tanglePHP', 'message test! follow me on Twitter @tanglePHP'));

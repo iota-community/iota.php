@@ -10,7 +10,7 @@
   /**
    * Class checkTransactionTest
    *
-   * @author       StefanBraun @IOTAphp
+   * @author       StefanBraun @tanglePHP
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class checkTransactionTest extends TestCase {

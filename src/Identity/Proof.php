@@ -6,7 +6,7 @@ use IOTA\Models\AbstractMap;
  * Class Proof
  *
  * @package      IOTA\Identity
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Proof extends AbstractMap {

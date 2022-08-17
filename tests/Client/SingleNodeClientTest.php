@@ -91,7 +91,7 @@
      * @throws ExceptionHelper
      */
     public function testsubmitMessage() {
-      $payload = new PayloadIndexation('#iota.php', 'message test! follow me on Twitter @IOTAphp');
+      $payload = new PayloadIndexation('#tanglePHP', 'message test! follow me on Twitter @tanglePHP');
       $message = new RequestSubmitMessage($payload);
       $this->assertInstanceOf(ResponseSubmitMessage::class, $this->client->messageSubmit($message));
       $this->assertInstanceOf(ResponseSubmitMessage::class, ($this->lastResponseSubmitMessage = $this->client->messageSubmit($payload)));
@@ -170,7 +170,7 @@
      * @throws ExceptionHelper
      */
     public function testmessageFind() {
-      $this->assertInstanceOf(ResponseMessagesFind::class, $this->client->messagesFind(Converter::string2Hex("#iota.php")));
+      $this->assertInstanceOf(ResponseMessagesFind::class, $this->client->messagesFind(Converter::string2Hex("#tanglePHP")));
     }
 
     /**

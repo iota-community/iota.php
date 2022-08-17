@@ -6,7 +6,7 @@ use IOTA\Models\AbstractApiResponse;
  * Class ResposneArray
  *
  * @package      IOTA\Api
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2022, StefanBraun
  */
 class ResponseArray extends AbstractApiResponse {

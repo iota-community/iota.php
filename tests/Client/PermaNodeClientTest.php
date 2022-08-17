@@ -17,7 +17,7 @@
   /**
    * Class PermaNodeClientTest
    *
-   * @author       StefanBraun @IOTAphp
+   * @author       StefanBraun @tanglePHP
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class PermaNodeClientTest extends TestCase {
@@ -94,7 +94,7 @@
      * @throws ExceptionHelper
      */
     public function testmessageFind() {
-      $this->assertInstanceOf(ResponseMessagesFind::class, $this->client->messagesFind("#iota.php"));
+      $this->assertInstanceOf(ResponseMessagesFind::class, $this->client->messagesFind("#tanglePHP"));
     }
 
     /**

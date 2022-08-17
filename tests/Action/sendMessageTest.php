@@ -9,18 +9,18 @@
   /**
    * Class sendMessageTest
    *
-   * @author       StefanBraun @IOTAphp
+   * @author       StefanBraun @tanglePHP
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class sendMessageTest extends TestCase {
     /**
      * @var string
      */
-    protected string $index = "#iota.php";
+    protected string $index = "#tanglePHP";
     /**
      * @var string
      */
-    protected string $message = "message test! follow me on Twitter @IOTAphp";
+    protected string $message = "message test! follow me on Twitter @tanglePHP";
     /**
      * @var SingleNodeClient
      */
@@ -38,8 +38,8 @@
      *
      */
     public function testsendMessage() {
-      $ret = (new sendMessage($this->client))->index('#iota.php')
-                                             ->data('message test! follow me on Twitter @IOTAphp');
+      $ret = (new sendMessage($this->client))->index('#tanglePHP')
+                                             ->data('message test! follow me on Twitter @tanglePHP');
 
       $this->assertInstanceOf(sendMessage::class, $ret);
       $this->assertInstanceOf(ResponseSubmitMessage::class, $ret->getResult());

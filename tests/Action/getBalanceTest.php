@@ -9,7 +9,7 @@
   /**
    * Class getBalanceTest
    *
-   * @author       StefanBraun @IOTAphp
+   * @author       StefanBraun @tanglePHP
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class getBalanceTest extends TestCase {

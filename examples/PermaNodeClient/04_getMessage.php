@@ -9,7 +9,7 @@
   // create SingleNodeClient
   $client = new SingleNodeClient('mainnet');
   // submit message
-  echo $ret = $client->messageSubmit(new PayloadIndexation('#iota.php', 'message test! follow me on Twitter @IOTAphp'));
+  echo $ret = $client->messageSubmit(new PayloadIndexation('#tanglePHP', 'message test! follow me on Twitter @tanglePHP'));
 
   // create PermaNodeClient
   $client = new \IOTA\Client\PermaNodeClient();

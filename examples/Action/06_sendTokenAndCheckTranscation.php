@@ -13,12 +13,12 @@
   $mnemonicWords = "giant dynamic museum toddler six deny defense ostrich bomb access mercy blood explain muscle shoot shallow glad autumn author calm heavy hawk abuse rally";
   $amount        = "1mi";
   $toAddress     = 'atoi1qzvhzythy64dzx456ccvus357hvhg77cmqrrw4ukuszprtu9fay5ywp5ncz';
-  $message       = 'transaction test! follow me on Twitter @IOTAphp';
+  $message       = 'transaction test! follow me on Twitter @tanglePHP';
   //
   $transactionRes = (new sendTokens($client))->amount($amount)
                                              ->seedInput($mnemonicWords)
                                              ->toAddressBech32($toAddress)
-                                             ->message("#iota.php", $message)
+                                             ->message("#tanglePHP", $message)
                                              ->run();
   //
   // Check transaction

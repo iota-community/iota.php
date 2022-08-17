@@ -17,7 +17,7 @@ use IOTA\Api\v1\ResponseOutput;
  * Class PermaNodeClient
  *
  * @package      IOTA\Client
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class PermaNodeClient {

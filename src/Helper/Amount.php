@@ -6,7 +6,7 @@ use IOTA\Exception\Helper as ExceptionHelper;
  * Class Amount
  *
  * @package      IOTA\Helper
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Amount {

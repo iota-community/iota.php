@@ -5,7 +5,7 @@ use IOTA\Util\Keys;
  * Class Result
  *
  * @package      IOTA\Identity
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Result {

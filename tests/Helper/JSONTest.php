@@ -12,9 +12,9 @@
    */
   final class JSONTest extends TestCase {
     protected JSON $object;
-    protected string $str = "follow me on Twitter @IOTAphp";
-    protected string $json = '{"data": "follow me on Twitter @IOTAphp"}';
-    protected array $array = ['data' => "follow me on Twitter @IOTAphp"];
+    protected string $str = "follow me on Twitter @tanglePHP";
+    protected string $json = '{"data": "follow me on Twitter @tanglePHP"}';
+    protected array $array = ['data' => "follow me on Twitter @tanglePHP"];
 
     public function setUp(): void {
       $this->object = new JSON($this->json);

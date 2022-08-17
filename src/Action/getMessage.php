@@ -14,7 +14,7 @@ use IOTA\Models\AbstractAction;
  * Class getMessage
  *
  * @package      IOTA\Action
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class getMessage extends AbstractAction {

@@ -10,7 +10,7 @@
   /**
    * Class getMessageTest
    *
-   * @author       StefanBraun @IOTAphp
+   * @author       StefanBraun @tanglePHP
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class getMessageTest extends TestCase {
@@ -33,8 +33,8 @@
      *
      */
     public function testgetMessage() {
-      $msg = (new sendMessage($this->client))->index('#iota.php')
-                                             ->data('message test! follow me on Twitter @IOTAphp')->run();
+      $msg = (new sendMessage($this->client))->index('#tanglePHP')
+                                             ->data('message test! follow me on Twitter @tanglePHP')->run();
 
       $ret = (new getMessage($this->client))->messageId($msg->messageId);
       $this->assertInstanceOf(getMessage::class, $ret);

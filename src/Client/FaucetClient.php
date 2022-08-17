@@ -91,7 +91,7 @@ class FaucetClient {
                                                      ->seedInput($seedInput)
                                                      ->accountIndex($_accountIndex)
                                                      ->toAddressBech32($this->network->faucet_address)
-                                                     ->message("#iota.php", "transaction faucet resend! follow me on Twitter @IOTAphp");
+                                                     ->message("#tanglePHP", "transaction faucet resend! follow me on Twitter @tanglePHP");
     if($_indexation) {
       $build->payloadIndexation($_indexation);
     }

@@ -5,7 +5,7 @@
   // create client
   $client = new \IOTA\Client\SingleNodeClient();
   // find Message
-  $found = $client->messagesFind('#iota.php');
+  $found = $client->messagesFind('#tanglePHP');
   if(count($found->messageIds) > 0) {
     echo "Messages Found: " . count($found->messageIds) . PHP_EOL;
     $lastData = $client->message(end($found->messageIds));

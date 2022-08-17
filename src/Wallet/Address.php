@@ -20,7 +20,7 @@ use SodiumException;
  * Class Address
  *
  * @package      IOTA\Wallet
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Address {
@@ -151,7 +151,7 @@ class Address {
                                                    ->addressIndex((int)$this->path->getAddressIndex())
                                                    ->toAddressBech32($toAddressBech32);
     // PayloadIndexation
-    $indexation ? $send->payloadIndexation($indexation) : $send->message("#iota.php", "wallet address transaction test! follow me on Twitter @IOTAphp");
+    $indexation ? $send->payloadIndexation($indexation) : $send->message("#tanglePHP", "wallet address transaction test! follow me on Twitter @tanglePHP");
     // run and check
     $send = $send->run();
     if($send instanceof ResponseError) {

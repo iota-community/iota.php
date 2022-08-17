@@ -11,9 +11,9 @@
    * @copyright    Copyright (c) 2021, StefanBraun
    */
   final class ConverterTest extends TestCase {
-    protected string $str = "follow me on Twitter @IOTAphp";
-    protected string $hex = "666f6c6c6f77206d65206f6e20547769747465722040494f5441706870";
-    protected string $bits = "0110011001101111011011000110110001101111011101110010000001101101011001010010000001101111011011100010000001010100011101110110100101110100011101000110010101110010001000000100000001001001010011110101010001000001011100000110100001110000";
+    protected string $str = "follow me on Twitter @tanglePHP";
+    protected string $hex = "666f6c6c6f77206d65206f6e2054776974746572204074616e676c65504850";
+    protected string $bits = "01100110011011110110110001101100011011110111011100100000011011010110010100100000011011110110111000100000010101000111011101101001011101000111010001100101011100100010000001000000011101000110000101101110011001110110110001100101010100000100100001010000";
     protected array $byteArray8bits = [
       1  => 102,
       2  => 111,
@@ -37,13 +37,15 @@
       20 => 114,
       21 => 32,
       22 => 64,
-      23 => 73,
-      24 => 79,
-      25 => 84,
-      26 => 65,
-      27 => 112,
-      28 => 104,
-      29 => 112,
+      23 => 116,
+      24 => 97,
+      25 => 110,
+      26 => 103,
+      27 => 108,
+      28 => 101,
+      29 => 80,
+      30 => 72,
+      31 => 80,
     ];
     protected array $byteArray5bits = [
       0  => 0,
@@ -83,21 +85,25 @@
       34 => 16,
       35 => 4,
       36 => 0,
-      37 => 18,
-      38 => 10,
-      39 => 15,
-      40 => 10,
-      41 => 17,
-      42 => 0,
-      43 => 23,
-      44 => 0,
-      45 => 26,
-      46 => 3,
+      37 => 29,
+      38 => 3,
+      39 => 1,
+      40 => 13,
+      41 => 25,
+      42 => 19,
+      43 => 22,
+      44 => 24,
+      45 => 25,
+      46 => 10,
       47 => 16,
+      48 => 9,
+      49 => 1,
+      50 => 8,
+      51 => 0,
     ];
-    protected string $base64 = "Zm9sbG93IG1lIG9uIFR3aXR0ZXIgQElPVEFwaHA=";
-    protected string $json = '{"data": "follow me on Twitter @IOTAphp"}';
-    protected string $binary = b'��$�p��ch�wl�����q){! u��J+ޑ����[BS�0:â���U�����~D�%�������P��0d�F�G�3�n~v��&�櫁D      	 #iota.php1   message test! follow me on Twitter @IOTAphpYM     ';
+    protected string $base64 = "Zm9sbG93IG1lIG9uIFR3aXR0ZXIgQHRhbmdsZVBIUA==";
+    protected string $json = '{"data": "follow me on Twitter @tanglePHP"}';
+    protected string $binary = b'��$�p��ch�wl�����q){! u��J+ޑ����[BS�0:â���U�����~D�%�������P��0d�F�G�3�n~v��&�櫁D      	 #tanglePHP1   message test! follow me on Twitter @tanglePHPYM     ';
 
     public function teststring2Hex(): void {
       $this->assertEquals($this->hex, Converter::string2Hex($this->str));

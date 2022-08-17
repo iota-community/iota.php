@@ -7,6 +7,6 @@
 
   // create client
   $client = new SingleNodeClient();
-  echo $ret = (new sendMessage($client))->index('#iota.php')
-                                        ->data('message test! follow me on Twitter @IOTAphp')
+  echo $ret = (new sendMessage($client))->index('#tanglePHP')
+                                        ->data('message test! follow me on Twitter @tanglePHP')
                                         ->run();

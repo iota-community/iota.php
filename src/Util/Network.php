@@ -9,7 +9,7 @@ use IOTA\Exception\Helper as ExceptionHelper;
  * Class Network
  *
  * @package      IOTA\Helper
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Network {

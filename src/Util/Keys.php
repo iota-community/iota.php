@@ -7,7 +7,7 @@ use IOTA\Crypto\Ed25519;
  * Class Keys
  *
  * @package      IOTA\Util
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Keys {

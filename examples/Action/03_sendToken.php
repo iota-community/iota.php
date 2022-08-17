@@ -14,5 +14,5 @@
   echo $ret = (new sendTokens($client))->amount("1mi")
                                        ->seedInput($mnemonicWords)
                                        ->toAddressBech32('atoi1qzvhzythy64dzx456ccvus357hvhg77cmqrrw4ukuszprtu9fay5ywp5ncz')
-                                       ->message("#iota.php", "transaction test! follow me on Twitter @IOTAphp")
+                                       ->message("#tanglePHP", "transaction test! follow me on Twitter @tanglePHP")
                                        ->run();

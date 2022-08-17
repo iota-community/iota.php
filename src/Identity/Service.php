@@ -6,7 +6,7 @@ use IOTA\Models\AbstractMap;
  * Class Service
  *
  * @package      IOTA\Identity
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Service extends AbstractMap {

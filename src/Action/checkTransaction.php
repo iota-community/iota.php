@@ -11,7 +11,7 @@ use IOTA\Exception\Helper as ExceptionHelper;
  * Class checkTransaction
  *
  * @package      IOTA\Action
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class checkTransaction extends AbstractAction {

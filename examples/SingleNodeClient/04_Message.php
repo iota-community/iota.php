@@ -8,7 +8,7 @@
   // create client
   $client = new SingleNodeClient();
   // submit message
-  echo $ret = $client->messageSubmit(new PayloadIndexation('#iota.php', 'message test! follow me on Twitter @IOTAphp'));
+  echo $ret = $client->messageSubmit(new PayloadIndexation('#tanglePHP', 'message test! follow me on Twitter @tanglePHP'));
   // get raw message
   echo $client->messageRaw($ret->messageId) . PHP_EOL;
   // get children of message

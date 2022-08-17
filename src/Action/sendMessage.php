@@ -12,18 +12,18 @@ use IOTA\Models\AbstractAction;
  * Class sendMessage
  *
  * @package      IOTA\Action
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class sendMessage extends AbstractAction {
   /**
    * @var string
    */
-  protected string $index = '#iota.php';
+  protected string $index = '#tanglePHP';
   /**
    * @var string
    */
-  protected string $data = 'message test! follow me on Twitter @IOTAphp';
+  protected string $data = 'message test! follow me on Twitter @tanglePHP';
   /**
    * @var bool
    */

@@ -7,7 +7,7 @@ use IOTA\Models\AbstractMap;
  * Class Authentication
  *
  * @package      IOTA\Identity
- * @author       StefanBraun @IOTAphp
+ * @author       StefanBraun @tanglePHP
  * @copyright    Copyright (c) 2021, StefanBraun
  */
 class Authentication extends AbstractMap {

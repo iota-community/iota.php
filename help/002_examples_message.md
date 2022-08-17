@@ -1,8 +1,8 @@
-![IOTA.php](./images/IOTA_PHP_Banner_Interact_Help.png)
+![tanglePHP](./images/IOTA_PHP_Banner_Interact_Help.png)
 
 <p style="text-align:center;">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?style=social&logo=discord" alt="Discord"></a>
-  <a href="https://twitter.com/IOTAphp/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
+  <a href="https://twitter.com/tanglePHP/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Twitter-9cf.svg?style=social&logo=twitter" alt="Twitter"></a>
   <br>
   <a href="https://github.com/iota-community/iota.php/LICENSE" style="text-decoration:none;"><img src="https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square" alt="Apache-2.0 license"></a>
   <a href="https://www.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/IOTA-lightgrey?style=flat&logo=iota" alt="IOTA"></a>
@@ -26,7 +26,7 @@
 ### Send message
 
 ```php
-  echo $client->messageSubmit(new IOTA\Api\v1\PayloadIndexation('#iota.php', 'message test! follow me on Twitter @IOTAphp'));
+  echo $client->messageSubmit(new IOTA\Api\v1\PayloadIndexation('#tanglePHP', 'message test! follow me on Twitter @tanglePHP'));
 ```
 
 ### Get message
@@ -38,7 +38,7 @@
 ### Fetch message
 
 ```php
-  $found = $client->messagesFind('#iota.php');
+  $found = $client->messagesFind('#tanglePHP');
   if(count($found->messageIds) > 0) {
     echo "Messages Found: " . count($found->messageIds) . PHP_EOL;
     $lastData = $client->message(end($found->messageIds));
