@@ -99,7 +99,7 @@ class Network {
    */
   const mainnet = [
     'NAME'                         => 'mainnet',
-    'API_ENDPOINT'                 => 'https://chrysalis-nodes.iota.org',
+    'API_ENDPOINT'                 => 'https://api.lb-0.h.chrysalis-devnet.iota.cafe',
     'API_ENDPOINT_basePath'        => 'api/v1/',
     'EXPLORER'                     => 'https://explorer.iota.org/mainnet/',
     'bech32HRP'                    => 'iota',
